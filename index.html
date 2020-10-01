@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <meta name="description"
+        content="Williams-Sonoma Coding Challenge submission by Terry Morse">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous">
+
+  <title>Bootstrap Modal with Image Carousel</title>
+
+</head>
+<body class="wsi-body">
+<header>
+  <h1 class="wsi-h1 text-center">Bootstrap Modal with Image Carousel</h1>
+  <p class="text-center">
+    <button id="show-button" class="btn btn-primary">
+      Show Modal
+    </button>
+  </p>
+</header>
+
+<main></main>
+
+<!-- JavaScript for Bootstrap -->
+<script
+  src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+  crossorigin="anonymous"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+  integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+  crossorigin="anonymous"></script>
+<script
+  src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+  integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+  crossorigin="anonymous"></script>
+
+<script>
+  // sample data
+  const productName = "Organic Tassel Stripe Bath Mat - Dark Horseradish";
+  // const imageHrefs = [
+  //   'https://assets.weimgs.com/weimgs/rk/images/wcm/products/202039/0013/organic-tassel-stripe-bath-mat-dark-horseradish-m.jpg'
+  // ];
+  const imageHrefs = [
+    'https://assets.weimgs.com/weimgs/rk/images/wcm/products/202039/0013/organic-tassel-stripe-bath-mat-dark-horseradish-m.jpg',
+    'https://assets.weimgs.com/weimgs/rk/images/wcm/products/202035/0077/organic-tassel-stripe-bath-mat-m.jpg',
+    'https://assets.weimgs.com/weimgs/rk/images/wcm/products/202038/0151/organic-tassel-stripe-bath-mat-stone-white-m.jpg',
+    'https://assets.weimgs.com/weimgs/rk/images/wcm/products/202019/0034/west-elm-chelsea-bathroom-refresh-bundle-1-m.jpg',
+    'https://assets.weimgs.com/weimgs/rk/images/wcm/products/202039/0013/organic-tassel-stripe-bath-mat-dark-horseradish-1-m.jpg',
+    'https://assets.weimgs.com/weimgs/rk/images/wcm/products/202036/0053/organic-tassel-stripe-bath-mat-1-m.jpg',
+    'https://assets.weimgs.com/weimgs/rk/images/wcm/products/202035/0076/organic-tassel-stripe-bath-mat-m.jpg',
+    'https://assets.weimgs.com/weimgs/rk/images/wcm/products/202026/0006/organic-tassel-stripe-bath-mat-m.jpg',
+    'https://assets.weimgs.com/weimgs/rk/images/wcm/products/202026/0006/belgian-flax-linen-shower-curtain-m.jpg',
+    'https://assets.weimgs.com/weimgs/rk/images/wcm/products/202014/0951/organic-tassel-stripe-bath-mat-stone-white-m.jpg',
+    'https://assets.weimgs.com/weimgs/rk/images/wcm/products/202029/0066/organic-striped-arrow-edge-jacquard-shower-curtain-m.jpg'
+  ];
+</script>
+
+<script  type="module">
+  import OverlayCarousel from './carousel.js';
+  window.addEventListener('load', () => {
+    const btnShow = document.getElementById('show-button');
+    const carousel = new OverlayCarousel({
+      maxWidth: '400px',
+      thumbnailHoverOutline: '2px solid dodgerblue'
+    });
+    carousel.populate(productName, imageHrefs);
+
+    // respond to clicks on 'show modal' button
+    btnShow.addEventListener('click', () => {
+      carousel.show();
+    });
+  });
+
+</script>
+
+</body>
+</html>

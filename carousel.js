@@ -17,15 +17,15 @@ function OverlayCarousel (userEditsToCSSProps) {
     if (typeof userEditsToCSSProps === 'undefined') { return; }
     for (const [propName, value] of Object.entries(userEditsToCSSProps)) {
       if (typeof cssEdProps[propName] === 'undefined') { continue; }
-      cssEdProps[propName].value = value;
+      cssEdProps[propName] = value;
     }
   }
 
   // apply all css props to css
   function applyCSSPropsToCSS () {
-    for (const [propName, prop] of Object.entries(cssEdProps)) {
+    for (const [propName, value] of Object.entries(cssEdProps)) {
       const searchStr = `{{${propName}}}`;
-      const subStr = `${prop.property}: ${prop.value};`;
+      const subStr = `${value}`;
       css = css.replace(searchStr, subStr);
     }
   }
@@ -89,11 +89,13 @@ function OverlayCarousel (userEditsToCSSProps) {
       img.className = 'img-fluid';
       carouselItem.appendChild(img);
 
+      const btnThumb = document.createElement('button');
+      thumbnails.appendChild(btnThumb);
+
       const imgThumb = document.createElement('img');
-      imgThumb.role = 'button';
       imgThumb.dataset.index = index;
       imgThumb.src = href;
-      thumbnails.appendChild(imgThumb);
+      btnThumb.appendChild(imgThumb);
     });
 
     // show thumbnails if there are multiple images
@@ -115,14 +117,27 @@ function OverlayCarousel (userEditsToCSSProps) {
     //display the first image
     displaySelectedImage(firstThumb);
 
-    // listen for thumbnail clicks
+    // listen for thumbnail clicks and enter keys
     listenForThumbnailClicks();
+    listenForEnterKeyOverButton();
   }
 
   // display in carousel the selected thumbnail image
   function displaySelectedImage (thumbnailImg) {
     const imgIndex = Number(thumbnailImg.getAttribute('data-index'));
     $('.carousel').carousel(imgIndex);
+  }
+
+  // listen for enter key on buttons and convert to click on child image
+  function listenForEnterKeyOverButton () {
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') { return; }
+      const elem = e.target;
+      if (elem.tagName !== 'BUTTON') { return; }
+      const btnImg = elem.firstChild;
+      if (!btnImg || btnImg.tagName !== 'IMG') { return; }
+      btnImg.click();
+    });
   }
 
   // respond to clicks on thumbnail images inside 'div-thumbnails'
@@ -193,12 +208,12 @@ function OverlayCarousel (userEditsToCSSProps) {
 
     const divThumbnails = $('.div-thumbnails');
     if (divThumbnails.animate) {
-      // console.log('scrollThumbnailsContainer using animate()');
+      console.log('scrollThumbnailsContainer using jQuery.animate()');
       divThumbnails.animate({
         scrollLeft: divThumb.scrollLeft + scrollAmount
       }, 500);
     } else if (divThumbnails.scrollLeft) {
-      // console.log('scrollThumbnailsContainer using scrollLeft()');
+      console.log('scrollThumbnailsContainer using jQuery.scrollLeft()');
       divThumbnails.scrollLeft(divThumb.scrollLeft + scrollAmount);
     } else {
       console.log('scrollThumbnailsContainer using fallback scroll()');

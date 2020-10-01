@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-carousel-modal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A bootstrap modal containing an image carousel",
   "main": "carousel.js",
   "scripts": {
@@ -9,6 +9,10 @@
   },
   "author": "Terry Morse",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/terrymorse58/bootstrap-carousel-modal.git"
+  },
   "devDependencies": {
     "lite-server": "^2.5.4"
   }

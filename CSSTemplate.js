@@ -2,19 +2,19 @@
 
 const CSSTemplate = `
     .wsi-overlay {
-      {{maxWidth}}
+      max-width: {{modalMaxWidth}};
     }
 
     .wsi-overlay .modal-header {
-      {{headerPadding}}
+      padding: {{headerPadding}};
     }
 
     .wsi-overlay .modal-header p {
-      {{headerParagraphMargin}}
+      margin: {{headerParagraphMargin}};
     }
 
     .wsi-overlay .modal-footer {
-      {{footerPadding}}
+      padding: {{footerPadding}};
     }
 
     .wsi-overlay .div-thumbnails {
@@ -24,22 +24,34 @@ const CSSTemplate = `
       background-color: transparent;
     }
     
-    .wsi-overlay .div-thumbnails img {
-      {{thumbnailHeight}}
-      width: auto;
-      {{thumbnailMargin}}
-      {{thumbnailBorder}}
+    .wsi-overlay .div-thumbnails button {
+      padding: {{thumbnailBtnPadding}};
+      margin: {{thumbnailBtnMargin}};
+      background-color: transparent;
+      border: none;
     }
-
+    
+    .wsi-overlay .div-thumbnails button:focus {
+      outline: 2px solid dodgerblue;
+      filter: brightness(80%);
+    }
+    
+    .wsi-overlay .div-thumbnails img {
+      height: {{thumbnailImgHeight}};
+      width: auto;
+      margin: 0;
+      border: {{thumbnailBorder}};
+    }
+    
     .wsi-overlay .div-thumbnails img:hover {
-      {{thumbnailHoverOutline}}
+      filter: {{thumbnailImgHoverFilter}};
     }
 
     .wsi-overlay .div-thumbnails img.selected {
       cursor: default;
-      outline: none;
-      {{thumbnailSelectedOpacity}}
-      {{thumbnailSelectedFilter}}
+      border: {{thumbnailImgSelectedBorder}};
+      opacity: {{thumbnailSelectedOpacity}};
+      filter: {{thumbnailSelectedFilter}};
     }
 `;
 

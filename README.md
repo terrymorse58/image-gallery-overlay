@@ -7,7 +7,7 @@ scrolling list of clickable thumbnail images.
  carousel modal")
  ### Install ###
  ```text
-npm install bootstrap-acrousel-modal
+npm install bootstrap-carousel-modal
 ```
 or
 ```text

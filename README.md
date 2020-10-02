@@ -1,17 +1,31 @@
 # bootstrap-carousel-modal
 ---
 A Bootstrap modal dialog with a single carousel image and
-scrolling list ofclickable thumbnail images.
+scrolling list of clickable thumbnail images.
  
 ![bootstrap-carousel-modal](https://terrymorse.com/public/bootstrap-carousel-modal.png "Sample
  carousel modal")
+ ### Install ###
+ ```text
+npm install bootstrap-acrousel-modal
+```
+or
+```text
+git clone https://github.com/terrymorse58/bootstrap-carousel-modal
+```
  ### Usage ###
- 
  ```javascript
-import OverlayCarousel from './carousel.js';
+import OverlayCarousel from '<path_to>/carousel.js';
 
+// create a carousel instance
 const carousel = new OverlayCarousel(styleOptions);
+
+// populate the carousel modal with a name and images
+//   name - text shown at the top of the modal
+//   imageURLs - array of url strings 
 carousel.populate(name, imageURLs);
+
+// show the modal
 carousel.show();
 ```
 ### Style Options ###

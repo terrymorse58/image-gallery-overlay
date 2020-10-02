@@ -1,4 +1,4 @@
-// HTML template for carousel modal
+// HTML template for carousel modal - a Bootstrap modal with an image carousel
 
 const HTMLTemplate = `
   <div
@@ -11,37 +11,42 @@ const HTMLTemplate = `
   >
     <div class="modal-dialog modal-dialog-centered wsi-overlay">
       <div class="modal-content">
+      
         <div class="modal-header"><p><!-- name of product --></p>
-          <button type="button" data-dismiss="modal" aria-label="Close"
-                  class="close"><span aria-hidden="true">×</span></button>
-        </div>
+          <button type="button"
+            data-dismiss="modal"
+            aria-label="Close"
+            class="close"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </div> <!-- /.modal-header -->
+        
         <div class="modal-body">
           <div
-            id="wsiCarousel"
-            data-ride="carousel"
-            class="carousel slide carousel-fade"
-            data-interval="false"
+            id="carousel-container"
+            class="carousel-container"
           >
-            <div class="carousel-inner">
-            <!--
-              <div class="carousel-item active" data-index="0">
-                <img src="..." alt="..." class="img-fluid">
-              </div>
-            -->
-            </div>
-          </div> <!-- /.carousel -->
+            <img
+              id="carousel-hero"
+              class="img-fluid"
+              src=""
+              alt="carousel hero">
+            <img
+              id="carousel-overlay"
+              class="carousel-overlay"
+              alt="carousel overlay"
+              data-in-transition="false"
+              style="z-index: -1000"
+              src=""
+            >
+          </div> <!-- /.carousel-container -->
         </div> <!-- /.modal-body -->
 
         <div class="modal-footer">
-          <div class="div-thumbnails">
-          <!--
-            <img role="button"
-              data-index="0"
-              onclick="displaySelectedImage(this)"
-              src="...">
-          -->
-          </div>
+          <div id="thumbnails-viewport" class="div-thumbnails"></div>
         </div> <!-- /.modal-footer -->
+        
       </div> <!-- /.modal-content -->
     </div> <!-- /.modal-dialog -->
   </div> <!-- /.modal -->

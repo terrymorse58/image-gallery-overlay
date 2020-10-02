@@ -53,6 +53,24 @@ const CSSTemplate = `
       opacity: {{thumbnailSelectedOpacity}};
       filter: {{thumbnailSelectedFilter}};
     }
+    
+    .carousel-container {
+      margin: 0;
+      position: relative;
+     }
+     .carousel-hero {}
+     .carousel-overlay {
+       position: absolute;
+       top: 0;
+       left: 0;
+       opacity: 0;
+       max-width: 100%;
+       height: auto;
+     }
+     .carousel-fade-in {
+       opacity: 1;
+       transition: opacity 1s;
+     }
 `;
 
 export default CSSTemplate;

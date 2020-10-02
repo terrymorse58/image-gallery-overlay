@@ -1,136 +1,170 @@
-// carousel overlay modal
-
+// carousel overlay modal with thumbnails
 import CSSTemplate from './CSSTemplate.js';
 import CSSEditableProps from './CSSEditableProps.js';
-import HTMLTemplate from './htmltemplate.js';
+import HTMLTemplate from './HTMLTemplate.js';
 
 function OverlayCarousel (userEditsToCSSProps) {
 
-  // console.log('OverlayCarousel userEditsToCSSProps:', userEditsToCSSProps);
+  const editableCSSProps = JSON.parse(JSON.stringify(CSSEditableProps));
+  let styleSheet = CSSTemplate.slice(0);
 
-  let css = CSSTemplate.slice(0);
-  let cssEdProps = JSON.parse(JSON.stringify(CSSEditableProps));
+  let carouselModal,
+    pHeader,
+    imgHero,
+    imgOverlay,
+    carouselFooter,
+    thumbnailsViewport,
+    thumbnailImages = [];
 
-  // apply passed in user edits to css props
+  // apply user edits to editable css props
   function applyUserEditsToCSSProps () {
-    console.log('applyUserEditsToCSSProps()');
     if (typeof userEditsToCSSProps === 'undefined') { return; }
     for (const [propName, value] of Object.entries(userEditsToCSSProps)) {
-      if (typeof cssEdProps[propName] === 'undefined') { continue; }
-      cssEdProps[propName] = value;
+      if (typeof editableCSSProps[propName] === 'undefined') { continue; }
+      editableCSSProps[propName] = value;
     }
   }
 
-  // apply all css props to css
-  function applyCSSPropsToCSS () {
-    for (const [propName, value] of Object.entries(cssEdProps)) {
+  // apply all css props to styleSheet
+  function applyCSSPropsToStyleSheet () {
+    for (const [propName, value] of Object.entries(editableCSSProps)) {
       const searchStr = `{{${propName}}}`;
       const subStr = `${value}`;
-      css = css.replace(searchStr, subStr);
+      styleSheet = styleSheet.replace(searchStr, subStr);
     }
   }
 
-  // append HTML template to end of <body>
-  function appendTemplateToBody () {
+  // append HTML template to <body>
+  function appendHTMLTemplateToBody () {
     const div = document.createElement('div');
     div.id = "carousel-modal-container";
     div.innerHTML = HTMLTemplate;
     document.body.appendChild(div);
 
-    // listen for carousel changes then update the DOM
-    $('.carousel').on('slide.bs.carousel', (evt) => {
-      const carouselIndex = Number(
-        evt.relatedTarget.getAttribute('data-index')
-      );
+    carouselModal = document.getElementById('carouselModal');
+    pHeader = carouselModal.querySelector('.modal-header p');
+    imgHero = document.getElementById('carousel-hero');
+    imgOverlay = document.getElementById('carousel-overlay');
+    thumbnailsViewport = document.getElementById('thumbnails-viewport');
+    carouselFooter = carouselModal.querySelector('.modal-footer');
+
+    // set up the image fade
+    imgOverlay.addEventListener('transitionend', completeImageFade);
+
+    // react to hero image changes
+    imgHero.addEventListener('change', () => {
+      const heroIndex = Number(imgHero.dataset.index);
 
       // get all the thumbnail images
-      const thumbImgs = getAllThumbnails();
+      // const thumbImgs = getAllThumbnails();
 
       // set (unset) the selected class for each thumbnail image
       const thumbSelected = updateThumbnailsSelectedClass(
-        thumbImgs, carouselIndex);
+        thumbnailImages, heroIndex);
 
       // scroll the thumbnails container
-      scrollThumbnailsContainer(thumbSelected);
+      scrollThumbnailsViewport(thumbSelected);
     });
   }
 
   // append style sheet to <head>
-  function appendCSSToHead () {
+  function appendStyleSheetToHead () {
     const style = document.createElement('style');
-    style.innerHTML = css;
+    style.innerHTML = styleSheet;
     document.head.appendChild(style);
   }
 
   // populate overlay with name, carousel and thumbnail images
   function populate (name, hrefs) {
-    const pHeader = document.querySelector(
-      '.wsi-overlay .modal-header p');
-    const carouselInner = document.querySelector(
-      '.wsi-overlay .carousel-inner');
-    const thumbnails = document.querySelector(
-      '.wsi-overlay .div-thumbnails');
-
     pHeader.innerHTML = name;
 
     // populate the carousel and the thumbnails
-    carouselInner.innerHTML = '';
-    thumbnails.innerHTML = '';
-    hrefs.forEach((href, index) => {
-      const carouselItem = document.createElement('div');
-      carouselItem.className = 'carousel-item';
-      if (index === 0) { carouselItem.classList.add('active'); }
-      carouselItem.dataset.index = index;
-      carouselInner.appendChild(carouselItem);
-
-      const img = document.createElement('img');
-      img.src = href;
-      img.alt = name;
-      img.className = 'img-fluid';
-      carouselItem.appendChild(img);
-
+    thumbnailsViewport.innerHTML = '';
+    thumbnailImages = hrefs.map((href, index) => {
       const btnThumb = document.createElement('button');
-      thumbnails.appendChild(btnThumb);
+      thumbnailsViewport.appendChild(btnThumb);
 
       const imgThumb = document.createElement('img');
       imgThumb.dataset.index = index;
       imgThumb.src = href;
       btnThumb.appendChild(imgThumb);
+
+      return imgThumb;
     });
 
-    // show thumbnails if there are multiple images
-    const footer = document.querySelector('.wsi-overlay .modal-footer');
+    // show thumbnails when there are multiple images
     const hasMultipleImages = hrefs.length > 1;
-    footer.style.display = hasMultipleImages ? '' : 'none';
+    carouselFooter.style.display = hasMultipleImages ? '' : 'none';
   }
 
   // show the carousel modal
   function show () {
-    $('#carouselModal').modal('show');
-    // mark the first thumbnail image as selected
-    const firstThumb = document.querySelector('.div-thumbnails img');
+
+    imgOverlay.dataset.inTransition = "false";
+
+    // make the display changes *before* showing the modal
+    const firstThumb = thumbnailsViewport.querySelector('img');
     if (firstThumb === null) {
       console.error('no thumbnail images found');
       return;
     }
-    firstThumb.classList.add('selected');
-    //display the first image
-    displaySelectedImage(firstThumb);
+    displaySelectedImage(firstThumb, false);
 
-    // listen for thumbnail clicks and enter keys
-    listenForThumbnailClicks();
-    listenForEnterKeyOverButton();
+    $('#carouselModal').modal('show');
   }
 
-  // display in carousel the selected thumbnail image
-  function displaySelectedImage (thumbnailImg) {
-    const imgIndex = Number(thumbnailImg.getAttribute('data-index'));
-    $('.carousel').carousel(imgIndex);
+  /**
+   * display in hero image the selected thumbnail image
+   * @param {Element} thumbnailImg
+   * @param {boolean} animate - animate the hero image transition
+   */
+  function displaySelectedImage (thumbnailImg, animate = true) {
+
+    // don't change hero image if it is still in transition from an
+    // earlier change
+    if (imgOverlay.dataset.inTransition === "true") {
+      console.error('hero image in transition, cannot change now');
+      return;
+    }
+
+    // dispatch 'change' event to hero image, which will update thumbnails
+    imgHero.dataset.index = thumbnailImg.dataset.index;
+    const changeEvt = new Event('change');
+    imgHero.dispatchEvent(changeEvt);
+
+    imgOverlay.src = thumbnailImg.src;
+    imgOverlay.dataset.index = thumbnailImg.dataset.index;
+
+    if (animate) {
+      // bring overlay to front and fade it in
+      imgOverlay.dataset.inTransition = "true";
+      imgOverlay.style.zIndex = "100";
+      imgOverlay.classList.add('carousel-fade-in');
+    } else {
+      // just clean up without animation
+      completeImageFade();
+    }
   }
 
-  // listen for enter key on buttons and convert to click on child image
+  // clean up display elements when image fade transition completes
+  function completeImageFade () {
+
+    // copy overlay image to hero image
+    imgHero.src = imgOverlay.src;
+
+    // send overlay to back and clean up
+    imgOverlay.style.zIndex = "-1000";
+    imgOverlay.src = "";
+    imgOverlay.dataset.index = null;
+    imgOverlay.dataset.inTransition = "false";
+    if (imgOverlay.classList.contains('carousel-fade-in')) {
+      imgOverlay.classList.remove('carousel-fade-in');
+    }
+  }
+
+  // enter key press over thumbnail button emit thumbnail image click
   function listenForEnterKeyOverButton () {
-    document.addEventListener('keydown', (e) => {
+    thumbnailsViewport.addEventListener('keydown', (e) => {
       if (e.key !== 'Enter') { return; }
       const elem = e.target;
       if (elem.tagName !== 'BUTTON') { return; }
@@ -141,9 +175,8 @@ function OverlayCarousel (userEditsToCSSProps) {
   }
 
   // respond to clicks on thumbnail images inside 'div-thumbnails'
-  function listenForThumbnailClicks () {
-    const divThumbnails = document.querySelector('.div-thumbnails');
-    divThumbnails.addEventListener('click', (evt) => {
+  function listenForThumbnailImageClicks () {
+    thumbnailsViewport.addEventListener('click', (evt) => {
       const elClicked = evt.target;
       const isThumbnailImg = (el) => el.tagName === 'IMG'
         && typeof el.dataset.index !== 'undefined';
@@ -152,81 +185,61 @@ function OverlayCarousel (userEditsToCSSProps) {
     });
   }
 
-  // get all thumbnail images
-  function getAllThumbnails () {
-    return Array.from(
-      document.querySelectorAll('.div-thumbnails img')
-    );
-  }
-
-  // update the "selected" class of all thumbnails
+  // update the "selected" class of each thumbnail image
   function updateThumbnailsSelectedClass (thumbnails, carouselIndex) {
+    const cIndex = Number(carouselIndex);
     let thumbSelected = null;
     thumbnails.forEach(img => {
-      const thumbIndex = Number(img.getAttribute('data-index'));
-      img.classList.remove('selected');
-      if (thumbIndex === carouselIndex) {
+      const thumbIndex = +(img.dataset.index);
+      if (thumbIndex === cIndex) {
         thumbSelected = img;
+        thumbSelected.classList.add('selected');
+        return;
       }
+      img.classList.remove('selected');
     });
-    if (thumbSelected) {
-      thumbSelected.classList.add('selected');
-    }
     return thumbSelected;
   }
 
   /**
-   * scroll the thumbnails container left or right, based on the selected
-   * thumbnail's position
-   * @param {Element} thumb
+   * scroll thumbnails viewport to show `thumbnail` in center of window
+   * @param {Element} thumbnail
    */
-  function scrollThumbnailsContainer (thumb) {
-    if (!thumb) { return; }
-    const divThumb = document.querySelector('.div-thumbnails');
-    const divMidpoint = Math.round(divThumb.clientWidth / 2);
-    const divScroll = divThumb.scrollLeft;
-    const tStyle = window.getComputedStyle(thumb);
-    const tTotalWidth = thumb.offsetWidth
+  function scrollThumbnailsViewport (thumbnail) {
+    if (!thumbnail) { return; }
+    const windowHalfWidth = Math.round(thumbnailsViewport.clientWidth / 2);
+    const tStyle = window.getComputedStyle(thumbnail);
+    const thumbnailWidth = thumbnail.offsetWidth
       + parseFloat(tStyle.marginLeft) + parseFloat(tStyle.marginRight);
-    const thumbCenter = thumb.offsetLeft + (thumb.offsetWidth / 2);
-    const centerOffset = thumbCenter - divScroll;
+    const thumbnailCenterPosInViewport = thumbnail.offsetLeft
+      + (thumbnail.offsetWidth / 2);
 
-    // if thumbnail is centered, do not scroll
-    const thumbnailIsCentered = () => {
-      return centerOffset >= divMidpoint - (tTotalWidth / 2)
-        && centerOffset <= divMidpoint + (tTotalWidth / 2);
-    };
-    if (thumbnailIsCentered()) {
-      return;
-    }
+    // scroll to place thumbnail in center of viewport window
+    const scrollAmount = thumbnailCenterPosInViewport
+      - windowHalfWidth - (thumbnailWidth / 2);
 
-    const scrollAmount = Math.sign(centerOffset - divMidpoint)
-      * tTotalWidth;
-
-    // console.log(`  divScroll: ${divScroll}, thumbCenter: ${thumbCenter}, ` +
-    // ` centerOffset: ${centerOffset}, scrollAmount: ${scrollAmount}`);
-
-    const divThumbnails = $('.div-thumbnails');
+    const divThumbnails = $('#thumbnails-viewport');
     if (divThumbnails.animate) {
-      console.log('scrollThumbnailsContainer using jQuery.animate()');
+      // console.log('scrollThumbnailsViewport using jQuery.animate()');
       divThumbnails.animate({
-        scrollLeft: divThumb.scrollLeft + scrollAmount
+        scrollLeft: scrollAmount
       }, 500);
     } else if (divThumbnails.scrollLeft) {
-      console.log('scrollThumbnailsContainer using jQuery.scrollLeft()');
-      divThumbnails.scrollLeft(divThumb.scrollLeft + scrollAmount);
+      console.log('scrollThumbnailsViewport using fallback scrollLeft()');
+      divThumbnails.scrollLeft(scrollAmount);
     } else {
-      console.log('scrollThumbnailsContainer using fallback scroll()');
-      divThumbnails.scroll(divThumb.scrollLeft + scrollAmount, 0);
+      console.log('scrollThumbnailsViewport using fallback scroll()');
+      divThumbnails.scroll(scrollAmount, 0);
     }
   }
 
   function init () {
-    // console.log('carousel.js init()');
     applyUserEditsToCSSProps();
-    applyCSSPropsToCSS();
-    appendTemplateToBody();
-    appendCSSToHead();
+    applyCSSPropsToStyleSheet();
+    appendHTMLTemplateToBody();
+    appendStyleSheetToHead();
+    listenForThumbnailImageClicks();
+    listenForEnterKeyOverButton();
   }
 
   // initialize

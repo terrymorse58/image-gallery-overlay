@@ -6,7 +6,7 @@ const CSSEditableProps = {
   headerParagraphMargin: '0',
   footerPadding: '0 1rem',
   thumbnailBtnPadding: '4px',
-  thumbnailBtnMargin: '0 6px',
+  thumbnailBtnMargin: '0 6px', /* must be in 'px' units */
   thumbnailImgHeight: '60px',
   thumbnailImgHoverFilter: 'brightness(90%)',
   thumbnailBorder: 'none',

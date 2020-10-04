@@ -5,6 +5,7 @@ import HTMLTemplate from './HTMLTemplate.js';
 
 function OverlayCarousel (userEditsToCSSProps) {
 
+  // make copies of templates
   const editableCSSProps = JSON.parse(JSON.stringify(CSSEditableProps));
   let styleSheet = CSSTemplate.slice(0);
 
@@ -14,7 +15,13 @@ function OverlayCarousel (userEditsToCSSProps) {
     imgOverlay,
     carouselFooter,
     thumbnailsViewport,
+    jqThumbnailsViewport,
     thumbnailImages = [];
+
+  // returns true if element supports smooth scrolling
+  const hasSmoothScrolling = (el) => {
+    return getComputedStyle(el).scrollBehavior === 'smooth';
+  }
 
   // apply user edits to editable css props
   function applyUserEditsToCSSProps () {
@@ -46,6 +53,7 @@ function OverlayCarousel (userEditsToCSSProps) {
     imgHero = document.getElementById('carousel-hero');
     imgOverlay = document.getElementById('carousel-overlay');
     thumbnailsViewport = document.getElementById('thumbnails-viewport');
+    jqThumbnailsViewport = $('#thumbnails-viewport');
     carouselFooter = carouselModal.querySelector('.modal-footer');
 
     // set up the image fade
@@ -202,35 +210,49 @@ function OverlayCarousel (userEditsToCSSProps) {
   }
 
   /**
-   * scroll thumbnails viewport to show `thumbnail` in center of window
-   * @param {Element} thumbnail
+   * scroll thumbnails viewport to show `thumbnailImg` in center of window
+   * @param {Element} thumbnailImg - thumbnail's img element
    */
-  function scrollThumbnailsViewport (thumbnail) {
-    if (!thumbnail) { return; }
-    const windowHalfWidth = Math.round(thumbnailsViewport.clientWidth / 2);
-    const tStyle = window.getComputedStyle(thumbnail);
-    const thumbnailWidth = thumbnail.offsetWidth
-      + parseFloat(tStyle.marginLeft) + parseFloat(tStyle.marginRight);
-    const thumbnailCenterPosInViewport = thumbnail.offsetLeft
-      + (thumbnail.offsetWidth / 2);
+  function scrollThumbnailsViewport (thumbnailImg) {
+    if (!thumbnailImg) { return; }
+    const viewportWidth = thumbnailsViewport.scrollWidth;
+    const windowWidth = thumbnailsViewport.clientWidth;
+    const scrollMax = viewportWidth - windowWidth;
+    const tnParent = thumbnailImg.parentElement; // thumbnailImg parent is button
+    const tnStyle = window.getComputedStyle(tnParent);
+    const tnWidth = tnParent.offsetWidth
+      + parseFloat(tnStyle.marginLeft) + parseFloat(tnStyle.marginRight);
+    const thumbnailCenterOffset = tnParent.offsetLeft
+      + (tnParent.offsetWidth / 2);
 
-    // scroll to place thumbnail in center of viewport window
-    const scrollAmount = thumbnailCenterPosInViewport
-      - windowHalfWidth - (thumbnailWidth / 2);
+    // console.log(`    viewportWidth: ${thumbnailsViewport.scrollWidth}
+    // windowWidth: ${windowWidth}
+    // scrollMax: ${scrollMax}
+    // tnParent.offsetLeft: ${tnParent.offsetLeft}
+    // tnParent.offsetWidth: ${tnParent.offsetWidth}
+    // thumbnailCenterOffset: ${thumbnailCenterOffset}`);
 
-    const divThumbnails = $('#thumbnails-viewport');
-    if (divThumbnails.animate) {
-      // console.log('scrollThumbnailsViewport using jQuery.animate()');
-      divThumbnails.animate({
-        scrollLeft: scrollAmount
-      }, 500);
-    } else if (divThumbnails.scrollLeft) {
-      console.log('scrollThumbnailsViewport using fallback scrollLeft()');
-      divThumbnails.scrollLeft(scrollAmount);
+    // scroll viewport to position thumbnail in center of viewport window
+    let newScrollLeft = thumbnailCenterOffset
+      - Math.round((windowWidth+tnWidth) / 2);
+    if (newScrollLeft < 0) { newScrollLeft = 0; }
+    if (newScrollLeft > scrollMax) { newScrollLeft = scrollMax; }
+
+    // console.log(`  newScrollLeft: ${newScrollLeft}`);
+
+    if (hasSmoothScrolling(thumbnailsViewport)
+      || jqThumbnailsViewport.animate === undefined
+    ) {
+      // console.log('scrolling with Element.scrollLeft = newScrollLeft');
+      thumbnailsViewport.scrollLeft = newScrollLeft;
     } else {
-      console.log('scrollThumbnailsViewport using fallback scroll()');
-      divThumbnails.scroll(scrollAmount, 0);
+      // console.log('smooth scrolling fallback with jQuery.animate()');
+      jqThumbnailsViewport.animate({
+        scrollLeft: newScrollLeft
+      }, 500);
     }
+
+    // console.log(`after scrollLeft: ${thumbnailsViewport.scrollLeft}`);
   }
 
   function init () {

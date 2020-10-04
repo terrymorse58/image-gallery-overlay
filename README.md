@@ -5,6 +5,7 @@ scrolling list of clickable thumbnail images.
  
 ![bootstrap-carousel-modal](https://terrymorse.com/public/bootstrap-carousel-modal.png "Sample
  carousel modal")
+ 
  ### Install ###
  ```text
 npm install bootstrap-carousel-modal
@@ -38,7 +39,7 @@ const defaultStyleOptions = {
   headerParagraphMargin: '0',
   footerPadding: '0 1rem',
   thumbnailBtnPadding: '4px',
-  thumbnailBtnMargin: '0 6px',
+  thumbnailBtnMargin: '0 6px', /* must be 'px' units */
   thumbnailImgHeight: '60px',
   thumbnailImgHoverFilter: 'brightness(90%)',
   thumbnailBorder: 'none',

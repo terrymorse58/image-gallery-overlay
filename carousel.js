@@ -10,12 +10,12 @@ function OverlayCarousel (userEditsToCSSProps) {
   let styleSheet = CSSTemplate.slice(0);
 
   let carouselModal,
+    jqCarouselModal,
     pHeader,
     imgHero,
     imgOverlay,
     carouselFooter,
     thumbnailsViewport,
-    jqThumbnailsViewport,
     thumbnailImages = [];
 
   // returns true if element supports smooth scrolling
@@ -49,11 +49,11 @@ function OverlayCarousel (userEditsToCSSProps) {
     document.body.appendChild(div);
 
     carouselModal = document.getElementById('carouselModal');
+    jqCarouselModal = $('#carouselModal');
     pHeader = carouselModal.querySelector('.modal-header p');
     imgHero = document.getElementById('carousel-hero');
     imgOverlay = document.getElementById('carousel-overlay');
     thumbnailsViewport = document.getElementById('thumbnails-viewport');
-    jqThumbnailsViewport = $('#thumbnails-viewport');
     carouselFooter = carouselModal.querySelector('.modal-footer');
 
     // set up the image fade
@@ -118,7 +118,7 @@ function OverlayCarousel (userEditsToCSSProps) {
     }
     displaySelectedImage(firstThumb, false);
 
-    $('#carouselModal').modal('show');
+    jqCarouselModal.modal('show');
   }
 
   /**
@@ -240,16 +240,32 @@ function OverlayCarousel (userEditsToCSSProps) {
 
     // console.log(`  newScrollLeft: ${newScrollLeft}`);
 
-    if (hasSmoothScrolling(thumbnailsViewport)
-      || jqThumbnailsViewport.animate === undefined
-    ) {
+    if (hasSmoothScrolling(thumbnailsViewport)) {
       // console.log('scrolling with Element.scrollLeft = newScrollLeft');
       thumbnailsViewport.scrollLeft = newScrollLeft;
     } else {
-      // console.log('smooth scrolling fallback with jQuery.animate()');
-      jqThumbnailsViewport.animate({
-        scrollLeft: newScrollLeft
-      }, 500);
+      // simulate scroll feature with vanilla JavaScript
+      const timeStep = 20;
+      const timeTotal = 400;
+      const stepsTotal = Math.round(timeTotal/timeStep);
+      const scrollStart = thumbnailsViewport.scrollLeft;
+      const scrollTotal = newScrollLeft - scrollStart;
+      const scrollStep = Math.round(scrollTotal/stepsTotal);
+      let time = timeStep, scroll = scrollStart + scrollStep;
+
+      const step = () => {
+        if (time >= timeTotal) {
+          thumbnailsViewport.scrollLeft = newScrollLeft;
+          return;
+        }
+
+        thumbnailsViewport.scrollLeft = scroll;
+        time += timeStep;
+        scroll += scrollStep;
+        setTimeout(step, timeStep);
+      }
+
+      if (scrollTotal !== 0) { step(); }
     }
 
     // console.log(`after scrollLeft: ${thumbnailsViewport.scrollLeft}`);

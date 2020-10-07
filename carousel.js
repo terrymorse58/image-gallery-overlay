@@ -11,12 +11,17 @@ function OverlayCarousel (userEditsToCSSProps) {
 
   let carouselModal,
     jqCarouselModal,
+    modalDialog,
+    modalContent,
+    modalHeader,
     pHeader,
+    modalBody,
+    carouselContainer,
     imgHero,
     imgOverlay,
-    carouselFooter,
     thumbnailsViewport,
-    thumbnailImages = [];
+    thumbnailImages = [],
+    modalFooter;
 
   // returns true if element supports smooth scrolling
   const hasSmoothScrolling = (el) => {
@@ -50,11 +55,16 @@ function OverlayCarousel (userEditsToCSSProps) {
 
     carouselModal = document.getElementById('carouselModal');
     jqCarouselModal = $('#carouselModal');
+    modalDialog = document.querySelector('.modal-dialog');
+    modalContent = document.querySelector('.modal-content');
+    modalHeader = document.querySelector('.modal-header');
     pHeader = carouselModal.querySelector('.modal-header p');
+    modalBody = carouselModal.querySelector('.wsi-overlay .modal-body');
+    carouselContainer = document.getElementById('carousel-container');
     imgHero = document.getElementById('carousel-hero');
     imgOverlay = document.getElementById('carousel-overlay');
     thumbnailsViewport = document.getElementById('thumbnails-viewport');
-    carouselFooter = carouselModal.querySelector('.modal-footer');
+    modalFooter = carouselModal.querySelector('.modal-footer');
 
     // set up the image fade
     imgOverlay.addEventListener('transitionend', completeImageFade);
@@ -62,9 +72,6 @@ function OverlayCarousel (userEditsToCSSProps) {
     // react to hero image changes
     imgHero.addEventListener('change', () => {
       const heroIndex = Number(imgHero.dataset.index);
-
-      // get all the thumbnail images
-      // const thumbImgs = getAllThumbnails();
 
       // set (unset) the selected class for each thumbnail image
       const thumbSelected = updateThumbnailsSelectedClass(
@@ -84,15 +91,64 @@ function OverlayCarousel (userEditsToCSSProps) {
 
   // populate overlay with name, carousel and thumbnail images
   function populate (name, hrefs) {
+    // console.log('populate()')
+
+    // display the modal (invisibly) to obtain its dimensions
+    carouselModal.style.display = 'block';
+
     pHeader.innerHTML = name;
 
-    // populate the carousel and the thumbnails
+    // detect aspect ratio of image when it's loaded
+    let imagesLoaded = 0;
+    let aspectRatioMin = Infinity;
+    function evalLoadedImage () {
+      const img = this;
+      let aspectRatio;
+
+      imagesLoaded++;
+      if (img.width === 0 || img.height === 0) { return; }
+
+      aspectRatio = img.width / img.height;
+      img.dataset.aspectRatio = aspectRatio;
+      aspectRatioMin = (aspectRatio < aspectRatioMin)
+        ? aspectRatio : aspectRatioMin;
+
+      // console.log(`index: ${img.dataset.index}, aspectRatio: ${aspectRatio}, min: ${aspectRatioMin}`);
+
+      if (imagesLoaded < hrefs.length) { return; }
+      if (aspectRatioMin === Infinity) { return; }
+
+      // all images loaded: set the padding-bottom of container to match aspect
+      // ratio
+      carouselContainer.style.paddingBottom = Math.round(
+        1.0 / aspectRatioMin * 100
+      ) + '%';
+      carouselContainer.dataset.aspectRatio = String(aspectRatioMin);
+
+      const contentAspectRatio =
+        modalContent.offsetWidth / modalContent.offsetHeight;
+      modalDialog.style.maxWidth = `calc(${
+        Math.round(contentAspectRatio * 100)
+      }vh - 2rem)`;
+
+      // console.log(`  modalContent.offsetWidth: ${modalContent.offsetWidth}
+      //   modalContent.offsetHeight: ${modalContent.offsetHeight}
+      //   aspectRatioMin: ${aspectRatioMin}
+      //   contentAspectRatio: ${contentAspectRatio}
+      //   modalDialog.style.maxWidth: ${modalDialog.style.maxWidth}`);
+
+      // un-display the modal
+      carouselModal.style.display = "none";
+    }
+
+    // populate the thumbnails
     thumbnailsViewport.innerHTML = '';
     thumbnailImages = hrefs.map((href, index) => {
       const btnThumb = document.createElement('button');
       thumbnailsViewport.appendChild(btnThumb);
 
       const imgThumb = document.createElement('img');
+      imgThumb.onload = evalLoadedImage;
       imgThumb.dataset.index = index;
       imgThumb.src = href;
       btnThumb.appendChild(imgThumb);
@@ -102,7 +158,8 @@ function OverlayCarousel (userEditsToCSSProps) {
 
     // show thumbnails when there are multiple images
     const hasMultipleImages = hrefs.length > 1;
-    carouselFooter.style.display = hasMultipleImages ? '' : 'none';
+    modalFooter.style.display = hasMultipleImages ? '' : 'none';
+
   }
 
   // show the carousel modal
@@ -127,12 +184,23 @@ function OverlayCarousel (userEditsToCSSProps) {
    * @param {boolean} animate - animate the hero image transition
    */
   function displaySelectedImage (thumbnailImg, animate = true) {
+    // console.log(`displaySelectedImage(imgIndex=${thumbnailImg.dataset.index},` +
+    // ` animate=${animate})`);
 
     // don't change hero image if it is still in transition from an
     // earlier change
     if (imgOverlay.dataset.inTransition === "true") {
       console.error('hero image in transition, cannot change now');
       return;
+    }
+
+    // don't animate transition if image's aspect ratio is greater than the
+    // current hero image's
+    const aspectRatioMismatch = (img) =>
+      +(img.dataset.aspectRatio) > +(imgHero.dataset.aspectRatio);
+    if (aspectRatioMismatch(thumbnailImg)) {
+      console.log('displaySelectedImage aspect ratio mismatch, no animation');
+      animate = false;
     }
 
     // dispatch 'change' event to hero image, which will update thumbnails
@@ -142,6 +210,7 @@ function OverlayCarousel (userEditsToCSSProps) {
 
     imgOverlay.src = thumbnailImg.src;
     imgOverlay.dataset.index = thumbnailImg.dataset.index;
+    imgOverlay.dataset.aspectRatio = thumbnailImg.dataset.aspectRatio;
 
     if (animate) {
       // bring overlay to front and fade it in
@@ -156,18 +225,24 @@ function OverlayCarousel (userEditsToCSSProps) {
 
   // clean up display elements when image fade transition completes
   function completeImageFade () {
+    // console.log('completeImageFade()');
 
     // copy overlay image to hero image
     imgHero.src = imgOverlay.src;
+    imgHero.dataset.index = imgOverlay.dataset.index;
+    imgHero.dataset.aspectRatio = imgOverlay.dataset.aspectRatio;
 
-    // send overlay to back and clean up
-    imgOverlay.style.zIndex = "-1000";
-    imgOverlay.src = "";
-    imgOverlay.dataset.index = null;
-    imgOverlay.dataset.inTransition = "false";
-    if (imgOverlay.classList.contains('carousel-fade-in')) {
-      imgOverlay.classList.remove('carousel-fade-in');
-    }
+    // send overlay to back and clean up (delayed to prevent flash)
+    setTimeout(() => {
+      imgOverlay.style.zIndex = "-1000";
+      imgOverlay.src = "";
+      imgOverlay.dataset.index = null;
+      imgOverlay.dataset.inTransition = "false";
+      imgOverlay.dataset.aspectRatio = "0";
+      if (imgOverlay.classList.contains('carousel-fade-in')) {
+        imgOverlay.classList.remove('carousel-fade-in');
+      }
+    }, 200);
   }
 
   // enter key press over thumbnail button emit thumbnail image click
@@ -216,25 +291,29 @@ function OverlayCarousel (userEditsToCSSProps) {
   function scrollThumbnailsViewport (thumbnailImg) {
     if (!thumbnailImg) { return; }
     const viewportWidth = thumbnailsViewport.scrollWidth;
+    const vpStyle = getComputedStyle(thumbnailsViewport);
+    const vpPaddingLeft = parseFloat(vpStyle.paddingLeft);
     const windowWidth = thumbnailsViewport.clientWidth;
     const scrollMax = viewportWidth - windowWidth;
     const tnParent = thumbnailImg.parentElement; // thumbnailImg parent is button
-    const tnStyle = window.getComputedStyle(tnParent);
+    const tnStyle = getComputedStyle(tnParent);
     const tnWidth = tnParent.offsetWidth
       + parseFloat(tnStyle.marginLeft) + parseFloat(tnStyle.marginRight);
     const thumbnailCenterOffset = tnParent.offsetLeft
       + (tnParent.offsetWidth / 2);
 
     // console.log(`    viewportWidth: ${thumbnailsViewport.scrollWidth}
+    // vpPaddingLeft: ${vpPaddingLeft}
     // windowWidth: ${windowWidth}
     // scrollMax: ${scrollMax}
     // tnParent.offsetLeft: ${tnParent.offsetLeft}
     // tnParent.offsetWidth: ${tnParent.offsetWidth}
+    // tnWidth: ${tnWidth}
     // thumbnailCenterOffset: ${thumbnailCenterOffset}`);
 
     // scroll viewport to position thumbnail in center of viewport window
     let newScrollLeft = thumbnailCenterOffset
-      - Math.round((windowWidth+tnWidth) / 2);
+      - Math.round((windowWidth+tnWidth) / 2) + vpPaddingLeft;
     if (newScrollLeft < 0) { newScrollLeft = 0; }
     if (newScrollLeft > scrollMax) { newScrollLeft = scrollMax; }
 

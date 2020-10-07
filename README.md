@@ -34,7 +34,6 @@ carousel.show();
 ```javascript
 // default style options
 const defaultStyleOptions = {
-  modalMaxWidth: '400px',
   headerPadding: '0.25rem 1rem',
   headerParagraphMargin: '0',
   footerPadding: '0 1rem',

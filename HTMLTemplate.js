@@ -12,7 +12,8 @@ const HTMLTemplate = `
     <div class="modal-dialog modal-dialog-centered wsi-overlay">
       <div class="modal-content">
       
-        <div class="modal-header"><p><!-- name of product --></p>
+        <div class="modal-header">
+          <p><!-- name of product --></p>
           <button type="button"
             data-dismiss="modal"
             aria-label="Close"
@@ -29,7 +30,7 @@ const HTMLTemplate = `
           >
             <img
               id="carousel-hero"
-              class="img-fluid"
+              class="carousel-hero"
               src=""
               alt="carousel hero">
             <img

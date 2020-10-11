@@ -15,6 +15,10 @@ scrolling list of clickable thumbnail images.
  + scrolls thumbnail images smoothly
  + enables accessibility from keyboard
  
+ ### Demo ###
+ 
+ A [live working demo](https://terrymorse.com/private/modalcarousel/index.html) is available.
+ 
  ### Install ###
  ```text
 npm install bootstrap-carousel-modal

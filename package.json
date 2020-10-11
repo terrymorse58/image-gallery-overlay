@@ -1,11 +1,12 @@
 {
   "name": "bootstrap-carousel-modal",
-  "version": "1.1.6",
+  "version": "1.2.0",
   "description": "A bootstrap modal containing an image carousel",
-  "main": "carousel.js",
+  "main": "build/js/carousel.js",
   "scripts": {
-    "test": "lite-server",
-    "dev": "lite-server"
+    "test": "jest",
+    "dev": "lite-server",
+    "build": "bash build.sh"
   },
   "author": "Terry Morse",
   "license": "MIT",
@@ -13,9 +14,33 @@
     "type": "git",
     "url": "https://github.com/terrymorse58/bootstrap-carousel-modal.git"
   },
-  "devDependencies": {
-    "bootstrap": "^4.5.2",
-    "lite-server": "^2.5.4"
+  "jest": {
+    "verbose": true,
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "modulePathIgnorePatterns": [
+      "carousel.mock.js"
+    ],
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+    }
   },
-  "dependencies": {}
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@jest/globals": "^26.5.2",
+    "babel-jest": "^26.5.2",
+    "babel-loader": "^8.1.0",
+    "benchmark": "^2.1.4",
+    "bootstrap": "^4.5.2",
+    "jest": "^26.5.2",
+    "jsdom": "^16.4.0",
+    "lite-server": "^2.5.4",
+    "popper.js": "^1.16.1"
+  },
+  "dependencies": {
+    "jquery": "^3.5.1"
+  }
 }

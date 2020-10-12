@@ -123,8 +123,15 @@ function OverlayCarousel (userEditsToCSSProps) {
 
     if (animate) {
       // fade in overlay
+      _imageInTransition = true;
       overlayDiv.dataset.inTransition = "true";
       overlayDiv.classList.add('carousel-fade-in');
+      // add timeout in case 'transitionend' event is not received
+      setTimeout(() => {
+        if (_imageInTransition === false) { return; }
+        // console.log('transitionend timeout, calling _completeImageFade()');
+        _completeImageFade();
+        }, 1100);
     } else {
       // just clean up without animation
       _completeImageFade();
@@ -132,14 +139,19 @@ function OverlayCarousel (userEditsToCSSProps) {
   }
 
   // clean up display elements when image fade transition completes
+  let _imageInTransition = false;
   function _completeImageFade () {
     // console.log('_completeImageFade()');
 
+    _imageInTransition = false;
     overlayDiv.dataset.inTransition = "false";
 
     // copy overlay image to hero image
-    imgHero.src = imgOverlay.src;
-    imgHero.dataset.index = imgOverlay.dataset.index;
+    if (imgOverlay.src) {
+      imgHero.src = imgOverlay.src;
+      imgHero.dataset.index = imgOverlay.dataset.index;
+    }
+
 
     // clean up overlay (delayed to prevent UI flash)
     setTimeout(() => {

@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-carousel-modal",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A bootstrap modal containing an image carousel",
   "main": "build/js/carousel.js",
   "scripts": {

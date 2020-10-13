@@ -1,12 +1,12 @@
 # image-gallery-overlay
 ---
-An overlay with a single gallery image and
+A responsive overlay component with a single gallery image and
 scrolling list of clickable thumbnail images.
  
 ![image-gallery-overlay](https://terrymorse.com/public/bootstrap-carousel-modal.gif "Sample
  carousel modal")
  
- ### Features ###
+### Features ###
  
  + produces largest images possible without scrolling
  + responds to window width and height changes
@@ -15,11 +15,11 @@ scrolling list of clickable thumbnail images.
  + scrolls thumbnail images smoothly
  + enables accessibility from keyboard
  
- ### Demo ###
+### Demo ###
  
  A [live working demo](https://terrymorse.com/private/modalcarousel/index.html) is available.
  
- ### Install ###
+### Install ###
  ```text
 npm install image-gallery-overlay
 ```
@@ -28,7 +28,7 @@ or
 git clone https://github.com/terrymorse58/image-gallery-overlay
 ```
 
- ### Loading ###
+### Loading ###
  
 As an ES6 module:
  ```html

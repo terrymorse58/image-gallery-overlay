@@ -1,7 +1,8 @@
 {
   "name": "image-gallery-overlay",
-  "version": "1.2.1",
-  "description": "A bootstrap modal containing an image carousel",
+  "version": "1.2.2",
+  "description": "A responsive overlay component with a hero image and scrolling list of clickable thumbnail images",
+
   "main": "build/js/carousel.js",
   "scripts": {
     "test": "jest",
@@ -41,6 +42,5 @@
     "popper.js": "^1.16.1"
   },
   "dependencies": {
-    "jquery": "^3.5.1"
   }
 }

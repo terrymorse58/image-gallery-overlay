@@ -6,8 +6,8 @@ const CSSTemplate = `
       font-family: {{fontFamily}};
     }
 
-    /* .modal */
-    #carousel-modal-container .modal {
+    /* .cmodal */
+    #carousel-modal-container .cmodal {
       position: fixed;
       top: 0;
       left: 0;
@@ -18,13 +18,13 @@ const CSSTemplate = `
       outline: 0;
       pointer-events: none;
     }
-    .modal-open #carousel-modal-container .modal {
+    .cmodal-open #carousel-modal-container .cmodal {
       overflow-x: hidden;
       overflow-y: auto;
     }
     
-    /* .modal-dialog */
-    #carousel-modal-container .modal .modal-dialog {
+    /* .cmodal-dialog */
+    #carousel-modal-container .cmodal .cmodal-dialog {
       position: relative;
       width: auto;
       margin: 0 auto;
@@ -36,18 +36,18 @@ const CSSTemplate = `
       transform: scale(0.95);
       transition: all 1s ease;
     }
-    #carousel-modal-container .modal.show .modal-dialog {
+    #carousel-modal-container .cmodal.show .cmodal-dialog {
      opacity: 1;
      transform: scale(1.0);
     }
     @media (max-width: 475px) {
-      #carousel-modal-container .modal.show .modal-dialog {
+      #carousel-modal-container .cmodal.show .cmodal-dialog {
         max-width: 92vw !important;
       }
     }
     
-    /* .modal-content */
-    #carousel-modal-container .modal-content {
+    /* .cmodal-content */
+    #carousel-modal-container .cmodal-content {
       position: relative;
       display: flex;
       flex-direction: column;
@@ -60,8 +60,8 @@ const CSSTemplate = `
       outline: 0;
     }
     
-    /* .modal-header */
-    #carousel-modal-container .modal-header {
+    /* .cmodal-header */
+    #carousel-modal-container .cmodal-header {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
@@ -70,12 +70,12 @@ const CSSTemplate = `
       border-top-left-radius: calc(.3rem - 1px);
       border-top-right-radius: calc(.3rem - 1px);
     }
-    #carousel-modal-container .modal-header p {
+    #carousel-modal-container .cmodal-header p {
       margin: {{headerParagraphMargin}};
     }
     
-    /* .modal-body */
-    #carousel-modal-container .modal-body {
+    /* .cmodal-body */
+    #carousel-modal-container .cmodal-body {
       position: relative;
       flex: 1 1 auto;
       padding: 1rem;
@@ -116,8 +116,8 @@ const CSSTemplate = `
        transition: opacity 1s ease;
      }
     
-    /* modal-footer */
-    #carousel-modal-container .modal-footer {
+    /* cmodal-footer */
+    #carousel-modal-container .cmodal-footer {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -175,8 +175,8 @@ const CSSTemplate = `
       opacity: .8;
     }
     
-    /* modal-backdrop */
-    .modal-backdrop {
+    /* cmodal-backdrop */
+    .cmodal-backdrop {
       position: fixed;
       top: 0;
       left: 0;
@@ -187,10 +187,19 @@ const CSSTemplate = `
       transition: opacity .3s linear;
       opacity: 0;
     }
-    .modal-backdrop.show {
+    .cmodal-backdrop.show {
       opacity: 0.5;
     }
     
+    /* .cmodal-open */
+    .cmodal-open {
+      overflow: hidden;
+    }
+    
+    cmodal-open cmodal {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
 `;
 
 export default CSSTemplate;

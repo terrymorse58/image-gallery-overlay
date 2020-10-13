@@ -58,19 +58,19 @@ function OverlayCarousel (userEditsToCSSProps) {
     document.body.appendChild(div);
 
     carouselModal = document.getElementById('carouselModal');
-    modalBackdrop = document.querySelector('.modal-backdrop');
-    modalDialog = document.querySelector('.modal-dialog');
-    modalContent = document.querySelector('.modal-content');
-    modalHeader = document.querySelector('.modal-header');
-    pHeader = carouselModal.querySelector('.modal-header p');
+    modalBackdrop = document.querySelector('.cmodal-backdrop');
+    modalDialog = document.querySelector('.cmodal-dialog');
+    modalContent = document.querySelector('.cmodal-content');
+    modalHeader = document.querySelector('.cmodal-header');
+    pHeader = carouselModal.querySelector('.cmodal-header p');
     closeButton = modalHeader.querySelector('button.close');
-    modalBody = carouselModal.querySelector('.modal-body');
+    modalBody = carouselModal.querySelector('.cmodal-body');
     carouselContainer = document.getElementById('carousel-container');
     imgHero = document.getElementById('carousel-hero');
     imgOverlay = document.getElementById('carousel-overlay');
     overlayDiv = document.querySelector('.carousel-overlay-div');
     thumbnailsViewport = document.getElementById('thumbnails-viewport');
-    modalFooter = carouselModal.querySelector('.modal-footer');
+    modalFooter = carouselModal.querySelector('.cmodal-footer');
 
     // set up the overlay fader
     overlayDiv.addEventListener('transitionend', _completeImageFade);
@@ -221,7 +221,7 @@ function OverlayCarousel (userEditsToCSSProps) {
 
     modalBackdrop.classList.remove('show');
     carouselModal.classList.remove('show');
-    document.body.classList.remove('modal-open');
+    document.body.classList.remove('cmodal-open');
   }
 
   // respond to clicks on close button
@@ -429,7 +429,7 @@ function OverlayCarousel (userEditsToCSSProps) {
     // wait for backdrop to complete before showing modal
     // modalBackdrop.addEventListener('transitionend', () => {
     //     carouselModal.classList.add('show');
-    //     document.body.classList.add('modal-open');
+    //     document.body.classList.add('cmodal-open');
     //     modalIsShowing = true;
     //   }, { once: true }
     // );
@@ -440,7 +440,7 @@ function OverlayCarousel (userEditsToCSSProps) {
     setTimeout(() => {
       carouselModal.classList.add('show');
       modalBackdrop.classList.add('show');
-      document.body.classList.add('modal-open');
+      document.body.classList.add('cmodal-open');
       modalIsShowing = true;
     }, 200);
   }

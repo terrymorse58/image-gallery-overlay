@@ -4,29 +4,26 @@ const HTMLTemplate = `
   <div
     id="carouselModal"
     tabindex="-1"
-    class="modal"
-    aria-modal="true"
-    role="dialog"
+    class="cmodal"
     data-wrap="false"
   >
     <div
-      class="modal-dialog modal-dialog-centered"
+      class="cmodal-dialog cmodal-dialog-centered"
       style="max-width: calc(-2rem + 58vh)"
     >
-      <div class="modal-content">
+      <div class="cmodal-content">
       
-        <div class="modal-header">
+        <div class="cmodal-header">
           <p><!-- name of product --></p>
           <button type="button"
-            data-dismiss="modal"
             aria-label="Close"
             class="close"
           >
             <span aria-hidden="true">×</span>
           </button>
-        </div> <!-- /.modal-header -->
+        </div> <!-- /.cmodal-header -->
         
-        <div class="modal-body">
+        <div class="cmodal-body">
           <div
             id="carousel-container"
             class="carousel-container"
@@ -51,16 +48,16 @@ const HTMLTemplate = `
               >
             </div> <!-- /.carousel-overlay-div -->
           </div> <!-- /.carousel-container -->
-        </div> <!-- /.modal-body -->
+        </div> <!-- /.cmodal-body -->
 
-        <div class="modal-footer">
+        <div class="cmodal-footer">
           <div id="thumbnails-viewport" class="div-thumbnails"></div>
-        </div> <!-- /.modal-footer -->
+        </div> <!-- /.cmodal-footer -->
         
-      </div> <!-- /.modal-content -->
-    </div> <!-- /.modal-dialog -->
-  </div> <!-- /.modal -->
-  <div class="modal-backdrop" style="display: none"></div>
+      </div> <!-- /.cmodal-content -->
+    </div> <!-- /.cmodal-dialog -->
+  </div> <!-- /.cmodal -->
+  <div class="cmodal-backdrop" style="display: none"></div>
 `;
 
 export default HTMLTemplate;

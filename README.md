@@ -1,9 +1,9 @@
-# bootstrap-carousel-modal
+# image-gallery-overlay
 ---
-A Bootstrap modal dialog with a single carousel image and
+An overlay with a single gallery image and
 scrolling list of clickable thumbnail images.
  
-![bootstrap-carousel-modal](https://terrymorse.com/public/bootstrap-carousel-modal.gif "Sample
+![image-gallery-overlay](https://terrymorse.com/public/bootstrap-carousel-modal.gif "Sample
  carousel modal")
  
  ### Features ###
@@ -21,27 +21,15 @@ scrolling list of clickable thumbnail images.
  
  ### Install ###
  ```text
-npm install bootstrap-carousel-modal
+npm install image-gallery-overlay
 ```
 or
 ```text
-git clone https://github.com/terrymorse58/bootstrap-carousel-modal
-```
-
-### Bootstrap Requirement ###
-For proper operation, the default Bootstrap CSS and scripts must be loaded:
-```html
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-<!-- JavaScript for Bootstrap -->
-<script src="//code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+git clone https://github.com/terrymorse58/image-gallery-overlay
 ```
 
  ### Loading ###
+ 
 As an ES6 module:
  ```html
 <script type="module">
@@ -65,19 +53,21 @@ const carousel = new OverlayCarousel(styleOptions);
 // populate the carousel modal with a name and images
 //   name - text shown at the top of the modal
 //   imageURLs - array of url strings 
-carousel.populate(name, imageURLs);
+//   imageTitles - array of strings that describe each image (optional)
+carousel.populate(name, imageURLs [, imageTitles]);
 
-// show the modal
+// show the overlay
 carousel.show();
 ```
 ### Style Options ###
 
-The styling may be modified with `styleOptions`, passed into `OverlayCarousel
-()`. Here are the default options:
+The styling of the overlay may be modified with `styleOptions`, passed into
+ `OverlayCarousel()`. Here are the default options:
 
 ```javascript
 // default style options
 const defaultStyleOptions = {
+  fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"'
   headerPadding: '0.25rem 1rem',
   headerParagraphMargin: '0',
   footerPadding: '0 1rem',

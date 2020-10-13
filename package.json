@@ -1,5 +1,5 @@
 {
-  "name": "bootstrap-carousel-modal",
+  "name": "image-gallery-overlay",
   "version": "1.2.1",
   "description": "A bootstrap modal containing an image carousel",
   "main": "build/js/carousel.js",
@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/terrymorse58/bootstrap-carousel-modal.git"
+    "url": "https://github.com/terrymorse58/image-gallery-overlay.git"
   },
   "jest": {
     "verbose": true,

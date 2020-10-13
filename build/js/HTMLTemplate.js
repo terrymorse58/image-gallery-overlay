@@ -4,13 +4,13 @@ const HTMLTemplate = `
   <div
     id="carouselModal"
     tabindex="-1"
-    class="modal fade"
+    class="modal"
     aria-modal="true"
     role="dialog"
     data-wrap="false"
   >
     <div
-      class="modal-dialog modal-dialog-centered wsi-overlay"
+      class="modal-dialog modal-dialog-centered"
       style="max-width: calc(-2rem + 58vh)"
     >
       <div class="modal-content">
@@ -60,6 +60,7 @@ const HTMLTemplate = `
       </div> <!-- /.modal-content -->
     </div> <!-- /.modal-dialog -->
   </div> <!-- /.modal -->
+  <div class="modal-backdrop" style="display: none"></div>
 `;
 
 export default HTMLTemplate;

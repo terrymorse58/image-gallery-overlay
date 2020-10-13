@@ -9,19 +9,22 @@
         content="Williams-Sonoma Coding Challenge submission by Terry Morse">
 
   <!-- Bootstrap CSS -->
+<!--
   <link rel="stylesheet"
         href="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
   >
+-->
 
-  <title>Bootstrap Modal with Image Gallery</title>
+  <title>Responsive Image Gallery Overlay</title>
 
 </head>
-<body>
+<body style="padding: 1rem">
 <header>
-  <h1 class="container text-center">Bootstrap Modal with Image Gallery</h1>
+  <h1 class="container text-center">Responsive Image Gallery Overlay</h1>
   <p class="text-center">
-    <button id="show-button" class="btn btn-primary">
-      Show Modal
+    <button id="show-button" style="font-size: 200%; border-radius: 8px;
+    padding: 1rem">
+      Show Overlay
     </button>
   </p>
 </header>
@@ -30,9 +33,11 @@
 
 <!-- JavaScript for Bootstrap -->
 <!-- JS, Popper.js, and jQuery -->
+<!--
 <script src="//code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+-->
 
 <script type="module">
   import OLCarousel from './carousel.js';
@@ -52,6 +57,20 @@
     'imgs/631-300x300.jpg',
     'imgs/987-400x200.jpg'
   ];
+  const imgTitles = [
+    'Golden Gate Bridge',
+    'curving building',
+    'misty pond',
+    'road, green hills, cloudy sky',
+    'man silouetted before water and sky',
+    'sunlit clouds over hills',
+    'Golden Gate Bridge',
+    'backpacker in mountains',
+    'dark clouds over ocean beach',
+    'tall forest',
+    'water droplet on leaf',
+    'rolling fog at sunset'
+  ];
 
   function initPage () {
     console.log('index.html initPage()');
@@ -61,7 +80,7 @@
     });
 
     // populate the modal with images
-    carousel.populate(productName, imageHrefs);
+    carousel.populate(productName, imageHrefs, imgTitles);
 
     // respond to clicks on 'show modal' button
     btnShow.addEventListener('click', () => {

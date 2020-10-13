@@ -91,7 +91,7 @@ test('modal template added to body', () => {
 
 test(`"${Mock.productName}" added to modal header`, () => {
   const pName = document.querySelector(
-    '#carousel-modal-container .modal-header p');
+    '#carousel-modal-container .cmodal-header p');
   expect(pName).not.toBeNull();
   expect(pName.innerHTML.length).not.toBe(0);
   expect(pName.innerHTML.valueOf()).toEqual(Mock.productName.valueOf());
@@ -112,7 +112,7 @@ test(`modal footer has ${Mock.imageHrefs.length} images`,
 
 test('show method opens modal', (done) => {
   setTimeout(() => {
-    const body = document.querySelector('.modal-open');
+    const body = document.querySelector('.cmodal-open');
     expect(body.tagName).toEqual('BODY');
     const modal = document.getElementById('carouselModal');
     expect(modal.style.display).toEqual('block');

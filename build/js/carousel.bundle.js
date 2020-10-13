@@ -127,7 +127,7 @@ var CSSEditableProps = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 // css template for carousel modal
-var CSSTemplate = "\n    /* general */\n    #carousel-modal-container {\n      font-family: {{fontFamily}};\n    }\n\n    /* .modal */\n    #carousel-modal-container .modal {\n      position: fixed;\n      top: 0;\n      left: 0;\n      z-index: 1050;\n      width: 100%;\n      height: 100%;\n      overflow: hidden;\n      outline: 0;\n      pointer-events: none;\n    }\n    .modal-open #carousel-modal-container .modal {\n      overflow-x: hidden;\n      overflow-y: auto;\n    }\n    \n    /* .modal-dialog */\n    #carousel-modal-container .modal .modal-dialog {\n      position: relative;\n      width: auto;\n      margin: 0 auto;\n      pointer-events: none;\n      display: flex;\n      align-items: center;\n      min-height: calc(100% - 1rem);\n      opacity: 0;\n      transform: scale(0.95);\n      transition: all 1s ease;\n    }\n    #carousel-modal-container .modal.show .modal-dialog {\n     opacity: 1;\n     transform: scale(1.0);\n    }\n    @media (max-width: 475px) {\n      #carousel-modal-container .modal.show .modal-dialog {\n        max-width: 92vw !important;\n      }\n    }\n    \n    /* .modal-content */\n    #carousel-modal-container .modal-content {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      width: 100%;\n      pointer-events: auto;\n      background-color: #fff;\n      background-clip: padding-box;\n      border: 1px solid rgba(0,0,0,.2);\n      border-radius: 0.3rem;\n      outline: 0;\n    }\n    \n    /* .modal-header */\n    #carousel-modal-container .modal-header {\n      display: flex;\n      align-items: flex-start;\n      justify-content: space-between;\n      padding: {{headerPadding}};\n      border-bottom: 1px solid #dee2e6;\n      border-top-left-radius: calc(.3rem - 1px);\n      border-top-right-radius: calc(.3rem - 1px);\n    }\n    #carousel-modal-container .modal-header p {\n      margin: {{headerParagraphMargin}};\n    }\n    \n    /* .modal-body */\n    #carousel-modal-container .modal-body {\n      position: relative;\n      flex: 1 1 auto;\n      padding: 1rem;\n    }\n    \n    /* carousel */\n    #carousel-modal-container .carousel-container {\n      margin: 0;\n      position: relative;\n      width: 100%;\n     }\n     #carousel-modal-container .carousel-overlay-div {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: 100%;\n      background-color: white;\n      opacity: 0;\n      pointer-events: none;\n     }\n     #carousel-modal-container .carousel-hero {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: auto;\n     }\n     #carousel-modal-container .carousel-overlay {\n       position: absolute;\n       top: 0;\n       left: 0;\n       width: 100%;\n       height: auto;\n     }\n     #carousel-modal-container .carousel-fade-in {\n       opacity: 1;\n       transition: opacity 1s ease;\n     }\n    \n    /* modal-footer */\n    #carousel-modal-container .modal-footer {\n      display: flex;\n      flex-wrap: wrap;\n      align-items: center;\n      justify-content: flex-end;\n      padding: {{footerPadding}};\n      border-top: 1px solid #dee2e6;\n      border-bottom-right-radius: calc(.3rem - 1px);\n      border-bottom-left-radius: calc(.3rem - 1px);\n    }\n    #carousel-modal-container .div-thumbnails {\n      overflow-x: auto;\n      white-space: nowrap;\n      margin: 0;\n      padding: 8px 16px 12px 16px; /* padding must be 'px' */\n      background-color: transparent;\n      scroll-behavior: smooth;\n    }\n    #carousel-modal-container .div-thumbnails button {\n      padding: {{thumbnailBtnPadding}};\n      margin: {{thumbnailBtnMargin}};\n      background-color: transparent;\n      border: none;\n    }\n    #carousel-modal-container .div-thumbnails img {\n      height: {{thumbnailImgHeight}};\n      width: auto;\n      margin: 0;\n      border: {{thumbnailBorder}};\n    }\n    #carousel-modal-container .div-thumbnails img:hover {\n      filter: {{thumbnailImgHoverFilter}};\n    }\n    #carousel-modal-container .div-thumbnails img.selected {\n      cursor: default;\n      border: {{thumbnailImgSelectedBorder}};\n      opacity: {{thumbnailSelectedOpacity}};\n      filter: {{thumbnailSelectedFilter}};\n    }\n    \n    /* close button */\n    #carousel-modal-container button.close {\n      float: right;\n      font-size: 1.5rem;\n      font-weight: 700;\n      line-height: 1;\n      color: #000;\n      text-shadow: 0 1px 0 #fff;\n      padding: 1rem;\n      margin: -1rem -1rem -1rem auto;;\n      background-color: transparent;\n      border: 0;\n      opacity: .5;\n    }\n    #carousel-modal-container button.close:hover {\n      opacity: .8;\n    }\n    \n    /* modal-backdrop */\n    .modal-backdrop {\n      position: fixed;\n      top: 0;\n      left: 0;\n      z-index: 1040;\n      width: 100vw;\n      height: 100vh;\n      background-color: #000;\n      transition: opacity .3s linear;\n      opacity: 0;\n    }\n    .modal-backdrop.show {\n      opacity: 0.5;\n    }\n    \n";
+var CSSTemplate = "\n    /* general */\n    #carousel-modal-container {\n      font-family: {{fontFamily}};\n    }\n\n    /* .cmodal */\n    #carousel-modal-container .cmodal {\n      position: fixed;\n      top: 0;\n      left: 0;\n      z-index: 1050;\n      width: 100%;\n      height: 100%;\n      overflow: hidden;\n      outline: 0;\n      pointer-events: none;\n    }\n    .cmodal-open #carousel-modal-container .cmodal {\n      overflow-x: hidden;\n      overflow-y: auto;\n    }\n    \n    /* .cmodal-dialog */\n    #carousel-modal-container .cmodal .cmodal-dialog {\n      position: relative;\n      width: auto;\n      margin: 0 auto;\n      pointer-events: none;\n      display: flex;\n      align-items: center;\n      min-height: calc(100% - 1rem);\n      opacity: 0;\n      transform: scale(0.95);\n      transition: all 1s ease;\n    }\n    #carousel-modal-container .cmodal.show .cmodal-dialog {\n     opacity: 1;\n     transform: scale(1.0);\n    }\n    @media (max-width: 475px) {\n      #carousel-modal-container .cmodal.show .cmodal-dialog {\n        max-width: 92vw !important;\n      }\n    }\n    \n    /* .cmodal-content */\n    #carousel-modal-container .cmodal-content {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      width: 100%;\n      pointer-events: auto;\n      background-color: #fff;\n      background-clip: padding-box;\n      border: 1px solid rgba(0,0,0,.2);\n      border-radius: 0.3rem;\n      outline: 0;\n    }\n    \n    /* .cmodal-header */\n    #carousel-modal-container .cmodal-header {\n      display: flex;\n      align-items: flex-start;\n      justify-content: space-between;\n      padding: {{headerPadding}};\n      border-bottom: 1px solid #dee2e6;\n      border-top-left-radius: calc(.3rem - 1px);\n      border-top-right-radius: calc(.3rem - 1px);\n    }\n    #carousel-modal-container .cmodal-header p {\n      margin: {{headerParagraphMargin}};\n    }\n    \n    /* .cmodal-body */\n    #carousel-modal-container .cmodal-body {\n      position: relative;\n      flex: 1 1 auto;\n      padding: 1rem;\n    }\n    \n    /* carousel */\n    #carousel-modal-container .carousel-container {\n      margin: 0;\n      position: relative;\n      width: 100%;\n     }\n     #carousel-modal-container .carousel-overlay-div {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: 100%;\n      background-color: white;\n      opacity: 0;\n      pointer-events: none;\n     }\n     #carousel-modal-container .carousel-hero {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: auto;\n     }\n     #carousel-modal-container .carousel-overlay {\n       position: absolute;\n       top: 0;\n       left: 0;\n       width: 100%;\n       height: auto;\n     }\n     #carousel-modal-container .carousel-fade-in {\n       opacity: 1;\n       transition: opacity 1s ease;\n     }\n    \n    /* cmodal-footer */\n    #carousel-modal-container .cmodal-footer {\n      display: flex;\n      flex-wrap: wrap;\n      align-items: center;\n      justify-content: flex-end;\n      padding: {{footerPadding}};\n      border-top: 1px solid #dee2e6;\n      border-bottom-right-radius: calc(.3rem - 1px);\n      border-bottom-left-radius: calc(.3rem - 1px);\n    }\n    #carousel-modal-container .div-thumbnails {\n      overflow-x: auto;\n      white-space: nowrap;\n      margin: 0;\n      padding: 8px 16px 12px 16px; /* padding must be 'px' */\n      background-color: transparent;\n      scroll-behavior: smooth;\n    }\n    #carousel-modal-container .div-thumbnails button {\n      padding: {{thumbnailBtnPadding}};\n      margin: {{thumbnailBtnMargin}};\n      background-color: transparent;\n      border: none;\n    }\n    #carousel-modal-container .div-thumbnails img {\n      height: {{thumbnailImgHeight}};\n      width: auto;\n      margin: 0;\n      border: {{thumbnailBorder}};\n    }\n    #carousel-modal-container .div-thumbnails img:hover {\n      filter: {{thumbnailImgHoverFilter}};\n    }\n    #carousel-modal-container .div-thumbnails img.selected {\n      cursor: default;\n      border: {{thumbnailImgSelectedBorder}};\n      opacity: {{thumbnailSelectedOpacity}};\n      filter: {{thumbnailSelectedFilter}};\n    }\n    \n    /* close button */\n    #carousel-modal-container button.close {\n      float: right;\n      font-size: 1.5rem;\n      font-weight: 700;\n      line-height: 1;\n      color: #000;\n      text-shadow: 0 1px 0 #fff;\n      padding: 1rem;\n      margin: -1rem -1rem -1rem auto;;\n      background-color: transparent;\n      border: 0;\n      opacity: .5;\n    }\n    #carousel-modal-container button.close:hover {\n      opacity: .8;\n    }\n    \n    /* cmodal-backdrop */\n    .cmodal-backdrop {\n      position: fixed;\n      top: 0;\n      left: 0;\n      z-index: 1040;\n      width: 100vw;\n      height: 100vh;\n      background-color: #000;\n      transition: opacity .3s linear;\n      opacity: 0;\n    }\n    .cmodal-backdrop.show {\n      opacity: 0.5;\n    }\n    \n    /* .cmodal-open */\n    .cmodal-open {\n      overflow: hidden;\n    }\n    \n    cmodal-open cmodal {\n      overflow-x: hidden;\n      overflow-y: auto;\n    }\n";
 /* harmony default export */ __webpack_exports__["default"] = (CSSTemplate);
 
 /***/ }),
@@ -142,7 +142,7 @@ var CSSTemplate = "\n    /* general */\n    #carousel-modal-container {\n      f
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 // HTML template for carousel modal - a Bootstrap modal with an image carousel
-var HTMLTemplate = "\n  <div\n    id=\"carouselModal\"\n    tabindex=\"-1\"\n    class=\"modal\"\n    aria-modal=\"true\"\n    role=\"dialog\"\n    data-wrap=\"false\"\n  >\n    <div\n      class=\"modal-dialog modal-dialog-centered\"\n      style=\"max-width: calc(-2rem + 58vh)\"\n    >\n      <div class=\"modal-content\">\n      \n        <div class=\"modal-header\">\n          <p><!-- name of product --></p>\n          <button type=\"button\"\n            data-dismiss=\"modal\"\n            aria-label=\"Close\"\n            class=\"close\"\n          >\n            <span aria-hidden=\"true\">\xD7</span>\n          </button>\n        </div> <!-- /.modal-header -->\n        \n        <div class=\"modal-body\">\n          <div\n            id=\"carousel-container\"\n            class=\"carousel-container\"\n            data-aspect-ratio=\"0.6666667\"\n            style=\"padding-bottom: 150%\"\n          >\n            <img\n              id=\"carousel-hero\"\n              class=\"carousel-hero\"\n              src=\"\"\n              alt=\"carousel hero\">\n            <!-- .carousel-overlay-div -->\n            <div\n              class=\"carousel-overlay-div\"\n              data-in-transition=\"false\"\n            >\n              <img\n                id=\"carousel-overlay\"\n                class=\"carousel-overlay\"\n                alt=\"carousel overlay\"\n                src=\"\"\n              >\n            </div> <!-- /.carousel-overlay-div -->\n          </div> <!-- /.carousel-container -->\n        </div> <!-- /.modal-body -->\n\n        <div class=\"modal-footer\">\n          <div id=\"thumbnails-viewport\" class=\"div-thumbnails\"></div>\n        </div> <!-- /.modal-footer -->\n        \n      </div> <!-- /.modal-content -->\n    </div> <!-- /.modal-dialog -->\n  </div> <!-- /.modal -->\n  <div class=\"modal-backdrop\" style=\"display: none\"></div>\n";
+var HTMLTemplate = "\n  <div\n    id=\"carouselModal\"\n    tabindex=\"-1\"\n    class=\"cmodal\"\n    data-wrap=\"false\"\n    style=\"display: none\"\n  >\n    <div\n      class=\"cmodal-dialog cmodal-dialog-centered\"\n      style=\"max-width: calc(-2rem + 58vh)\"\n    >\n      <div class=\"cmodal-content\">\n      \n        <div class=\"cmodal-header\">\n          <p><!-- name of product --></p>\n          <button type=\"button\"\n            aria-label=\"Close\"\n            class=\"close\"\n          >\n            <span aria-hidden=\"true\">\xD7</span>\n          </button>\n        </div> <!-- /.cmodal-header -->\n        \n        <div class=\"cmodal-body\">\n          <div\n            id=\"carousel-container\"\n            class=\"carousel-container\"\n            data-aspect-ratio=\"0.6666667\"\n            style=\"padding-bottom: 150%\"\n          >\n            <img\n              id=\"carousel-hero\"\n              class=\"carousel-hero\"\n              src=\"\"\n              alt=\"carousel hero\">\n            <!-- .carousel-overlay-div -->\n            <div\n              class=\"carousel-overlay-div\"\n              data-in-transition=\"false\"\n            >\n              <img\n                id=\"carousel-overlay\"\n                class=\"carousel-overlay\"\n                alt=\"carousel overlay\"\n                src=\"\"\n              >\n            </div> <!-- /.carousel-overlay-div -->\n          </div> <!-- /.carousel-container -->\n        </div> <!-- /.cmodal-body -->\n\n        <div class=\"cmodal-footer\">\n          <div id=\"thumbnails-viewport\" class=\"div-thumbnails\"></div>\n        </div> <!-- /.cmodal-footer -->\n        \n      </div> <!-- /.cmodal-content -->\n    </div> <!-- /.cmodal-dialog -->\n  </div> <!-- /.cmodal -->\n  <div class=\"cmodal-backdrop\" style=\"display: none\"></div>\n";
 /* harmony default export */ __webpack_exports__["default"] = (HTMLTemplate);
 
 /***/ }),
@@ -240,19 +240,19 @@ function OverlayCarousel(userEditsToCSSProps) {
     div.innerHTML = _HTMLTemplate_js__WEBPACK_IMPORTED_MODULE_2__["default"];
     document.body.appendChild(div);
     carouselModal = document.getElementById('carouselModal');
-    modalBackdrop = document.querySelector('.modal-backdrop');
-    modalDialog = document.querySelector('.modal-dialog');
-    modalContent = document.querySelector('.modal-content');
-    modalHeader = document.querySelector('.modal-header');
-    pHeader = carouselModal.querySelector('.modal-header p');
+    modalBackdrop = document.querySelector('.cmodal-backdrop');
+    modalDialog = document.querySelector('.cmodal-dialog');
+    modalContent = document.querySelector('.cmodal-content');
+    modalHeader = document.querySelector('.cmodal-header');
+    pHeader = carouselModal.querySelector('.cmodal-header p');
     closeButton = modalHeader.querySelector('button.close');
-    modalBody = carouselModal.querySelector('.modal-body');
+    modalBody = carouselModal.querySelector('.cmodal-body');
     carouselContainer = document.getElementById('carousel-container');
     imgHero = document.getElementById('carousel-hero');
     imgOverlay = document.getElementById('carousel-overlay');
     overlayDiv = document.querySelector('.carousel-overlay-div');
     thumbnailsViewport = document.getElementById('thumbnails-viewport');
-    modalFooter = carouselModal.querySelector('.modal-footer'); // set up the overlay fader
+    modalFooter = carouselModal.querySelector('.cmodal-footer'); // set up the overlay fader
 
     overlayDiv.addEventListener('transitionend', _completeImageFade); // react to hero image changes
 
@@ -282,11 +282,13 @@ function OverlayCarousel(userEditsToCSSProps) {
 
   function _displaySelectedImage(thumbnailImg) {
     var animate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-    console.log("_displaySelectedImage(imgIndex=".concat(thumbnailImg.dataset.index, ",") + " animate=".concat(animate, ")")); // don't animate if overlay is still in transition from an
-    // earlier change
 
+    // console.log(`_displaySelectedImage(imgIndex=${thumbnailImg.dataset.index},` +
+    // ` animate=${animate})`);
+    // don't animate if overlay is still in transition from an
+    // earlier change
     if (overlayDiv.dataset.inTransition === "true") {
-      console.log('overlay in transition, disabling fade');
+      // console.log('overlay in transition, disabling fade');
       overlayDiv.dataset.inTransition = "false";
       overlayDiv.classList.remove('carousel-fade-in');
       animate = false;
@@ -309,9 +311,9 @@ function OverlayCarousel(userEditsToCSSProps) {
 
       return;
     } // fade in overlay
+    // console.log('_displaySelectedImage fading in overlay');
 
 
-    console.log('_displaySelectedImage fading in overlay');
     _imageInTransition = true;
     overlayDiv.dataset.inTransition = 'true';
     overlayDiv.classList.add('carousel-fade-in'); // add timeout in case 'transitionend' event is never received
@@ -319,9 +321,9 @@ function OverlayCarousel(userEditsToCSSProps) {
     setTimeout(function () {
       if (_imageInTransition === false) {
         return;
-      }
+      } // console.log('_displaySelectedImage transitionend timeout, calling' +
+      //   ' _completeImageFade()');
 
-      console.log('_displaySelectedImage transitionend timeout, calling' + ' _completeImageFade()');
 
       _completeImageFade();
     }, 1100);
@@ -331,7 +333,7 @@ function OverlayCarousel(userEditsToCSSProps) {
   var _imageInTransition = false;
 
   function _completeImageFade() {
-    console.log('_completeImageFade() _imageInTranstion:', _imageInTransition);
+    // console.log('_completeImageFade() _imageInTranstion:', _imageInTransition);
     _imageInTransition = false;
     overlayDiv.dataset.inTransition = "false"; // copy overlay image to hero image
 
@@ -397,26 +399,28 @@ function OverlayCarousel(userEditsToCSSProps) {
   }
 
   function _hideModal() {
+    console.log('_hideModal()');
+
     if (modalIsShowing === false) {
       return;
     }
 
     modalIsShowing = false;
     modalBackdrop.addEventListener('transitionend', function () {
-      // console.log('modalBackdrop hide transitionend');
+      console.log('modalBackdrop transitionend, setting display:none');
       modalBackdrop.style.display = 'none';
     }, {
       once: true
     });
     carouselModal.addEventListener('transitionend', function () {
-      // console.log('carouselModal hide transitionend');
+      console.log('carouselModal transitionend, setting display:none');
       carouselModal.style.display = 'none';
     }, {
       once: true
     });
     modalBackdrop.classList.remove('show');
     carouselModal.classList.remove('show');
-    document.body.classList.remove('modal-open');
+    document.body.classList.remove('cmodal-open');
   } // respond to clicks on close button
 
 
@@ -537,8 +541,10 @@ function OverlayCarousel(userEditsToCSSProps) {
 
   function populate(name, hrefs) {
     var titles = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-    // console.log('populate()')
-    // display the modal (invisibly) to obtain its dimensions
+    console.log("populate(), carouselModal.style.display: \"".concat(carouselModal.style.display, "\"")); // display the modal (invisibly) to obtain its dimensions
+
+    var displaySave = carouselModal.style.display;
+    console.log('populate setting carouselModal display:block');
     carouselModal.style.display = 'block';
     pHeader.innerHTML = name; // detect aspect ratio of image when it receives a 'load' event
 
@@ -578,7 +584,8 @@ function OverlayCarousel(userEditsToCSSProps) {
       //   modalDialog.style.maxWidth: ${modalDialog.style.maxWidth}`);
       // un-display the modal
 
-      carouselModal.style.display = "none";
+      console.log("populate setting carouselModal display to \"".concat(displaySave, "\""));
+      carouselModal.style.display = displaySave;
     } // populate the thumbnails
 
 
@@ -622,18 +629,19 @@ function OverlayCarousel(userEditsToCSSProps) {
     _displaySelectedImage(firstThumb, false); // wait for backdrop to complete before showing modal
     // modalBackdrop.addEventListener('transitionend', () => {
     //     carouselModal.classList.add('show');
-    //     document.body.classList.add('modal-open');
+    //     document.body.classList.add('cmodal-open');
     //     modalIsShowing = true;
     //   }, { once: true }
     // );
 
 
     modalBackdrop.style.display = 'block';
+    console.log('show setting carouselModal display:block');
     carouselModal.style.display = 'block';
     setTimeout(function () {
       carouselModal.classList.add('show');
       modalBackdrop.classList.add('show');
-      document.body.classList.add('modal-open');
+      document.body.classList.add('cmodal-open');
       modalIsShowing = true;
     }, 200);
   }

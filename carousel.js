@@ -205,16 +205,18 @@ function OverlayCarousel (userEditsToCSSProps) {
 
   function _hideModal () {
 
+    console.log('_hideModal()');
+
     if (modalIsShowing === false) { return; }
     modalIsShowing = false;
 
     modalBackdrop.addEventListener('transitionend', () => {
-      // console.log('modalBackdrop hide transitionend');
+      console.log('modalBackdrop transitionend, setting display:none');
         modalBackdrop.style.display = 'none';
       }, { once: true }
     );
     carouselModal.addEventListener('transitionend', () => {
-      // console.log('carouselModal hide transitionend');
+      console.log('carouselModal transitionend, setting display:none');
         carouselModal.style.display = 'none';
       }, { once: true }
     );
@@ -334,9 +336,11 @@ function OverlayCarousel (userEditsToCSSProps) {
 
   // populate overlay with name, carousel and thumbnail images
   function populate (name, hrefs, titles = null) {
-    // console.log('populate()')
+    console.log(`populate(), carouselModal.style.display: "${carouselModal.style.display}"`);
 
     // display the modal (invisibly) to obtain its dimensions
+    const displaySave = carouselModal.style.display;
+    console.log('populate setting carouselModal display:block');
     carouselModal.style.display = 'block';
 
     pHeader.innerHTML = name;
@@ -381,7 +385,8 @@ function OverlayCarousel (userEditsToCSSProps) {
       //   modalDialog.style.maxWidth: ${modalDialog.style.maxWidth}`);
 
       // un-display the modal
-      carouselModal.style.display = "none";
+      console.log(`populate setting carouselModal display to "${displaySave}"`);
+      carouselModal.style.display = displaySave;
     }
 
     // populate the thumbnails
@@ -435,6 +440,8 @@ function OverlayCarousel (userEditsToCSSProps) {
     // );
 
     modalBackdrop.style.display = 'block';
+
+    console.log('show setting carouselModal display:block');
     carouselModal.style.display = 'block';
 
     setTimeout(() => {

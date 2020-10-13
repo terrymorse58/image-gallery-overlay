@@ -6,6 +6,7 @@ const HTMLTemplate = `
     tabindex="-1"
     class="cmodal"
     data-wrap="false"
+    style="display: none"
   >
     <div
       class="cmodal-dialog cmodal-dialog-centered"

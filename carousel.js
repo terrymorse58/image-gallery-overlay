@@ -105,13 +105,13 @@ function OverlayCarousel (userEditsToCSSProps) {
     thumbnailImg,
     animate = true)
   {
-    console.log(`_displaySelectedImage(imgIndex=${thumbnailImg.dataset.index},` +
-    ` animate=${animate})`);
+    // console.log(`_displaySelectedImage(imgIndex=${thumbnailImg.dataset.index},` +
+    // ` animate=${animate})`);
 
     // don't animate if overlay is still in transition from an
     // earlier change
     if (overlayDiv.dataset.inTransition === "true") {
-      console.log('overlay in transition, disabling fade');
+      // console.log('overlay in transition, disabling fade');
       overlayDiv.dataset.inTransition = "false";
       overlayDiv.classList.remove('carousel-fade-in');
       animate = false;
@@ -136,7 +136,7 @@ function OverlayCarousel (userEditsToCSSProps) {
     }
 
     // fade in overlay
-    console.log('_displaySelectedImage fading in overlay');
+    // console.log('_displaySelectedImage fading in overlay');
     _imageInTransition = true;
     overlayDiv.dataset.inTransition = 'true';
     overlayDiv.classList.add('carousel-fade-in');
@@ -144,8 +144,8 @@ function OverlayCarousel (userEditsToCSSProps) {
     // add timeout in case 'transitionend' event is never received
     setTimeout(() => {
       if (_imageInTransition === false) { return; }
-      console.log('_displaySelectedImage transitionend timeout, calling' +
-        ' _completeImageFade()');
+      // console.log('_displaySelectedImage transitionend timeout, calling' +
+      //   ' _completeImageFade()');
       _completeImageFade();
     }, 1100);
   }
@@ -153,7 +153,7 @@ function OverlayCarousel (userEditsToCSSProps) {
   // clean up display elements when image fade transition completes
   let _imageInTransition = false;
   function _completeImageFade () {
-    console.log('_completeImageFade() _imageInTranstion:', _imageInTransition);
+    // console.log('_completeImageFade() _imageInTranstion:', _imageInTransition);
 
     _imageInTransition = false;
     overlayDiv.dataset.inTransition = "false";

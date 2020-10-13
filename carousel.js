@@ -205,18 +205,16 @@ function OverlayCarousel (userEditsToCSSProps) {
 
   function _hideModal () {
 
-    console.log('_hideModal()');
+    // console.log('_hideModal()');
 
     if (modalIsShowing === false) { return; }
     modalIsShowing = false;
 
     modalBackdrop.addEventListener('transitionend', () => {
-      console.log('modalBackdrop transitionend, setting display:none');
         modalBackdrop.style.display = 'none';
       }, { once: true }
     );
     carouselModal.addEventListener('transitionend', () => {
-      console.log('carouselModal transitionend, setting display:none');
         carouselModal.style.display = 'none';
       }, { once: true }
     );
@@ -342,13 +340,12 @@ function OverlayCarousel (userEditsToCSSProps) {
    * @return {Promise<unknown>}
    */
   function populate (name, hrefs, titles = null) {
-    console.log(`populate(), carouselModal.style.display: "${carouselModal.style.display}"`);
+    // console.log(`populate()`);
 
     return new Promise(function (resolve) {
 
       // display the modal (invisibly) to obtain its dimensions
       const displaySave = carouselModal.style.display;
-      console.log('populate setting carouselModal display:block');
       carouselModal.style.display = 'block';
 
       pHeader.innerHTML = name;
@@ -388,7 +385,6 @@ function OverlayCarousel (userEditsToCSSProps) {
         }vh)`;
 
         // un-display the modal
-        console.log(`populate setting carouselModal display to "${displaySave}"`);
         carouselModal.style.display = displaySave;
 
         // all done, resolve the promise
@@ -447,8 +443,6 @@ function OverlayCarousel (userEditsToCSSProps) {
     // );
 
     modalBackdrop.style.display = 'block';
-
-    console.log('show setting carouselModal display:block');
     carouselModal.style.display = 'block';
 
     setTimeout(() => {

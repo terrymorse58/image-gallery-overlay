@@ -80,12 +80,19 @@
     });
 
     // populate the modal with images
-    carousel.populate(productName, imageHrefs, imgTitles);
+    carousel.populate(productName, imageHrefs, imgTitles)
+      .then(() => {
+        // then show the modal
+        console.log('carousel.populate() resolved');
 
-    // respond to clicks on 'show modal' button
-    btnShow.addEventListener('click', () => {
-      const show = carousel.show();
-    });
+        carousel.show();
+
+        // respond to clicks on 'show modal' button
+        btnShow.addEventListener('click', () => {
+          const show = carousel.show();
+        });
+      });
+
   }
 
   window.addEventListener('load', initPage);

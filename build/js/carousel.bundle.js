@@ -399,21 +399,18 @@ function OverlayCarousel(userEditsToCSSProps) {
   }
 
   function _hideModal() {
-    console.log('_hideModal()');
-
+    // console.log('_hideModal()');
     if (modalIsShowing === false) {
       return;
     }
 
     modalIsShowing = false;
     modalBackdrop.addEventListener('transitionend', function () {
-      console.log('modalBackdrop transitionend, setting display:none');
       modalBackdrop.style.display = 'none';
     }, {
       once: true
     });
     carouselModal.addEventListener('transitionend', function () {
-      console.log('carouselModal transitionend, setting display:none');
       carouselModal.style.display = 'none';
     }, {
       once: true
@@ -536,78 +533,82 @@ function OverlayCarousel(userEditsToCSSProps) {
       _vpScrollJavaScript(newScrollLeft);
     } // console.log(`after scrollLeft: ${thumbnailsViewport.scrollLeft}`);
 
-  } // populate overlay with name, carousel and thumbnail images
+  }
+  /**
+   * populate overlay with name, carousel and thumbnail images
+   * @param name
+   * @param hrefs
+   * @param titles
+   * @return {Promise<unknown>}
+   */
 
 
   function populate(name, hrefs) {
     var titles = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-    console.log("populate(), carouselModal.style.display: \"".concat(carouselModal.style.display, "\"")); // display the modal (invisibly) to obtain its dimensions
+    // console.log(`populate()`);
+    return new Promise(function (resolve) {
+      // display the modal (invisibly) to obtain its dimensions
+      var displaySave = carouselModal.style.display;
+      carouselModal.style.display = 'block';
+      pHeader.innerHTML = name; // detect aspect ratio of image when it receives a 'load' event
 
-    var displaySave = carouselModal.style.display;
-    console.log('populate setting carouselModal display:block');
-    carouselModal.style.display = 'block';
-    pHeader.innerHTML = name; // detect aspect ratio of image when it receives a 'load' event
+      var imagesLoaded = 0;
+      var aspectRatioMin = Infinity;
 
-    var imagesLoaded = 0;
-    var aspectRatioMin = Infinity;
+      function _evalLoadedImage() {
+        var img = this;
+        var aspectRatio;
+        imagesLoaded++;
 
-    function _evalLoadedImage() {
-      var img = this;
-      var aspectRatio;
-      imagesLoaded++;
+        if (img.width === 0 || img.height === 0) {
+          return;
+        }
 
-      if (img.width === 0 || img.height === 0) {
-        return;
-      }
+        aspectRatio = img.width / img.height;
+        img.dataset.aspectRatio = aspectRatio;
+        aspectRatioMin = aspectRatio < aspectRatioMin ? aspectRatio : aspectRatioMin; // console.log(`_evalLoadedImage index: ${img.dataset.index}, aspectRatio: ${aspectRatio}, min: ${aspectRatioMin}`);
 
-      aspectRatio = img.width / img.height;
-      img.dataset.aspectRatio = aspectRatio;
-      aspectRatioMin = aspectRatio < aspectRatioMin ? aspectRatio : aspectRatioMin; // console.log(`_evalLoadedImage index: ${img.dataset.index}, aspectRatio: ${aspectRatio}, min: ${aspectRatioMin}`);
+        if (imagesLoaded < hrefs.length) {
+          return;
+        }
 
-      if (imagesLoaded < hrefs.length) {
-        return;
-      }
-
-      if (aspectRatioMin === Infinity) {
-        return;
-      } // all images loaded: set the padding-bottom of container to match aspect
-      // ratio
-
-
-      carouselContainer.style.paddingBottom = Math.round(1.0 / aspectRatioMin * 100) + '%';
-      carouselContainer.dataset.aspectRatio = String(aspectRatioMin);
-      var contentAspectRatio = modalContent.offsetWidth / modalContent.offsetHeight;
-      modalDialog.style.maxWidth = "calc(-30px + ".concat(Math.round(contentAspectRatio * 100), "vh)"); // console.log(`  modalContent.offsetWidth: ${modalContent.offsetWidth}
-      //   modalContent.offsetHeight: ${modalContent.offsetHeight}
-      //   aspectRatioMin: ${aspectRatioMin}
-      //   contentAspectRatio: ${contentAspectRatio}
-      //   modalDialog.style.maxWidth: ${modalDialog.style.maxWidth}`);
-      // un-display the modal
-
-      console.log("populate setting carouselModal display to \"".concat(displaySave, "\""));
-      carouselModal.style.display = displaySave;
-    } // populate the thumbnails
+        if (aspectRatioMin === Infinity) {
+          return;
+        } // all images loaded: set the padding-bottom of container to match aspect
+        // ratio
 
 
-    thumbnailsViewport.innerHTML = '';
-    thumbnailImages = hrefs.map(function (href, index) {
-      var btnThumb = document.createElement('button');
-      thumbnailsViewport.appendChild(btnThumb);
-      var imgThumb = document.createElement('img');
-      imgThumb.onload = _evalLoadedImage;
-      imgThumb.dataset.index = String(index);
-      imgThumb.src = href;
+        carouselContainer.style.paddingBottom = Math.round(1.0 / aspectRatioMin * 100) + '%';
+        carouselContainer.dataset.aspectRatio = String(aspectRatioMin);
+        var contentAspectRatio = modalContent.offsetWidth / modalContent.offsetHeight;
+        modalDialog.style.maxWidth = "calc(-30px + ".concat(Math.round(contentAspectRatio * 100), "vh)"); // un-display the modal
 
-      if (titles !== null) {
-        imgThumb.alt = imgThumb.title = titles[index];
-      }
+        carouselModal.style.display = displaySave; // all done, resolve the promise
 
-      btnThumb.appendChild(imgThumb);
-      return imgThumb;
-    }); // show thumbnails when there are multiple images
+        resolve();
+      } // populate the thumbnails
 
-    var hasMultipleImages = hrefs.length > 1;
-    modalFooter.style.display = hasMultipleImages ? '' : 'none';
+
+      thumbnailsViewport.innerHTML = '';
+      thumbnailImages = hrefs.map(function (href, index) {
+        var btnThumb = document.createElement('button');
+        thumbnailsViewport.appendChild(btnThumb);
+        var imgThumb = document.createElement('img');
+        imgThumb.onload = _evalLoadedImage;
+        imgThumb.dataset.index = String(index);
+        imgThumb.src = href;
+
+        if (titles !== null) {
+          imgThumb.alt = imgThumb.title = titles[index];
+        }
+
+        btnThumb.appendChild(imgThumb);
+        return imgThumb;
+      }); // show thumbnails when there are multiple images
+
+      var hasMultipleImages = hrefs.length > 1;
+      modalFooter.style.display = hasMultipleImages ? '' : 'none';
+    });
   } // show the carousel modal
 
 
@@ -636,7 +637,6 @@ function OverlayCarousel(userEditsToCSSProps) {
 
 
     modalBackdrop.style.display = 'block';
-    console.log('show setting carouselModal display:block');
     carouselModal.style.display = 'block';
     setTimeout(function () {
       carouselModal.classList.add('show');

@@ -9,27 +9,27 @@ document.head.innerHTML = Mock.mockHead;
 document.body.innerHTML = Mock.mockBody;
 
 // add bootstrap style sheet into head
-const cssPath = path.join(__dirname, 'bootstrap.min.css');
-const bootstrapCSS = fs.readFileSync(
-  cssPath,
-  'utf8'
-);
-const bsStyle = document.createElement('style');
-bsStyle.innerHTML = bootstrapCSS;
-bsStyle.id = "bootstrap-css";
-document.head.appendChild(bsStyle);
+// const cssPath = path.join(__dirname, 'bootstrap.min.css');
+// const bootstrapCSS = fs.readFileSync(
+//   cssPath,
+//   'utf8'
+// );
+// const bsStyle = document.createElement('style');
+// bsStyle.innerHTML = bootstrapCSS;
+// bsStyle.id = "bootstrap-css";
+// document.head.appendChild(bsStyle);
 
 // import jquery
-const $ = require('jquery');
-window.jquery = window.$ = $;
+// const $ = require('jquery');
+// window.jquery = window.$ = $;
 
 // import Popper
-import Popper from 'popper.js';
-window.Popper = Popper;
+// import Popper from 'popper.js';
+// window.Popper = Popper;
 
 // import bootstrap.js
 // (bootstrap appends all of its methods to jquery)
-require('bootstrap');
+// require('bootstrap');
 
 // import carousel
 import Carousel from '../carousel.js';
@@ -38,6 +38,8 @@ let carousel = new Carousel({
 });
 
 // populate carousel with name and images
+// Note: populate promise will not resolve, because
+// img.onload does nothing when running jest
 carousel.populate(Mock.productName, Mock.imageHrefs);
 
 // show the modal
@@ -45,26 +47,26 @@ carousel.show();
 
 // start testing
 
-test('bootstrap css added to head', () => {
-  const style = document.getElementById('bootstrap-css');
-  expect(style).not.toBeNull();
-  expect(style.innerHTML.length).toBeGreaterThan(0);
-});
-
-test('jquery loaded', () => {
-  const jq = window.$;
-  expect(typeof jq).toEqual('function');
-});
-
-test('Popper loaded', () => {
-  const popper = window.Popper;
-  expect(typeof popper).toEqual('function');
-});
-
-test('bootstrap js loaded', () => {
-  const bsFunction = $().modal;
-  expect(typeof bsFunction).toEqual('function');
-});
+// test('bootstrap css added to head', () => {
+//   const style = document.getElementById('bootstrap-css');
+//   expect(style).not.toBeNull();
+//   expect(style.innerHTML.length).toBeGreaterThan(0);
+// });
+//
+// test('jquery loaded', () => {
+//   const jq = window.$;
+//   expect(typeof jq).toEqual('function');
+// });
+//
+// test('Popper loaded', () => {
+//   const popper = window.Popper;
+//   expect(typeof popper).toEqual('function');
+// });
+//
+// test('bootstrap js loaded', () => {
+//   const bsFunction = $().modal;
+//   expect(typeof bsFunction).toEqual('function');
+// });
 
 test('carousel.js loaded', () => {
   expect(typeof Carousel).toEqual('function');
@@ -83,7 +85,7 @@ test('carousel css added to head', () => {
   expect(style.innerHTML.length).toBeGreaterThan(0);
 });
 
-test('modal template added to body', () => {
+test('carousel-modal-container template added to body', () => {
   const template = document.getElementById('carousel-modal-container');
   expect(template).not.toBeNull();
   expect(template.innerHTML.length).toBeGreaterThan(0);

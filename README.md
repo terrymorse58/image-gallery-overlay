@@ -3,8 +3,7 @@
 A responsive overlay component with a single gallery image and
 scrolling list of clickable thumbnail images.
  
-![image-gallery-overlay](https://terrymorse.com/public/bootstrap-carousel-modal.gif "Sample
- carousel modal")
+![image-gallery-overlay](https://terrymorse.com/public/bootstrap-carousel-modal.gif "Sample image gallery")
  
 ### Features ###
  
@@ -17,9 +16,11 @@ scrolling list of clickable thumbnail images.
  
 ### Demo ###
  
- A [live working demo](https://terrymorse.com/private/modalcarousel/index.html) is available.
+ A live demo is available at
+ [terrymorse.com](https://terrymorse.com/private/modalcarousel/index.html).
  
 ### Install ###
+
  ```text
 npm install image-gallery-overlay
 ```
@@ -39,7 +40,7 @@ As an ES6 module:
 
 As a bundled JavaScript classic script:
 ```html
-<script src="<path_to>/carousel.build.js"></script>
+<script src="<path_to>/carousel.bundle.js"></script>
 <script>
   const OverlayCarousel = OLCarousel.default;
 </script>
@@ -54,20 +55,22 @@ const carousel = new OverlayCarousel(styleOptions);
 //   name - text shown at the top of the modal
 //   imageURLs - array of url strings 
 //   imageTitles - array of strings that describe each image (optional)
-carousel.populate(name, imageURLs [, imageTitles]);
+carousel.populate(name, imageURLs, imageTitles)
+  .then(() => {
+    // show the overlay after all images have loaded
+    carousel.show();
+});
 
-// show the overlay
-carousel.show();
 ```
 ### Style Options ###
 
-The styling of the overlay may be modified with `styleOptions`, passed into
- `OverlayCarousel()`. Here are the default options:
+The default styling of the overlay may be modified with `styleOptions`, passed
+ into `OverlayCarousel()`. Here are the default options:
 
 ```javascript
 // default style options
 const defaultStyleOptions = {
-  fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"'
+  fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
   headerPadding: '0.25rem 1rem',
   headerParagraphMargin: '0',
   footerPadding: '0 1rem',

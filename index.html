@@ -6,16 +6,9 @@
         content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <meta name="description"
-        content="Williams-Sonoma Coding Challenge submission by Terry Morse">
+        content="a responsive component overlay containing an image gallery with scrollable thumbnails">
 
-  <!-- Bootstrap CSS -->
-<!--
-  <link rel="stylesheet"
-        href="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-  >
--->
-
-  <title>Responsive Image Gallery Overlay</title>
+  <title>Component — Responsive Image Gallery Overlay</title>
 
 </head>
 <body style="padding: 1rem">
@@ -30,14 +23,6 @@
 </header>
 
 <main></main>
-
-<!-- JavaScript for Bootstrap -->
-<!-- JS, Popper.js, and jQuery -->
-<!--
-<script src="//code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
--->
 
 <script type="module">
   import OLCarousel from './carousel.js';
@@ -73,24 +58,28 @@
   ];
 
   function initPage () {
-    console.log('index.html initPage()');
+    // console.log('index.html initPage()');
     const btnShow = document.getElementById('show-button');
     const carousel = new OLCarousel({
       headerPadding: '0.5rem 1rem'
     });
 
-    // populate the modal with images
+    // respond to clicks on 'show modal' button
+    btnShow.addEventListener('click', () => {
+      carousel.show();
+    });
+
+    // populate the overlay with images
     carousel.populate(productName, imageHrefs, imgTitles)
       .then(() => {
-        // then show the modal
-        console.log('carousel.populate() resolved');
-
+        // then show the overlay
+        // console.log('carousel.populate() resolved');
         carousel.show();
-
-        // respond to clicks on 'show modal' button
-        btnShow.addEventListener('click', () => {
-          const show = carousel.show();
-        });
+      })
+      .catch(err => {
+        // display populate() errors
+        console.error(err);
+        alert(err);
       });
 
   }

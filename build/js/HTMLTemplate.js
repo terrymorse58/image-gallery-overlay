@@ -2,7 +2,6 @@
 
 const HTMLTemplate = `
   <div
-    id="carouselModal"
     tabindex="-1"
     class="cmodal"
     data-wrap="false"
@@ -26,23 +25,19 @@ const HTMLTemplate = `
         
         <div class="cmodal-body">
           <div
-            id="carousel-container"
             class="carousel-container"
             data-aspect-ratio="0.6666667"
             style="padding-bottom: 150%"
           >
             <img
-              id="carousel-hero"
               class="carousel-hero"
               src=""
               alt="carousel hero">
             <!-- .carousel-overlay-div -->
             <div
               class="carousel-overlay-div"
-              data-in-transition="false"
             >
               <img
-                id="carousel-overlay"
                 class="carousel-overlay"
                 alt="carousel overlay"
                 src=""
@@ -52,7 +47,7 @@ const HTMLTemplate = `
         </div> <!-- /.cmodal-body -->
 
         <div class="cmodal-footer">
-          <div id="thumbnails-viewport" class="div-thumbnails"></div>
+          <div class="div-thumbnails"></div>
         </div> <!-- /.cmodal-footer -->
         
       </div> <!-- /.cmodal-content -->

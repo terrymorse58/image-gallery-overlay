@@ -9,7 +9,8 @@ function OverlayCarousel (userEditsToCSSProps) {
   const editableCSSProps = JSON.parse(JSON.stringify(CSSEditableProps));
   let styleSheet = CSSTemplate.slice(0);
 
-  let carouselModal,
+  let cModalContainer,
+    carouselModal,
     modalBackdrop,
     modalDialog,
     modalContent,
@@ -22,12 +23,25 @@ function OverlayCarousel (userEditsToCSSProps) {
     imgOverlay,
     overlayDiv,
     thumbnailsViewport,
+    firstThumbnail,
     thumbnailImages = [],
     modalFooter,
     modalIsShowing = false;
 
+  // state of the image that fades in over the hero image
+  function _initOverlayState () {
+    return {
+      inTransition: false,
+      imgSrc: "",
+      imgAlt: "",
+      imgTitle: "",
+      imgIndex: null,
+      timeoutID: null
+    };
+  }
+  const _overlayState = _initOverlayState();
 
-  // returns true if element supports smooth scrolling
+  // true if element (and browser) support smooth scrolling
   const _hasSmoothScrolling = (el) => {
     return getComputedStyle(el).scrollBehavior === 'smooth';
   }
@@ -57,20 +71,22 @@ function OverlayCarousel (userEditsToCSSProps) {
     div.innerHTML = HTMLTemplate;
     document.body.appendChild(div);
 
-    carouselModal = document.getElementById('carouselModal');
-    modalBackdrop = document.querySelector('.cmodal-backdrop');
-    modalDialog = document.querySelector('.cmodal-dialog');
-    modalContent = document.querySelector('.cmodal-content');
-    modalHeader = document.querySelector('.cmodal-header');
-    pHeader = carouselModal.querySelector('.cmodal-header p');
+    cModalContainer = document.getElementById('carousel-modal-container');
+    carouselModal = cModalContainer.querySelector('.cmodal');
+    modalBackdrop = cModalContainer.querySelector('.cmodal-backdrop');
+    modalDialog = carouselModal.querySelector('.cmodal-dialog');
+    modalContent = modalDialog.querySelector('.cmodal-content');
+    modalHeader = modalDialog.querySelector('.cmodal-header');
+    pHeader = modalHeader.querySelector('p');
     closeButton = modalHeader.querySelector('button.close');
-    modalBody = carouselModal.querySelector('.cmodal-body');
-    carouselContainer = document.getElementById('carousel-container');
-    imgHero = document.getElementById('carousel-hero');
-    imgOverlay = document.getElementById('carousel-overlay');
-    overlayDiv = document.querySelector('.carousel-overlay-div');
-    thumbnailsViewport = document.getElementById('thumbnails-viewport');
-    modalFooter = carouselModal.querySelector('.cmodal-footer');
+    modalBody = modalDialog.querySelector('.cmodal-body');
+    carouselContainer = modalBody.querySelector('.carousel-container');
+    imgHero = carouselContainer.querySelector('.carousel-hero');
+    overlayDiv = carouselContainer.querySelector('.carousel-overlay-div');
+    imgOverlay = overlayDiv.querySelector('.carousel-overlay');
+    modalFooter = modalDialog.querySelector('.cmodal-footer');
+    thumbnailsViewport = modalFooter.querySelector('.div-thumbnails');
+
 
     // set up the overlay fader
     overlayDiv.addEventListener('transitionend', _completeImageFade);
@@ -79,11 +95,11 @@ function OverlayCarousel (userEditsToCSSProps) {
     imgHero.addEventListener('change', () => {
       const heroIndex = Number(imgHero.dataset.index);
 
-      // set (unset) the selected class for each thumbnail image
+      // set (unset) the `selected` class for each thumbnail image
       const thumbSelected = _updateThumbnailsSelectedClass(
         thumbnailImages, heroIndex);
 
-      // scroll the thumbnails container
+      // scroll the thumbnails container horizontally
       _scrollThumbnailsViewport(thumbSelected);
     });
   }
@@ -105,82 +121,87 @@ function OverlayCarousel (userEditsToCSSProps) {
     thumbnailImg,
     animate = true)
   {
-    // console.log(`_displaySelectedImage(imgIndex=${thumbnailImg.dataset.index},` +
-    // ` animate=${animate})`);
+    // console.log(`_displaySelectedImage()
+    // thumbnailImg: ${JSON.stringify(thumbnailImg)}
+    // animate=${animate})
+    // _overlayState: ${JSON.stringify(_overlayState,null,2)}`);
 
-    // don't animate if overlay is still in transition from an
-    // earlier change
-    if (overlayDiv.dataset.inTransition === "true") {
-      // console.log('overlay in transition, disabling fade');
-      overlayDiv.dataset.inTransition = "false";
-      overlayDiv.classList.remove('carousel-fade-in');
-      animate = false;
+    // clear prior overlay timeout, if one exists
+    if (_overlayState.timeoutID !== null) {
+      // console.log('    clearing prior timeout');
+      clearTimeout(_overlayState.timeoutID);
+      _overlayState.timeoutID = null;
     }
+
+    // set overlay state for the selected thumbnail
+    Object.assign(_overlayState, {
+      imgSrc: thumbnailImg.src,
+      imgAlt: thumbnailImg.alt,
+      imgTitle: thumbnailImg.title,
+      imgIndex: Number(thumbnailImg.dataset.index)
+    });
 
     // dispatch 'change' event to hero image, which will update thumbnails
     imgHero.dataset.index = thumbnailImg.dataset.index;
     const changeEvt = new Event('change');
     imgHero.dispatchEvent(changeEvt);
 
-    Object.assign(imgOverlay, {
-      src: thumbnailImg.src,
-      alt: thumbnailImg.alt,
-      title: thumbnailImg.title
-    });
-    imgOverlay.dataset.index = thumbnailImg.dataset.index;
+    // change the fade-in overlay image
+    imgOverlay.src = _overlayState.imgSrc;
 
     if (animate === false) {
-      // just clean up without animation
+      // clean up without animation
       _completeImageFade();
       return;
     }
 
     // fade in overlay
     // console.log('_displaySelectedImage fading in overlay');
-    _imageInTransition = true;
-    overlayDiv.dataset.inTransition = 'true';
+    _overlayState.inTransition = true;
     overlayDiv.classList.add('carousel-fade-in');
 
     // add timeout in case 'transitionend' event is never received
-    setTimeout(() => {
-      if (_imageInTransition === false) { return; }
-      // console.log('_displaySelectedImage transitionend timeout, calling' +
-      //   ' _completeImageFade()');
+    const thisIndex = _overlayState.imgIndex;
+    _overlayState.timeoutID = setTimeout(() => {
+      if (_overlayState.inTransition === false) { return; }
+      if (_overlayState.imgIndex !== thisIndex) { return; }
+      // console.log(`transitionend timeout for index ${thisIndex}, call _completeImageFade()`);
       _completeImageFade();
-    }, 1100);
+    }, 1500);
   }
 
   // clean up display elements when image fade transition completes
-  let _imageInTransition = false;
   function _completeImageFade () {
-    // console.log('_completeImageFade() _imageInTranstion:', _imageInTransition);
+    // console.log('_completeImageFade() _overlayState.inTransition:', _overlayState.inTransition);
+    // console.log(`    imgOverlay.src: "${imgOverlay.src}"`);
 
-    _imageInTransition = false;
-    overlayDiv.dataset.inTransition = "false";
+    _overlayState.inTransition = false;
 
-    // copy overlay image to hero image
-    if (imgOverlay.src) {
+    // update hero image
+    if (_overlayState.imgSrc.length > 0) {
       Object.assign(imgHero, {
-        src: imgOverlay.src,
-        alt: imgOverlay.alt,
-        title: imgOverlay.title
-      })
-      imgHero.dataset.index = imgOverlay.dataset.index;
+        src: _overlayState.imgSrc,
+        alt: _overlayState.imgAlt,
+        title: _overlayState.imgTitle
+      });
+      imgHero.dataset.index = String(_overlayState.imgIndex);
     }
 
-    // clean up overlay (delayed to prevent UI flash)
-    setTimeout(() => {
-      Object.assign(imgOverlay, {
-        src: "",
-        alt: "",
-        title: ""
-      });
-      imgOverlay.removeAttribute('data-index');
-      overlayDiv.classList.remove('carousel-fade-in');
-    }, 250);
+    // clear overlay state
+    Object.assign(_overlayState, _initOverlayState());
+
+    // // skip the overlay clean up when not necessary
+    // const hasFadeInClass = (el) => el.classList.contains('carousel-fade-in');
+    // if (hasFadeInClass(overlayDiv) === false) {
+    //   return;
+    // }
+
+    // clean up overlay
+    if (_overlayState.inTransition) { return; }
+    overlayDiv.classList.remove('carousel-fade-in');
   }
 
-  // enter key press over thumbnail button emit thumbnail image click
+  // upon enter key press over thumbnail button, emit click on thumbnail image
   function _listenForEnterKeyOverButton () {
     thumbnailsViewport.addEventListener('keydown', (e) => {
       if (e.key !== 'Enter') { return; }
@@ -204,7 +225,6 @@ function OverlayCarousel (userEditsToCSSProps) {
   }
 
   function _hideModal () {
-
     // console.log('_hideModal()');
 
     if (modalIsShowing === false) { return; }
@@ -224,26 +244,28 @@ function OverlayCarousel (userEditsToCSSProps) {
     document.body.classList.remove('cmodal-open');
   }
 
-  // respond to clicks on close button
-  function _listenForCloseModalEvents () {
+  // respond to events intended to hide modal
+  function _listenForHideModalEvents () {
 
+    // click on modal close button
     closeButton.addEventListener('click', (evt) => {
       // console.log('close button click');
       _hideModal();
     });
 
+    // click on modal backdrop
     modalBackdrop.addEventListener('click', () => {
       // console.log('modalBackdrop click');
       _hideModal();
     });
 
-    // ESC key
+    // ESC key pressed anywhere
     document.addEventListener('keyup', evt => {
       if (evt.key === 'Escape') {
         // console.log('ESC key pressed');
         _hideModal();
       }
-    })
+    });
   }
 
   // update the "selected" class of each thumbnail image
@@ -263,6 +285,7 @@ function OverlayCarousel (userEditsToCSSProps) {
   }
 
   // scroll viewport using vanilla JavaScript
+  // (use on browsers like Safari that don't support smooth scrolling)
   function _vpScrollJavaScript (scrollDest) {
     // simulate scroll feature with vanilla JavaScript
     const timeStep = 20;
@@ -341,8 +364,10 @@ function OverlayCarousel (userEditsToCSSProps) {
    */
   function populate (name, hrefs, titles = null) {
     // console.log(`populate()`);
+    const hrefsCount = hrefs.length;
+    let completed = false;
 
-    return new Promise(function (resolve) {
+    return new Promise(function (resolve, reject) {
 
       // display the modal (invisibly) to obtain its dimensions
       const displaySave = carouselModal.style.display;
@@ -354,21 +379,21 @@ function OverlayCarousel (userEditsToCSSProps) {
       let imagesLoaded = 0;
       let aspectRatioMin = Infinity;
 
+      // evaluate each image onload
       function _evalLoadedImage () {
         const img = this;
-        let aspectRatio;
+        const imgAspectRatio = (img.height > 0) ? img.width / img.height : null;
 
         imagesLoaded++;
-        if (img.width === 0 || img.height === 0) { return; }
+        if (imgAspectRatio === null) { return; }
 
-        aspectRatio = img.width / img.height;
-        img.dataset.aspectRatio = aspectRatio;
-        aspectRatioMin = (aspectRatio < aspectRatioMin)
-          ? aspectRatio : aspectRatioMin;
+        img.dataset.aspectRatio = String(imgAspectRatio);
+        aspectRatioMin = (imgAspectRatio < aspectRatioMin) ?
+          imgAspectRatio : aspectRatioMin;
 
-        // console.log(`_evalLoadedImage index: ${img.dataset.index}, aspectRatio: ${aspectRatio}, min: ${aspectRatioMin}`);
+        // console.log(`_evalLoadedImage index: ${img.dataset.index}, imgAspectRatio: ${imgAspectRatio}, min: ${aspectRatioMin}`);
 
-        if (imagesLoaded < hrefs.length) { return; }
+        if (imagesLoaded < hrefsCount) { return; }
         if (aspectRatioMin === Infinity) { return; }
 
         // all images loaded: set the padding-bottom of container to match aspect
@@ -384,10 +409,11 @@ function OverlayCarousel (userEditsToCSSProps) {
           Math.round(contentAspectRatio * 100)
         }vh)`;
 
-        // un-display the modal
+        // restore the modal's display state
         carouselModal.style.display = displaySave;
 
-        // all done, resolve the promise
+        // all images loaded, mark as completed and resolve the promise
+        completed = true;
         resolve();
       }
 
@@ -408,10 +434,20 @@ function OverlayCarousel (userEditsToCSSProps) {
 
         return imgThumb;
       });
+      firstThumbnail = thumbnailsViewport.querySelector('img');
 
       // show thumbnails when there are multiple images
-      const hasMultipleImages = hrefs.length > 1;
+      const hasMultipleImages = hrefsCount > 1;
       modalFooter.style.display = hasMultipleImages ? '' : 'none';
+
+      // set a timeout in case images don't load
+      setTimeout(() => {
+        if (completed) { return; }
+        // reject with an error message
+        const errmsg = `unable to load some images, expected ${hrefsCount}` +
+          `, loaded ${imagesLoaded}`;
+        reject(errmsg);
+      }, 2000);
 
     });
   }
@@ -423,15 +459,12 @@ function OverlayCarousel (userEditsToCSSProps) {
 
     if (modalIsShowing) { return; }
 
-    overlayDiv.dataset.inTransition = "false";
-
     // make the display changes *before* showing the modal
-    const firstThumb = thumbnailsViewport.querySelector('img');
-    if (firstThumb === null) {
+    if (firstThumbnail === null) {
       console.error('no thumbnail images found');
       return;
     }
-    _displaySelectedImage(firstThumb, false);
+    _displaySelectedImage(firstThumbnail, false);
 
 
     // wait for backdrop to complete before showing modal
@@ -461,7 +494,7 @@ function OverlayCarousel (userEditsToCSSProps) {
     _appendHTMLTemplateToBody();
     _listenForThumbnailImageClicks();
     _listenForEnterKeyOverButton();
-    _listenForCloseModalEvents();
+    _listenForHideModalEvents();
   }
 
   // initialize

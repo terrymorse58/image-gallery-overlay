@@ -34,7 +34,7 @@ const CSSTemplate = `
       min-height: calc(100% - 1rem);
       opacity: 0;
       transform: scale(0.95);
-      transition: all 1s ease;
+      transition: all .75s ease;
     }
     #carousel-modal-container .cmodal.show .cmodal-dialog {
      opacity: 1;
@@ -96,6 +96,7 @@ const CSSTemplate = `
       background-color: white;
       opacity: 0;
       pointer-events: none;
+      transition: opacity 0.1s;
      }
      #carousel-modal-container .carousel-hero {
       position: absolute;
@@ -113,7 +114,7 @@ const CSSTemplate = `
      }
      #carousel-modal-container .carousel-fade-in {
        opacity: 1;
-       transition: opacity 1s ease;
+       transition: opacity .75s ease;
      }
     
     /* cmodal-footer */

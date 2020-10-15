@@ -6,36 +6,24 @@
         content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <meta name="description"
-        content="Williams-Sonoma Coding Challenge submission by Terry Morse">
+        content="a responsive component overlay containing an image gallery with scrollable thumbnails">
 
-  <!-- Bootstrap CSS -->
-<!--
-  <link rel="stylesheet"
-        href="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-  >
--->
-
-  <title>Bootstrap Modal with Image Gallery</title>
+  <title>Component — Responsive Image Gallery Overlay</title>
 
 </head>
-<body>
+<body style="padding: 1rem">
 <header>
-  <h1 class="container text-center">Bootstrap Modal with Image Gallery</h1>
+  <h1 class="container text-center">Responsive Image Gallery Overlay</h1>
   <p class="text-center">
-    <button id="show-button" class="btn btn-primary">
-      Show Modal
+    <button id="show-button" style="font-size: 200%; border-radius: 8px;
+    padding: 1rem">
+      Show Overlay
     </button>
   </p>
 </header>
 
 <main></main>
 
-<!-- JavaScript for Bootstrap -->
-<!--
-<script src="//code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
--->
 
 <script src="./build/js/carousel.bundle.js"></script>
 <script>
@@ -57,6 +45,20 @@
     'imgs/631-300x300.jpg',
     'imgs/987-400x200.jpg'
   ];
+  const imgTitles = [
+    'Golden Gate Bridge',
+    'curving building',
+    'misty pond',
+    'road, green hills, cloudy sky',
+    'man silouetted before water and sky',
+    'sunlit clouds over hills',
+    'Golden Gate Bridge',
+    'backpacker in mountains',
+    'dark clouds over ocean beach',
+    'tall forest',
+    'water droplet on leaf',
+    'rolling fog at sunset'
+  ];
 
   function initPage () {
     console.log('index.html initPage()');
@@ -65,13 +67,24 @@
       headerPadding: '0.5rem 1rem'
     });
 
-    // populate the modal with images
-    carousel.populate(productName, imageHrefs);
-
     // respond to clicks on 'show modal' button
     btnShow.addEventListener('click', () => {
-      const show = carousel.show();
+      carousel.show();
     });
+
+    // populate the overlay with images
+    carousel.populate(productName, imageHrefs, imgTitles)
+      .then(() => {
+        // then show the overlay
+        // console.log('carousel.populate() resolved');
+        carousel.show();
+      })
+      .catch(err => {
+        // display populate() errors
+        console.error(err);
+        alert(err);
+      });
+
   }
 
   window.addEventListener('load', initPage);

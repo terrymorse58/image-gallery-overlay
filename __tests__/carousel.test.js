@@ -40,10 +40,15 @@ let carousel = new Carousel({
 // populate carousel with name and images
 // Note: populate promise will not resolve, because
 // img.onload does nothing when running jest
-carousel.populate(Mock.productName, Mock.imageHrefs);
-
-// show the modal
-carousel.show();
+carousel.populate(Mock.productName, Mock.imageHrefs)
+  .then(() => {
+    carousel.show();
+  })
+  .catch(err => {
+    // catch will always happen, as img.onload does not work in jest
+    // console.error('carousel.populate err:', err);
+    carousel.show();
+  });
 
 // start testing
 
@@ -102,22 +107,22 @@ test(`"${Mock.productName}" added to modal header`, () => {
 test(`modal footer has ${Mock.imageHrefs.length} images`,
   (done) => {
     setTimeout(() => {
-      const thumbnailsViewport = document.getElementById(
-        'thumbnails-viewport'
+      const thumbnailsViewport = document.querySelector(
+        '.div-thumbnails'
       );
       expect(thumbnailsViewport).not.toBeNull();
       expect(thumbnailsViewport.childElementCount)
         .toEqual(Mock.imageHrefs.length);
       done();
-    }, 1000);
+    }, 3000);
   });
 
 test('show method opens modal', (done) => {
   setTimeout(() => {
     const body = document.querySelector('.cmodal-open');
     expect(body.tagName).toEqual('BODY');
-    const modal = document.getElementById('carouselModal');
+    const modal = document.querySelector('.cmodal');
     expect(modal.style.display).toEqual('block');
     done();
-  }, 1000);
+  }, 3000);
 })

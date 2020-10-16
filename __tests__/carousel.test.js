@@ -52,27 +52,6 @@ carousel.populate(Mock.productName, Mock.imageHrefs)
 
 // start testing
 
-// test('bootstrap css added to head', () => {
-//   const style = document.getElementById('bootstrap-css');
-//   expect(style).not.toBeNull();
-//   expect(style.innerHTML.length).toBeGreaterThan(0);
-// });
-//
-// test('jquery loaded', () => {
-//   const jq = window.$;
-//   expect(typeof jq).toEqual('function');
-// });
-//
-// test('Popper loaded', () => {
-//   const popper = window.Popper;
-//   expect(typeof popper).toEqual('function');
-// });
-//
-// test('bootstrap js loaded', () => {
-//   const bsFunction = $().modal;
-//   expect(typeof bsFunction).toEqual('function');
-// });
-
 test('carousel.js loaded', () => {
   expect(typeof Carousel).toEqual('function');
 });
@@ -84,20 +63,21 @@ test('carousel methods populate() and show() exist', () => {
 
 
 
-test('carousel css added to head', () => {
-  const style = document.getElementById('carousel-style');
-  expect(style).not.toBeNull();
-  expect(style.innerHTML.length).toBeGreaterThan(0);
+test('<gallery-overlay> exists', () => {
+  const gOverlay = document.querySelector('gallery-overlay');
+  expect(gOverlay).not.toBeNull();
 });
 
-test('carousel-modal-container template added to body', () => {
-  const template = document.getElementById('carousel-modal-container');
-  expect(template).not.toBeNull();
-  expect(template.innerHTML.length).toBeGreaterThan(0);
+test('gallery overlay has shadowRoot', () => {
+  const gOverlay = document.querySelector('gallery-overlay');
+  expect(gOverlay.shadowRoot).not.toBeNull();
 });
+
 
 test(`"${Mock.productName}" added to modal header`, () => {
-  const pName = document.querySelector(
+  const gOverlay = document.querySelector('gallery-overlay');
+  const shadowRoot = gOverlay.shadowRoot;
+  const pName = shadowRoot.querySelector(
     '#carousel-modal-container .cmodal-header p');
   expect(pName).not.toBeNull();
   expect(pName.innerHTML.length).not.toBe(0);
@@ -107,7 +87,9 @@ test(`"${Mock.productName}" added to modal header`, () => {
 test(`modal footer has ${Mock.imageHrefs.length} images`,
   (done) => {
     setTimeout(() => {
-      const thumbnailsViewport = document.querySelector(
+      const gOverlay = document.querySelector('gallery-overlay');
+      const shadowRoot = gOverlay.shadowRoot;
+      const thumbnailsViewport = shadowRoot.querySelector(
         '.div-thumbnails'
       );
       expect(thumbnailsViewport).not.toBeNull();
@@ -120,8 +102,11 @@ test(`modal footer has ${Mock.imageHrefs.length} images`,
 test('show method opens modal', (done) => {
   setTimeout(() => {
     const body = document.querySelector('.cmodal-open');
+    const gOverlay = document.querySelector('gallery-overlay');
+    const shadowRoot = gOverlay.shadowRoot;
+    const modal = shadowRoot.querySelector('.cmodal');
+
     expect(body.tagName).toEqual('BODY');
-    const modal = document.querySelector('.cmodal');
     expect(modal.style.display).toEqual('block');
     done();
   }, 3000);

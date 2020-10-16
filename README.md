@@ -1,18 +1,21 @@
 # image-gallery-overlay
 ---
-A responsive overlay component with a single gallery image and
+A responsive overlay Web Component with a single gallery image and
 scrolling list of clickable thumbnail images.
  
 ![image-gallery-overlay](https://terrymorse.com/public/bootstrap-carousel-modal.gif "Sample image gallery")
  
 ### Features ###
  
- + produces largest images possible without scrolling
- + responds to window width and height changes
- + matches aspect ratio of supplied images
- + cross fades image changes
+ + self contained Web Component
+ + displays largest images possible without scrolling
+ + responsive to window width and height changes
+ + dimensions match aspect ratio of supplied images
+ + changes images via cross fading
  + scrolls thumbnail images smoothly
- + enables accessibility from keyboard
+ + enables accessibility from keyboard (tab, enter, esc)
+ + vanilla JavaScript with no dependencies
+ + exposed styles for easy styling changes
  
 ### Demo ###
  
@@ -51,7 +54,7 @@ As a bundled JavaScript classic script:
 // create a carousel instance
 const carousel = new OverlayCarousel(styleOptions);
 
-// populate the carousel modal with a name and images
+// populate the carousel overlay with a name and images
 //   name - text shown at the top of the modal
 //   imageURLs - array of url strings 
 //   imageTitles - array of strings that describe each image (optional)
@@ -59,8 +62,10 @@ carousel.populate(name, imageURLs, imageTitles)
   .then(() => {
     // show the overlay after all images have loaded
     carousel.show();
-});
-
+  });
+  .catch(err => { 
+    // handle errors (typically image(s) did not load)
+  });
 ```
 ### Style Options ###
 

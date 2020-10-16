@@ -10,9 +10,8 @@ const CSSEditableProps = {
   thumbnailImgHeight: '60px',
   thumbnailImgHoverFilter: 'brightness(70%) contrast(150%)',
   thumbnailBorder: 'none',
-  thumbnailImgSelectedBorder: '1px solid #888',
   thumbnailSelectedOpacity: '60%',
-  thumbnailSelectedFilter: 'grayscale(100%) blur(1px)'
+  thumbnailSelectedFilter: 'grayscale(100%) brightness(110%) blur(1px)'
 };
 
 export default CSSEditableProps;

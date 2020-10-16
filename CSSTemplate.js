@@ -142,6 +142,10 @@ const CSSTemplate = `
       background-color: transparent;
       border: none;
     }
+    #carousel-modal-container .div-thumbnails button:focus {
+      outline: 2px solid #aaa;
+      outline-offset: 2px;
+    }
     #carousel-modal-container .div-thumbnails img {
       height: {{thumbnailImgHeight}};
       width: auto;
@@ -153,7 +157,6 @@ const CSSTemplate = `
     }
     #carousel-modal-container .div-thumbnails img.selected {
       cursor: default;
-      border: {{thumbnailImgSelectedBorder}};
       opacity: {{thumbnailSelectedOpacity}};
       filter: {{thumbnailSelectedFilter}};
     }

@@ -109,9 +109,8 @@ var CSSEditableProps = {
   thumbnailImgHeight: '60px',
   thumbnailImgHoverFilter: 'brightness(70%) contrast(150%)',
   thumbnailBorder: 'none',
-  thumbnailImgSelectedBorder: '1px solid #888',
   thumbnailSelectedOpacity: '60%',
-  thumbnailSelectedFilter: 'grayscale(100%) blur(1px)'
+  thumbnailSelectedFilter: 'grayscale(100%) brightness(110%) blur(1px)'
 };
 /* harmony default export */ __webpack_exports__["default"] = (CSSEditableProps);
 
@@ -127,7 +126,7 @@ var CSSEditableProps = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 // css template for carousel modal
-var CSSTemplate = "\n    /* general */\n    #carousel-modal-container {\n      font-family: {{fontFamily}};\n    }\n\n    /* .cmodal */\n    #carousel-modal-container .cmodal {\n      position: fixed;\n      top: 0;\n      left: 0;\n      z-index: 1050;\n      width: 100%;\n      height: 100%;\n      overflow: hidden;\n      outline: 0;\n      pointer-events: none;\n    }\n    .cmodal-open #carousel-modal-container .cmodal {\n      overflow-x: hidden;\n      overflow-y: auto;\n    }\n    \n    /* .cmodal-dialog */\n    #carousel-modal-container .cmodal .cmodal-dialog {\n      position: relative;\n      width: auto;\n      margin: 0 auto;\n      pointer-events: none;\n      display: flex;\n      align-items: center;\n      min-height: calc(100% - 1rem);\n      opacity: 0;\n      transform: scale(0.95);\n      transition: all .75s ease;\n    }\n    #carousel-modal-container .cmodal.show .cmodal-dialog {\n     opacity: 1;\n     transform: scale(1.0);\n    }\n    @media (max-width: 475px) {\n      #carousel-modal-container .cmodal.show .cmodal-dialog {\n        max-width: 92vw !important;\n      }\n    }\n    \n    /* .cmodal-content */\n    #carousel-modal-container .cmodal-content {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      width: 100%;\n      pointer-events: auto;\n      background-color: #fff;\n      background-clip: padding-box;\n      border: 1px solid rgba(0,0,0,.2);\n      border-radius: 0.3rem;\n      outline: 0;\n    }\n    \n    /* .cmodal-header */\n    #carousel-modal-container .cmodal-header {\n      display: flex;\n      align-items: flex-start;\n      justify-content: space-between;\n      padding: {{headerPadding}};\n      border-bottom: 1px solid #dee2e6;\n      border-top-left-radius: calc(.3rem - 1px);\n      border-top-right-radius: calc(.3rem - 1px);\n    }\n    #carousel-modal-container .cmodal-header p {\n      margin: {{headerParagraphMargin}};\n    }\n    \n    /* .cmodal-body */\n    #carousel-modal-container .cmodal-body {\n      position: relative;\n      flex: 1 1 auto;\n      padding: 1rem;\n    }\n    \n    /* carousel */\n    #carousel-modal-container .carousel-container {\n      margin: 0;\n      position: relative;\n      width: 100%;\n     }\n     #carousel-modal-container .carousel-overlay-div {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: 100%;\n      background-color: white;\n      opacity: 0;\n      pointer-events: none;\n      transition: opacity 0.1s;\n     }\n     #carousel-modal-container .carousel-hero {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: auto;\n     }\n     #carousel-modal-container .carousel-overlay {\n       position: absolute;\n       top: 0;\n       left: 0;\n       width: 100%;\n       height: auto;\n     }\n     #carousel-modal-container .carousel-fade-in {\n       opacity: 1;\n       transition: opacity .75s ease;\n     }\n    \n    /* cmodal-footer */\n    #carousel-modal-container .cmodal-footer {\n      display: flex;\n      flex-wrap: wrap;\n      align-items: center;\n      justify-content: flex-end;\n      padding: {{footerPadding}};\n      border-top: 1px solid #dee2e6;\n      border-bottom-right-radius: calc(.3rem - 1px);\n      border-bottom-left-radius: calc(.3rem - 1px);\n    }\n    #carousel-modal-container .div-thumbnails {\n      overflow-x: auto;\n      white-space: nowrap;\n      margin: 0;\n      padding: 8px 16px 12px 16px; /* padding must be 'px' */\n      background-color: transparent;\n      scroll-behavior: smooth;\n    }\n    #carousel-modal-container .div-thumbnails button {\n      padding: {{thumbnailBtnPadding}};\n      margin: {{thumbnailBtnMargin}};\n      background-color: transparent;\n      border: none;\n    }\n    #carousel-modal-container .div-thumbnails img {\n      height: {{thumbnailImgHeight}};\n      width: auto;\n      margin: 0;\n      border: {{thumbnailBorder}};\n    }\n    #carousel-modal-container .div-thumbnails img:hover {\n      filter: {{thumbnailImgHoverFilter}};\n    }\n    #carousel-modal-container .div-thumbnails img.selected {\n      cursor: default;\n      border: {{thumbnailImgSelectedBorder}};\n      opacity: {{thumbnailSelectedOpacity}};\n      filter: {{thumbnailSelectedFilter}};\n    }\n    \n    /* close button */\n    #carousel-modal-container button.close {\n      float: right;\n      font-size: 1.5rem;\n      font-weight: 700;\n      line-height: 1;\n      color: #000;\n      text-shadow: 0 1px 0 #fff;\n      padding: 1rem;\n      margin: -1rem -1rem -1rem auto;;\n      background-color: transparent;\n      border: 0;\n      opacity: .5;\n    }\n    #carousel-modal-container button.close:hover {\n      opacity: .8;\n    }\n    \n    /* cmodal-backdrop */\n    .cmodal-backdrop {\n      position: fixed;\n      top: 0;\n      left: 0;\n      z-index: 1040;\n      width: 100vw;\n      height: 100vh;\n      background-color: #000;\n      transition: opacity .3s linear;\n      opacity: 0;\n    }\n    .cmodal-backdrop.show {\n      opacity: 0.5;\n    }\n    \n    /* .cmodal-open */\n    .cmodal-open {\n      overflow: hidden;\n    }\n    \n    cmodal-open cmodal {\n      overflow-x: hidden;\n      overflow-y: auto;\n    }\n";
+var CSSTemplate = "\n    /* general */\n    #carousel-modal-container {\n      font-family: {{fontFamily}};\n    }\n\n    /* .cmodal */\n    #carousel-modal-container .cmodal {\n      position: fixed;\n      top: 0;\n      left: 0;\n      z-index: 1050;\n      width: 100%;\n      height: 100%;\n      overflow: hidden;\n      outline: 0;\n      pointer-events: none;\n    }\n    .cmodal-open #carousel-modal-container .cmodal {\n      overflow-x: hidden;\n      overflow-y: auto;\n    }\n    \n    /* .cmodal-dialog */\n    #carousel-modal-container .cmodal .cmodal-dialog {\n      position: relative;\n      width: auto;\n      margin: 0 auto;\n      pointer-events: none;\n      display: flex;\n      align-items: center;\n      min-height: calc(100% - 1rem);\n      opacity: 0;\n      transform: scale(0.95);\n      transition: all .75s ease;\n    }\n    #carousel-modal-container .cmodal.show .cmodal-dialog {\n     opacity: 1;\n     transform: scale(1.0);\n    }\n    @media (max-width: 475px) {\n      #carousel-modal-container .cmodal.show .cmodal-dialog {\n        max-width: 92vw !important;\n      }\n    }\n    \n    /* .cmodal-content */\n    #carousel-modal-container .cmodal-content {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      width: 100%;\n      pointer-events: auto;\n      background-color: #fff;\n      background-clip: padding-box;\n      border: 1px solid rgba(0,0,0,.2);\n      border-radius: 0.3rem;\n      outline: 0;\n    }\n    \n    /* .cmodal-header */\n    #carousel-modal-container .cmodal-header {\n      display: flex;\n      align-items: flex-start;\n      justify-content: space-between;\n      padding: {{headerPadding}};\n      border-bottom: 1px solid #dee2e6;\n      border-top-left-radius: calc(.3rem - 1px);\n      border-top-right-radius: calc(.3rem - 1px);\n    }\n    #carousel-modal-container .cmodal-header p {\n      margin: {{headerParagraphMargin}};\n    }\n    \n    /* .cmodal-body */\n    #carousel-modal-container .cmodal-body {\n      position: relative;\n      flex: 1 1 auto;\n      padding: 1rem;\n    }\n    \n    /* carousel */\n    #carousel-modal-container .carousel-container {\n      margin: 0;\n      position: relative;\n      width: 100%;\n     }\n     #carousel-modal-container .carousel-overlay-div {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: 100%;\n      background-color: white;\n      opacity: 0;\n      pointer-events: none;\n      transition: opacity 0.1s;\n     }\n     #carousel-modal-container .carousel-hero {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: auto;\n     }\n     #carousel-modal-container .carousel-overlay {\n       position: absolute;\n       top: 0;\n       left: 0;\n       width: 100%;\n       height: auto;\n     }\n     #carousel-modal-container .carousel-fade-in {\n       opacity: 1;\n       transition: opacity .75s ease;\n     }\n    \n    /* cmodal-footer */\n    #carousel-modal-container .cmodal-footer {\n      display: flex;\n      flex-wrap: wrap;\n      align-items: center;\n      justify-content: flex-end;\n      padding: {{footerPadding}};\n      border-top: 1px solid #dee2e6;\n      border-bottom-right-radius: calc(.3rem - 1px);\n      border-bottom-left-radius: calc(.3rem - 1px);\n    }\n    #carousel-modal-container .div-thumbnails {\n      overflow-x: auto;\n      white-space: nowrap;\n      margin: 0;\n      padding: 8px 16px 12px 16px; /* padding must be 'px' */\n      background-color: transparent;\n      scroll-behavior: smooth;\n    }\n    #carousel-modal-container .div-thumbnails button {\n      padding: {{thumbnailBtnPadding}};\n      margin: {{thumbnailBtnMargin}};\n      background-color: transparent;\n      border: none;\n    }\n    #carousel-modal-container .div-thumbnails button:focus {\n      outline: 2px solid #aaa;\n      outline-offset: 2px;\n    }\n    #carousel-modal-container .div-thumbnails img {\n      height: {{thumbnailImgHeight}};\n      width: auto;\n      margin: 0;\n      border: {{thumbnailBorder}};\n    }\n    #carousel-modal-container .div-thumbnails img:hover {\n      filter: {{thumbnailImgHoverFilter}};\n    }\n    #carousel-modal-container .div-thumbnails img.selected {\n      cursor: default;\n      opacity: {{thumbnailSelectedOpacity}};\n      filter: {{thumbnailSelectedFilter}};\n    }\n    \n    /* close button */\n    #carousel-modal-container button.close {\n      float: right;\n      font-size: 1.5rem;\n      font-weight: 700;\n      line-height: 1;\n      color: #000;\n      text-shadow: 0 1px 0 #fff;\n      padding: 1rem;\n      margin: -1rem -1rem -1rem auto;;\n      background-color: transparent;\n      border: 0;\n      opacity: .5;\n    }\n    #carousel-modal-container button.close:hover {\n      opacity: .8;\n    }\n    \n    /* cmodal-backdrop */\n    .cmodal-backdrop {\n      position: fixed;\n      top: 0;\n      left: 0;\n      z-index: 1040;\n      width: 100vw;\n      height: 100vh;\n      background-color: #000;\n      transition: opacity .3s linear;\n      opacity: 0;\n    }\n    .cmodal-backdrop.show {\n      opacity: 0.5;\n    }\n    \n    /* .cmodal-open */\n    .cmodal-open {\n      overflow: hidden;\n    }\n    \n    cmodal-open cmodal {\n      overflow-x: hidden;\n      overflow-y: auto;\n    }\n";
 /* harmony default export */ __webpack_exports__["default"] = (CSSTemplate);
 
 /***/ }),
@@ -159,6 +158,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CSSTemplate_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CSSTemplate.js */ "./CSSTemplate.js");
 /* harmony import */ var _CSSEditableProps_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CSSEditableProps.js */ "./CSSEditableProps.js");
 /* harmony import */ var _HTMLTemplate_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HTMLTemplate.js */ "./HTMLTemplate.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new Map() : undefined; _wrapNativeSuper = function _wrapNativeSuper(Class) { if (Class === null || !_isNativeFunction(Class)) return Class; if (typeof Class !== "function") { throw new TypeError("Super expression must either be null or a function"); } if (typeof _cache !== "undefined") { if (_cache.has(Class)) return _cache.get(Class); _cache.set(Class, Wrapper); } function Wrapper() { return _construct(Class, arguments, _getPrototypeOf(this).constructor); } Wrapper.prototype = Object.create(Class.prototype, { constructor: { value: Wrapper, enumerable: false, writable: true, configurable: true } }); return _setPrototypeOf(Wrapper, Class); }; return _wrapNativeSuper(Class); }
+
+function _construct(Parent, args, Class) { if (_isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _isNativeFunction(fn) { return Function.toString.call(fn).indexOf("[native code]") !== -1; }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -171,33 +194,26 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-// carousel overlay modal with thumbnails
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// image gallery carousel overlay with thumbnails
 
 
 
 
 function OverlayCarousel(userEditsToCSSProps) {
-  // make copies of templates
-  var editableCSSProps = JSON.parse(JSON.stringify(_CSSEditableProps_js__WEBPACK_IMPORTED_MODULE_1__["default"]));
-  var styleSheet = _CSSTemplate_js__WEBPACK_IMPORTED_MODULE_0__["default"].slice(0);
-  var cModalContainer,
-      carouselModal,
-      modalBackdrop,
-      modalDialog,
-      modalContent,
-      modalHeader,
-      pHeader,
-      closeButton,
-      modalBody,
-      carouselContainer,
-      imgHero,
-      imgOverlay,
-      overlayDiv,
-      thumbnailsViewport,
-      firstThumbnail,
-      thumbnailImages = [],
-      modalFooter,
-      modalIsShowing = false; // state of the image that fades in over the hero image
+  // work on duplicates of the templates
+  var editableCSSProps = _objectSpread({}, _CSSEditableProps_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+  var cssContent = _CSSTemplate_js__WEBPACK_IMPORTED_MODULE_0__["default"].slice(0); // handy reference to our created HTML elements
+
+  var htmlRefs = {};
+  var _modalIsShowing = false; // state of the div + image that overlays the hero image
+  // to perform cross-fading
 
   function _initOverlayState() {
     return {
@@ -210,7 +226,18 @@ function OverlayCarousel(userEditsToCSSProps) {
     };
   }
 
-  var _overlayState = _initOverlayState(); // true if element (and browser) support smooth scrolling
+  var _overlayState = _initOverlayState(); // state of the thumbnails
+
+
+  function _initThumbnailsState() {
+    return {
+      imgs: [],
+      firstThumbnailImg: null,
+      selectedThumbnailImg: null
+    };
+  }
+
+  var _thumbnailsState = _initThumbnailsState(); // true if element (and browser) support smooth scrolling
 
 
   var _hasSmoothScrolling = function _hasSmoothScrolling(el) {
@@ -218,12 +245,12 @@ function OverlayCarousel(userEditsToCSSProps) {
   }; // apply user edits to editable css props
 
 
-  function _applyUserEditsToCSSProps() {
-    if (typeof userEditsToCSSProps === 'undefined') {
+  function _applyUserEditsToCSSProps(edits) {
+    if (typeof edits === 'undefined') {
       return;
     }
 
-    for (var _i = 0, _Object$entries = Object.entries(userEditsToCSSProps); _i < _Object$entries.length; _i++) {
+    for (var _i = 0, _Object$entries = Object.entries(edits); _i < _Object$entries.length; _i++) {
       var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
           propName = _Object$entries$_i[0],
           value = _Object$entries$_i[1];
@@ -234,82 +261,137 @@ function OverlayCarousel(userEditsToCSSProps) {
 
       editableCSSProps[propName] = value;
     }
-  } // apply all css props to styleSheet
+  } // apply all css props to cssContent
 
 
-  function _applyCSSPropsToStyleSheet() {
-    for (var _i2 = 0, _Object$entries2 = Object.entries(editableCSSProps); _i2 < _Object$entries2.length; _i2++) {
+  function _applyCSSPropsToCSSContent(props) {
+    for (var _i2 = 0, _Object$entries2 = Object.entries(props); _i2 < _Object$entries2.length; _i2++) {
       var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
           propName = _Object$entries2$_i[0],
           value = _Object$entries2$_i[1];
 
       var searchStr = "{{".concat(propName, "}}");
       var subStr = "".concat(value);
-      styleSheet = styleSheet.replace(searchStr, subStr);
+      cssContent = cssContent.replace(searchStr, subStr);
     }
-  } // append HTML template to <body>
+  } // create style sheet HTML element with `textContent`
 
 
-  function _appendHTMLTemplateToBody() {
+  function _createStyleSheetElement(textContent) {
+    var style = document.createElement('style');
+    style.textContent = textContent;
+    return style;
+  } // create carousel-modal-container div
+
+
+  function _createCarouselModalContainer(innerHTML) {
     var div = document.createElement('div');
     div.id = "carousel-modal-container";
-    div.innerHTML = _HTMLTemplate_js__WEBPACK_IMPORTED_MODULE_2__["default"];
-    document.body.appendChild(div);
-    cModalContainer = document.getElementById('carousel-modal-container');
-    carouselModal = cModalContainer.querySelector('.cmodal');
-    modalBackdrop = cModalContainer.querySelector('.cmodal-backdrop');
-    modalDialog = carouselModal.querySelector('.cmodal-dialog');
-    modalContent = modalDialog.querySelector('.cmodal-content');
-    modalHeader = modalDialog.querySelector('.cmodal-header');
-    pHeader = modalHeader.querySelector('p');
-    closeButton = modalHeader.querySelector('button.close');
-    modalBody = modalDialog.querySelector('.cmodal-body');
-    carouselContainer = modalBody.querySelector('.carousel-container');
-    imgHero = carouselContainer.querySelector('.carousel-hero');
-    overlayDiv = carouselContainer.querySelector('.carousel-overlay-div');
-    imgOverlay = overlayDiv.querySelector('.carousel-overlay');
-    modalFooter = modalDialog.querySelector('.cmodal-footer');
-    thumbnailsViewport = modalFooter.querySelector('.div-thumbnails'); // set up the overlay fader
-
-    overlayDiv.addEventListener('transitionend', _completeImageFade); // react to hero image changes
-
-    imgHero.addEventListener('change', function () {
-      var heroIndex = Number(imgHero.dataset.index); // set (unset) the `selected` class for each thumbnail image
-
-      var thumbSelected = _updateThumbnailsSelectedClass(thumbnailImages, heroIndex); // scroll the thumbnails container horizontally
+    div.innerHTML = innerHTML;
+    return div;
+  } // references to our significant HTML elements
 
 
-      _scrollThumbnailsViewport(thumbSelected);
-    });
-  } // append style sheet to <head>
+  function _htmlElementReferences(galleryOverlay) {
+    var cModalContainer = galleryOverlay.shadowRoot.getElementById('carousel-modal-container'),
+        cModal = cModalContainer.querySelector('.cmodal'),
+        cmBackdrop = cModalContainer.querySelector('.cmodal-backdrop'),
+        cmDialog = cModal.querySelector('.cmodal-dialog'),
+        cmContent = cmDialog.querySelector('.cmodal-content'),
+        cmHeader = cmDialog.querySelector('.cmodal-header'),
+        cmHeaderP = cmHeader.querySelector('p'),
+        closeBtn = cmHeader.querySelector('button.close'),
+        cmBody = cmDialog.querySelector('.cmodal-body'),
+        carouselContainer = cmBody.querySelector('.carousel-container'),
+        heroImg = carouselContainer.querySelector('.carousel-hero'),
+        overlayDiv = carouselContainer.querySelector('.carousel-overlay-div'),
+        overlayImg = overlayDiv.querySelector('.carousel-overlay'),
+        cmFooter = cmDialog.querySelector('.cmodal-footer'),
+        thumbnailsDiv = cmFooter.querySelector('.div-thumbnails');
+    return {
+      cModalContainer: cModalContainer,
+      cModal: cModal,
+      cmBackdrop: cmBackdrop,
+      cmDialog: cmDialog,
+      cmContent: cmContent,
+      cmHeader: cmHeader,
+      cmHeaderP: cmHeaderP,
+      closeBtn: closeBtn,
+      cmBody: cmBody,
+      carouselContainer: carouselContainer,
+      heroImg: heroImg,
+      overlayDiv: overlayDiv,
+      overlayImg: overlayImg,
+      cmFooter: cmFooter,
+      thumbnailsDiv: thumbnailsDiv
+    };
+  } // <gallery-overlay> custom element
 
 
-  function _appendStyleSheetToHead() {
-    var style = document.createElement('style');
-    style.innerHTML = styleSheet;
-    style.id = 'carousel-style';
-    document.head.appendChild(style);
+  var GalleryOverlay = /*#__PURE__*/function (_HTMLElement) {
+    _inherits(GalleryOverlay, _HTMLElement);
+
+    var _super = _createSuper(GalleryOverlay);
+
+    function GalleryOverlay() {
+      var _this;
+
+      _classCallCheck(this, GalleryOverlay);
+
+      _this = _super.call(this); // append shadow root
+
+      _this.attachShadow({
+        mode: 'open'
+      }); // append style element to the shadow DOM
+
+
+      _this.shadowRoot.append(_createStyleSheetElement(cssContent)); // append carousel modal container and its contents to shadow DOM
+
+
+      _this.shadowRoot.append(_createCarouselModalContainer(_HTMLTemplate_js__WEBPACK_IMPORTED_MODULE_2__["default"]));
+
+      return _this;
+    }
+
+    return GalleryOverlay;
+  }( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
+
+  function _createGalleryOverlay() {
+    // console.log('_createGalleryOverlay()');
+    customElements.define('gallery-overlay', GalleryOverlay);
+    return document.createElement('gallery-overlay');
+  }
+
+  function _appendGalleryOverlayToBody(galleryOverlay) {
+    document.body.appendChild(galleryOverlay);
   }
   /**
-   * display in hero image the selected thumbnail image
+   * select thumbnail and display as hero image
    * @param {HTMLImageElement} thumbnailImg
    * @param {boolean} animate - animate the hero image transition
    */
 
 
-  function _displaySelectedImage(thumbnailImg) {
+  function _selectAndDisplayImage(thumbnailImg) {
     var animate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-    // console.log(`_displaySelectedImage()
-    // thumbnailImg: ${JSON.stringify(thumbnailImg)}
-    // animate=${animate})
-    // _overlayState: ${JSON.stringify(_overlayState,null,2)}`);
-    // clear prior overlay timeout, if one exists
+    // console.log(`_selectAndDisplayImage()`);
+    // deselect current thumbnail and select new one
+    if (_thumbnailsState.selectedThumbnailImg) {
+      _thumbnailsState.selectedThumbnailImg.classList.remove('selected');
+    }
+
+    _thumbnailsState.selectedThumbnailImg = thumbnailImg;
+    thumbnailImg.classList.add('selected'); // scroll to the selected thumbnail
+
+    _scrollThumbnailsViewport(); // clear existing overlay timeout, if one exists
+
+
     if (_overlayState.timeoutID !== null) {
       // console.log('    clearing prior timeout');
       clearTimeout(_overlayState.timeoutID);
       _overlayState.timeoutID = null;
-    } // set overlay state for the selected thumbnail
+    } // set overlay state for the selected image
 
 
     Object.assign(_overlayState, {
@@ -317,25 +399,21 @@ function OverlayCarousel(userEditsToCSSProps) {
       imgAlt: thumbnailImg.alt,
       imgTitle: thumbnailImg.title,
       imgIndex: Number(thumbnailImg.dataset.index)
-    }); // dispatch 'change' event to hero image, which will update thumbnails
+    }); // change the fade-in overlay image
 
-    imgHero.dataset.index = thumbnailImg.dataset.index;
-    var changeEvt = new Event('change');
-    imgHero.dispatchEvent(changeEvt); // change the fade-in overlay image
-
-    imgOverlay.src = _overlayState.imgSrc;
+    htmlRefs.overlayImg.src = _overlayState.imgSrc;
 
     if (animate === false) {
       // clean up without animation
       _completeImageFade();
 
       return;
-    } // fade in overlay
-    // console.log('_displaySelectedImage fading in overlay');
+    } // with animation: fade in overlay image
+    // console.log('_selectAndDisplayImage fading in overlay');
 
 
     _overlayState.inTransition = true;
-    overlayDiv.classList.add('carousel-fade-in'); // add timeout in case 'transitionend' event is never received
+    htmlRefs.overlayDiv.classList.add('carousel-fade-in'); // add timeout in case 'transitionend' event is never received
 
     var thisIndex = _overlayState.imgIndex;
     _overlayState.timeoutID = setTimeout(function () {
@@ -350,41 +428,34 @@ function OverlayCarousel(userEditsToCSSProps) {
 
       _completeImageFade();
     }, 1500);
-  } // clean up display elements when image fade transition completes
+  } // clean up display elements after image fade transition completes
 
 
   function _completeImageFade() {
     // console.log('_completeImageFade() _overlayState.inTransition:', _overlayState.inTransition);
-    // console.log(`    imgOverlay.src: "${imgOverlay.src}"`);
     _overlayState.inTransition = false; // update hero image
 
-    if (_overlayState.imgSrc.length > 0) {
-      Object.assign(imgHero, {
+    if (_overlayState.imgSrc && _overlayState.imgSrc.length > 0) {
+      Object.assign(htmlRefs.heroImg, {
         src: _overlayState.imgSrc,
         alt: _overlayState.imgAlt,
         title: _overlayState.imgTitle
       });
-      imgHero.dataset.index = String(_overlayState.imgIndex);
-    } // clear overlay state
+    } // reset overlay state
 
 
-    Object.assign(_overlayState, _initOverlayState()); // // skip the overlay clean up when not necessary
-    // const hasFadeInClass = (el) => el.classList.contains('carousel-fade-in');
-    // if (hasFadeInClass(overlayDiv) === false) {
-    //   return;
-    // }
-    // clean up overlay
+    Object.assign(_overlayState, _initOverlayState()); // clean up overlay
 
     if (_overlayState.inTransition) {
       return;
     }
 
-    overlayDiv.classList.remove('carousel-fade-in');
-  } // upon enter key press over thumbnail button, emit click on thumbnail image
+    htmlRefs.overlayDiv.classList.remove('carousel-fade-in');
+  } // upon enter keydown over thumbnail button, dispatch click on thumbnail image
 
 
   function _listenForEnterKeyOverButton() {
-    thumbnailsViewport.addEventListener('keydown', function (e) {
+    var handleEnterKey = function handleEnterKey(e) {
       if (e.key !== 'Enter') {
         return;
       }
@@ -402,12 +473,14 @@ function OverlayCarousel(userEditsToCSSProps) {
       }
 
       btnImg.click();
-    });
+    };
+
+    htmlRefs.thumbnailsDiv.addEventListener('keydown', handleEnterKey);
   } // respond to clicks on thumbnail images
 
 
   function _listenForThumbnailImageClicks() {
-    thumbnailsViewport.addEventListener('click', function (evt) {
+    var handleClick = function handleClick(evt) {
       var elClicked = evt.target;
 
       var isThumbnailImg = function isThumbnailImg(el) {
@@ -418,44 +491,46 @@ function OverlayCarousel(userEditsToCSSProps) {
         return;
       }
 
-      _displaySelectedImage(elClicked);
-    });
-  }
+      _selectAndDisplayImage(elClicked);
+    };
+
+    htmlRefs.thumbnailsDiv.addEventListener('click', handleClick);
+  } // listen for overlay fade completion
+
+
+  function _listenForImageOverlayFade() {
+    htmlRefs.overlayDiv.addEventListener('transitionend', _completeImageFade);
+  } // hide everything
+
 
   function _hideModal() {
     // console.log('_hideModal()');
-    if (modalIsShowing === false) {
+    if (_modalIsShowing === false) {
       return;
     }
 
-    modalIsShowing = false;
-    modalBackdrop.addEventListener('transitionend', function () {
-      modalBackdrop.style.display = 'none';
+    _modalIsShowing = false;
+    htmlRefs.cmBackdrop.addEventListener('transitionend', function () {
+      htmlRefs.cmBackdrop.style.display = 'none';
     }, {
       once: true
     });
-    carouselModal.addEventListener('transitionend', function () {
-      carouselModal.style.display = 'none';
+    htmlRefs.cModal.addEventListener('transitionend', function () {
+      htmlRefs.cModal.style.display = 'none';
     }, {
       once: true
     });
-    modalBackdrop.classList.remove('show');
-    carouselModal.classList.remove('show');
+    htmlRefs.cmBackdrop.classList.remove('show');
+    htmlRefs.cModal.classList.remove('show');
     document.body.classList.remove('cmodal-open');
   } // respond to events intended to hide modal
 
 
   function _listenForHideModalEvents() {
-    // click on modal close button
-    closeButton.addEventListener('click', function (evt) {
-      // console.log('close button click');
-      _hideModal();
-    }); // click on modal backdrop
+    // a click on modal close button
+    htmlRefs.closeBtn.addEventListener('click', _hideModal); // a click on modal backdrop
 
-    modalBackdrop.addEventListener('click', function () {
-      // console.log('modalBackdrop click');
-      _hideModal();
-    }); // ESC key pressed anywhere
+    htmlRefs.cmBackdrop.addEventListener('click', _hideModal); // ESC key pressed anywhere
 
     document.addEventListener('keyup', function (evt) {
       if (evt.key === 'Escape') {
@@ -463,26 +538,8 @@ function OverlayCarousel(userEditsToCSSProps) {
         _hideModal();
       }
     });
-  } // update the "selected" class of each thumbnail image
-
-
-  function _updateThumbnailsSelectedClass(thumbnails, carouselIndex) {
-    var cIndex = Number(carouselIndex);
-    var thumbSelected = null;
-    thumbnails.forEach(function (img) {
-      var thumbIndex = +img.dataset.index;
-
-      if (thumbIndex === cIndex) {
-        thumbSelected = img;
-        thumbSelected.classList.add('selected');
-        return;
-      }
-
-      img.classList.remove('selected');
-    });
-    return thumbSelected;
   } // scroll viewport using vanilla JavaScript
-  // (use on browsers like Safari that don't support smooth scrolling)
+  // (for browsers like Safari that don't natively support smooth scrolling)
 
 
   function _vpScrollJavaScript(scrollDest) {
@@ -490,7 +547,7 @@ function OverlayCarousel(userEditsToCSSProps) {
     var timeStep = 20;
     var timeTotal = 400;
     var stepsTotal = Math.round(timeTotal / timeStep);
-    var scrollStart = thumbnailsViewport.scrollLeft;
+    var scrollStart = htmlRefs.thumbnailsDiv.scrollLeft;
     var scrollTotal = scrollDest - scrollStart;
     var scrollStep = Math.round(scrollTotal / stepsTotal);
     var time = timeStep,
@@ -498,71 +555,91 @@ function OverlayCarousel(userEditsToCSSProps) {
 
     var _scrollRecursive = function _scrollRecursive() {
       if (time >= timeTotal) {
-        thumbnailsViewport.scrollLeft = scrollDest;
+        htmlRefs.thumbnailsDiv.scrollLeft = scrollDest;
         return;
       }
 
-      thumbnailsViewport.scrollLeft = scroll;
+      htmlRefs.thumbnailsDiv.scrollLeft = scroll;
       time += timeStep;
       scroll += scrollStep;
       setTimeout(_scrollRecursive, timeStep);
     };
 
-    if (scrollTotal !== 0) {
-      _scrollRecursive();
+    if (scrollTotal === 0) {
+      return;
     }
+
+    _scrollRecursive();
   }
   /**
-   * scroll thumbnails viewport to show `thumbnailImg` in center of window
-   * @param {HTMLImageElement} thumbnailImg - thumbnail's img element
+   * scroll thumbnails viewport to show currently selected thumbnail
+   * in center
    */
 
 
-  function _scrollThumbnailsViewport(thumbnailImg) {
+  function _scrollThumbnailsViewport() {
+    var thumbnailImg = _thumbnailsState.selectedThumbnailImg;
+
     if (!thumbnailImg) {
       return;
     }
 
-    var viewportWidth = thumbnailsViewport.scrollWidth;
-    var vpStyle = getComputedStyle(thumbnailsViewport);
+    var vpScrollWidth = htmlRefs.thumbnailsDiv.scrollWidth;
+    var vpStyle = getComputedStyle(htmlRefs.thumbnailsDiv);
     var vpPaddingLeft = parseFloat(vpStyle.paddingLeft);
-    var windowWidth = thumbnailsViewport.clientWidth;
-    var scrollMax = viewportWidth - windowWidth;
-    var tnParent = thumbnailImg.parentElement; // thumbnailImg parent is button
+    var vpWindowWidth = htmlRefs.thumbnailsDiv.clientWidth;
+    var vpScrollMax = vpScrollWidth - vpWindowWidth;
+    var tnButton = thumbnailImg.parentElement;
+    var tnButtonStyle = getComputedStyle(tnButton);
+    var tnButtonWidth = tnButton.offsetWidth + parseFloat(tnButtonStyle.marginLeft) + parseFloat(tnButtonStyle.marginRight);
+    var tnOffsetCenter = tnButton.offsetLeft + tnButton.offsetWidth / 2; // scroll to position thumbnail in center of viewport window
 
-    var tnStyle = getComputedStyle(tnParent);
-    var tnWidth = tnParent.offsetWidth + parseFloat(tnStyle.marginLeft) + parseFloat(tnStyle.marginRight);
-    var thumbnailCenterOffset = tnParent.offsetLeft + tnParent.offsetWidth / 2; // console.log(`    viewportWidth: ${thumbnailsViewport.scrollWidth}
-    // vpPaddingLeft: ${vpPaddingLeft}
-    // windowWidth: ${windowWidth}
-    // scrollMax: ${scrollMax}
-    // tnParent.offsetLeft: ${tnParent.offsetLeft}
-    // tnParent.offsetWidth: ${tnParent.offsetWidth}
-    // tnWidth: ${tnWidth}
-    // thumbnailCenterOffset: ${thumbnailCenterOffset}`);
-    // scroll viewport to position thumbnail in center of viewport window
-
-    var newScrollLeft = thumbnailCenterOffset - Math.round((windowWidth + tnWidth) / 2) + vpPaddingLeft;
+    var newScrollLeft = tnOffsetCenter - Math.round((vpWindowWidth + tnButtonWidth) / 2) + vpPaddingLeft;
 
     if (newScrollLeft < 0) {
       newScrollLeft = 0;
     }
 
-    if (newScrollLeft > scrollMax) {
-      newScrollLeft = scrollMax;
-    } // console.log(`  newScrollLeft: ${newScrollLeft}`);
+    if (newScrollLeft > vpScrollMax) {
+      newScrollLeft = vpScrollMax;
+    }
 
-
-    if (_hasSmoothScrolling(thumbnailsViewport)) {
+    if (_hasSmoothScrolling(htmlRefs.thumbnailsDiv)) {
       // console.log('scrolling with Element.scrollLeft = newScrollLeft');
-      thumbnailsViewport.scrollLeft = newScrollLeft;
+      htmlRefs.thumbnailsDiv.scrollLeft = newScrollLeft;
     } else {
       _vpScrollJavaScript(newScrollLeft);
-    } // console.log(`after scrollLeft: ${thumbnailsViewport.scrollLeft}`);
+    } // give focus to the thumbnail button
 
+
+    tnButton.focus();
+  }
+
+  function _populateThumbnails(hrefs, titles, imgOnLoadHandler) {
+    htmlRefs.thumbnailsDiv.innerHTML = '';
+    Object.assign(_thumbnailsState, _initThumbnailsState());
+    _thumbnailsState.imgs = hrefs.map(function (href, index) {
+      var btnThumb = document.createElement('button');
+      htmlRefs.thumbnailsDiv.appendChild(btnThumb);
+      var imgThumb = document.createElement('img');
+      imgThumb.onload = imgOnLoadHandler;
+      imgThumb.dataset.index = String(index);
+      imgThumb.src = href;
+
+      if (titles !== null) {
+        imgThumb.alt = imgThumb.title = titles[index];
+      }
+
+      btnThumb.appendChild(imgThumb);
+      return imgThumb;
+    });
+    _thumbnailsState.firstThumbnailImg = _thumbnailsState.imgs[0]; // display thumbnails only when there are multiple images
+
+    var hasMultipleImages = hrefs.length > 1;
+    htmlRefs.cmFooter.style.display = hasMultipleImages ? '' : 'none';
   }
   /**
-   * populate overlay with name, carousel and thumbnail images
+   * populate overlay with name, hero and thumbnail images
    * @param name
    * @param hrefs
    * @param titles
@@ -577,12 +654,11 @@ function OverlayCarousel(userEditsToCSSProps) {
     var completed = false;
     return new Promise(function (resolve, reject) {
       // display the modal (invisibly) to obtain its dimensions
-      var displaySave = carouselModal.style.display;
-      carouselModal.style.display = 'block';
-      pHeader.innerHTML = name; // detect aspect ratio of image when it receives a 'load' event
-
+      var displaySave = htmlRefs.cModal.style.display;
+      htmlRefs.cModal.style.display = 'block';
+      htmlRefs.cmHeaderP.innerHTML = name;
       var imagesLoaded = 0;
-      var aspectRatioMin = Infinity; // evaluate each image onload
+      var aspectRatioMin = Infinity; // detect image aspect ratio when it receives a 'load' event
 
       function _evalLoadedImage() {
         var img = this;
@@ -594,7 +670,7 @@ function OverlayCarousel(userEditsToCSSProps) {
         }
 
         img.dataset.aspectRatio = String(imgAspectRatio);
-        aspectRatioMin = imgAspectRatio < aspectRatioMin ? imgAspectRatio : aspectRatioMin; // console.log(`_evalLoadedImage index: ${img.dataset.index}, imgAspectRatio: ${imgAspectRatio}, min: ${aspectRatioMin}`);
+        aspectRatioMin = imgAspectRatio < aspectRatioMin ? imgAspectRatio : aspectRatioMin;
 
         if (imagesLoaded < hrefsCount) {
           return;
@@ -602,42 +678,26 @@ function OverlayCarousel(userEditsToCSSProps) {
 
         if (aspectRatioMin === Infinity) {
           return;
-        } // all images loaded: set the padding-bottom of container to match aspect
-        // ratio
+        } // all images loaded:
+        // set padding-bottom of container to accommodate tallest image
 
 
-        carouselContainer.style.paddingBottom = Math.round(1.0 / aspectRatioMin * 100) + '%';
-        carouselContainer.dataset.aspectRatio = String(aspectRatioMin);
-        var contentAspectRatio = modalContent.offsetWidth / modalContent.offsetHeight;
-        modalDialog.style.maxWidth = "calc(-30px + ".concat(Math.round(contentAspectRatio * 100), "vh)"); // restore the modal's display state
+        htmlRefs.carouselContainer.style.paddingBottom = Math.round(1.0 / aspectRatioMin * 100) + '%';
+        htmlRefs.carouselContainer.dataset.aspectRatio = String(aspectRatioMin); // set the modal's max width to maintain its aspect ratio
+        // while keeping the entire modal within the browser's viewport
 
-        carouselModal.style.display = displaySave; // all images loaded, mark as completed and resolve the promise
+        var modalAspectRatio = htmlRefs.cmContent.offsetWidth / htmlRefs.cmContent.offsetHeight;
+        htmlRefs.cmDialog.style.maxWidth = "calc(-30px + ".concat(Math.round(modalAspectRatio * 100), "vh)"); // restore the modal's display state
+
+        htmlRefs.cModal.style.display = displaySave; // all images loaded, mark as completed and resolve the promise
 
         completed = true;
         resolve();
       } // populate the thumbnails
 
 
-      thumbnailsViewport.innerHTML = '';
-      thumbnailImages = hrefs.map(function (href, index) {
-        var btnThumb = document.createElement('button');
-        thumbnailsViewport.appendChild(btnThumb);
-        var imgThumb = document.createElement('img');
-        imgThumb.onload = _evalLoadedImage;
-        imgThumb.dataset.index = String(index);
-        imgThumb.src = href;
+      _populateThumbnails(hrefs, titles, _evalLoadedImage); // set a timeout in case some images don't load
 
-        if (titles !== null) {
-          imgThumb.alt = imgThumb.title = titles[index];
-        }
-
-        btnThumb.appendChild(imgThumb);
-        return imgThumb;
-      });
-      firstThumbnail = thumbnailsViewport.querySelector('img'); // show thumbnails when there are multiple images
-
-      var hasMultipleImages = hrefsCount > 1;
-      modalFooter.style.display = hasMultipleImages ? '' : 'none'; // set a timeout in case images don't load
 
       setTimeout(function () {
         if (completed) {
@@ -649,48 +709,46 @@ function OverlayCarousel(userEditsToCSSProps) {
         reject(errmsg);
       }, 2000);
     });
-  } // show the carousel modal
+  } // show the image gallery
 
 
   function show() {
     // console.log('show()');
-    if (modalIsShowing) {
+    if (_modalIsShowing) {
       return;
     } // make the display changes *before* showing the modal
 
 
-    if (firstThumbnail === null) {
+    if (_thumbnailsState.firstThumbnailImg === null) {
       console.error('no thumbnail images found');
       return;
     }
 
-    _displaySelectedImage(firstThumbnail, false); // wait for backdrop to complete before showing modal
-    // modalBackdrop.addEventListener('transitionend', () => {
-    //     carouselModal.classList.add('show');
-    //     document.body.classList.add('cmodal-open');
-    //     modalIsShowing = true;
-    //   }, { once: true }
-    // );
+    _selectAndDisplayImage(_thumbnailsState.firstThumbnailImg, false);
 
+    htmlRefs.cmBackdrop.style.display = 'block';
+    htmlRefs.cModal.style.display = 'block'; // delay showing slightly to avoid any UI flash
 
-    modalBackdrop.style.display = 'block';
-    carouselModal.style.display = 'block';
     setTimeout(function () {
-      carouselModal.classList.add('show');
-      modalBackdrop.classList.add('show');
+      htmlRefs.cModal.classList.add('show');
+      htmlRefs.cmBackdrop.classList.add('show');
       document.body.classList.add('cmodal-open');
-      modalIsShowing = true;
+      _modalIsShowing = true;
     }, 200);
   }
 
   function _init() {
-    _applyUserEditsToCSSProps();
+    _applyUserEditsToCSSProps(userEditsToCSSProps);
 
-    _applyCSSPropsToStyleSheet();
+    _applyCSSPropsToCSSContent(editableCSSProps);
 
-    _appendStyleSheetToHead();
+    var galleryOverlay = _createGalleryOverlay();
 
-    _appendHTMLTemplateToBody();
+    _appendGalleryOverlayToBody(galleryOverlay);
+
+    Object.assign(htmlRefs, _htmlElementReferences(galleryOverlay));
+
+    _listenForImageOverlayFade();
 
     _listenForThumbnailImageClicks();
 

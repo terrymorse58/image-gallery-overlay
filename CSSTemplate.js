@@ -33,12 +33,10 @@ const CSSTemplate = `
       align-items: center;
       min-height: calc(100% - 1rem);
       opacity: 0;
-      transform: scale(0.95);
-      transition: all .75s ease;
+      transition: opacity .75s ease;
     }
     #carousel-modal-container .cmodal.show .cmodal-dialog {
      opacity: 1;
-     transform: scale(1.0);
     }
     @media (max-width: 475px) {
       #carousel-modal-container .cmodal.show .cmodal-dialog {
@@ -188,14 +186,14 @@ const CSSTemplate = `
       width: 100vw;
       height: 100vh;
       background-color: #000;
-      transition: opacity .3s linear;
+      transition: opacity .3s ease;
       opacity: 0;
     }
     .cmodal-backdrop.show {
       opacity: 0.5;
     }
     
-    /* .cmodal-open */
+    /* .cmodal-open */ 
     .cmodal-open {
       overflow: hidden;
     }

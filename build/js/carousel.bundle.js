@@ -126,7 +126,7 @@ var CSSEditableProps = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 // css template for carousel modal
-var CSSTemplate = "\n    /* general */\n    #carousel-modal-container {\n      font-family: {{fontFamily}};\n    }\n\n    /* .cmodal */\n    #carousel-modal-container .cmodal {\n      position: fixed;\n      top: 0;\n      left: 0;\n      z-index: 1050;\n      width: 100%;\n      height: 100%;\n      overflow: hidden;\n      outline: 0;\n      pointer-events: none;\n    }\n    .cmodal-open #carousel-modal-container .cmodal {\n      overflow-x: hidden;\n      overflow-y: auto;\n    }\n    \n    /* .cmodal-dialog */\n    #carousel-modal-container .cmodal .cmodal-dialog {\n      position: relative;\n      width: auto;\n      margin: 0 auto;\n      pointer-events: none;\n      display: flex;\n      align-items: center;\n      min-height: calc(100% - 1rem);\n      opacity: 0;\n      transform: scale(0.95);\n      transition: all .75s ease;\n    }\n    #carousel-modal-container .cmodal.show .cmodal-dialog {\n     opacity: 1;\n     transform: scale(1.0);\n    }\n    @media (max-width: 475px) {\n      #carousel-modal-container .cmodal.show .cmodal-dialog {\n        max-width: 92vw !important;\n      }\n    }\n    \n    /* .cmodal-content */\n    #carousel-modal-container .cmodal-content {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      width: 100%;\n      pointer-events: auto;\n      background-color: #fff;\n      background-clip: padding-box;\n      border: 1px solid rgba(0,0,0,.2);\n      border-radius: 0.3rem;\n      outline: 0;\n    }\n    \n    /* .cmodal-header */\n    #carousel-modal-container .cmodal-header {\n      display: flex;\n      align-items: flex-start;\n      justify-content: space-between;\n      padding: {{headerPadding}};\n      border-bottom: 1px solid #dee2e6;\n      border-top-left-radius: calc(.3rem - 1px);\n      border-top-right-radius: calc(.3rem - 1px);\n    }\n    #carousel-modal-container .cmodal-header p {\n      margin: {{headerParagraphMargin}};\n    }\n    \n    /* .cmodal-body */\n    #carousel-modal-container .cmodal-body {\n      position: relative;\n      flex: 1 1 auto;\n      padding: 1rem;\n    }\n    \n    /* carousel */\n    #carousel-modal-container .carousel-container {\n      margin: 0;\n      position: relative;\n      width: 100%;\n     }\n     #carousel-modal-container .carousel-overlay-div {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: 100%;\n      background-color: white;\n      opacity: 0;\n      pointer-events: none;\n      transition: opacity 0.1s;\n     }\n     #carousel-modal-container .carousel-hero {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: auto;\n     }\n     #carousel-modal-container .carousel-overlay {\n       position: absolute;\n       top: 0;\n       left: 0;\n       width: 100%;\n       height: auto;\n     }\n     #carousel-modal-container .carousel-fade-in {\n       opacity: 1;\n       transition: opacity .75s ease;\n     }\n    \n    /* cmodal-footer */\n    #carousel-modal-container .cmodal-footer {\n      display: flex;\n      flex-wrap: wrap;\n      align-items: center;\n      justify-content: flex-end;\n      padding: {{footerPadding}};\n      border-top: 1px solid #dee2e6;\n      border-bottom-right-radius: calc(.3rem - 1px);\n      border-bottom-left-radius: calc(.3rem - 1px);\n    }\n    #carousel-modal-container .div-thumbnails {\n      overflow-x: auto;\n      white-space: nowrap;\n      margin: 0;\n      padding: 8px 16px 12px 16px; /* padding must be 'px' */\n      background-color: transparent;\n      scroll-behavior: smooth;\n    }\n    #carousel-modal-container .div-thumbnails button {\n      padding: {{thumbnailBtnPadding}};\n      margin: {{thumbnailBtnMargin}};\n      background-color: transparent;\n      border: none;\n    }\n    #carousel-modal-container .div-thumbnails button:focus {\n      outline: 2px solid #aaa;\n      outline-offset: 2px;\n    }\n    #carousel-modal-container .div-thumbnails img {\n      height: {{thumbnailImgHeight}};\n      width: auto;\n      margin: 0;\n      border: {{thumbnailBorder}};\n    }\n    #carousel-modal-container .div-thumbnails img:hover {\n      filter: {{thumbnailImgHoverFilter}};\n    }\n    #carousel-modal-container .div-thumbnails img.selected {\n      cursor: default;\n      opacity: {{thumbnailSelectedOpacity}};\n      filter: {{thumbnailSelectedFilter}};\n    }\n    \n    /* close button */\n    #carousel-modal-container button.close {\n      float: right;\n      font-size: 1.5rem;\n      font-weight: 700;\n      line-height: 1;\n      color: #000;\n      text-shadow: 0 1px 0 #fff;\n      padding: 1rem;\n      margin: -1rem -1rem -1rem auto;;\n      background-color: transparent;\n      border: 0;\n      opacity: .5;\n    }\n    #carousel-modal-container button.close:hover {\n      opacity: .8;\n    }\n    \n    /* cmodal-backdrop */\n    .cmodal-backdrop {\n      position: fixed;\n      top: 0;\n      left: 0;\n      z-index: 1040;\n      width: 100vw;\n      height: 100vh;\n      background-color: #000;\n      transition: opacity .3s linear;\n      opacity: 0;\n    }\n    .cmodal-backdrop.show {\n      opacity: 0.5;\n    }\n    \n    /* .cmodal-open */\n    .cmodal-open {\n      overflow: hidden;\n    }\n    \n    cmodal-open cmodal {\n      overflow-x: hidden;\n      overflow-y: auto;\n    }\n";
+var CSSTemplate = "\n    /* general */\n    #carousel-modal-container {\n      font-family: {{fontFamily}};\n    }\n\n    /* .cmodal */\n    #carousel-modal-container .cmodal {\n      position: fixed;\n      top: 0;\n      left: 0;\n      z-index: 1050;\n      width: 100%;\n      height: 100%;\n      overflow: hidden;\n      outline: 0;\n      pointer-events: none;\n    }\n    .cmodal-open #carousel-modal-container .cmodal {\n      overflow-x: hidden;\n      overflow-y: auto;\n    }\n    \n    /* .cmodal-dialog */\n    #carousel-modal-container .cmodal .cmodal-dialog {\n      position: relative;\n      width: auto;\n      margin: 0 auto;\n      pointer-events: none;\n      display: flex;\n      align-items: center;\n      min-height: calc(100% - 1rem);\n      opacity: 0;\n      transition: opacity .75s ease;\n    }\n    #carousel-modal-container .cmodal.show .cmodal-dialog {\n     opacity: 1;\n    }\n    @media (max-width: 475px) {\n      #carousel-modal-container .cmodal.show .cmodal-dialog {\n        max-width: 92vw !important;\n      }\n    }\n    \n    /* .cmodal-content */\n    #carousel-modal-container .cmodal-content {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      width: 100%;\n      pointer-events: auto;\n      background-color: #fff;\n      background-clip: padding-box;\n      border: 1px solid rgba(0,0,0,.2);\n      border-radius: 0.3rem;\n      outline: 0;\n    }\n    \n    /* .cmodal-header */\n    #carousel-modal-container .cmodal-header {\n      display: flex;\n      align-items: flex-start;\n      justify-content: space-between;\n      padding: {{headerPadding}};\n      border-bottom: 1px solid #dee2e6;\n      border-top-left-radius: calc(.3rem - 1px);\n      border-top-right-radius: calc(.3rem - 1px);\n    }\n    #carousel-modal-container .cmodal-header p {\n      margin: {{headerParagraphMargin}};\n    }\n    \n    /* .cmodal-body */\n    #carousel-modal-container .cmodal-body {\n      position: relative;\n      flex: 1 1 auto;\n      padding: 1rem;\n    }\n    \n    /* carousel */\n    #carousel-modal-container .carousel-container {\n      margin: 0;\n      position: relative;\n      width: 100%;\n     }\n     #carousel-modal-container .carousel-overlay-div {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: 100%;\n      background-color: white;\n      opacity: 0;\n      pointer-events: none;\n      transition: opacity 0.1s;\n     }\n     #carousel-modal-container .carousel-hero {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: auto;\n     }\n     #carousel-modal-container .carousel-overlay {\n       position: absolute;\n       top: 0;\n       left: 0;\n       width: 100%;\n       height: auto;\n     }\n     #carousel-modal-container .carousel-fade-in {\n       opacity: 1;\n       transition: opacity .75s ease;\n     }\n    \n    /* cmodal-footer */\n    #carousel-modal-container .cmodal-footer {\n      display: flex;\n      flex-wrap: wrap;\n      align-items: center;\n      justify-content: flex-end;\n      padding: {{footerPadding}};\n      border-top: 1px solid #dee2e6;\n      border-bottom-right-radius: calc(.3rem - 1px);\n      border-bottom-left-radius: calc(.3rem - 1px);\n    }\n    #carousel-modal-container .div-thumbnails {\n      overflow-x: auto;\n      white-space: nowrap;\n      margin: 0;\n      padding: 8px 16px 12px 16px; /* padding must be 'px' */\n      background-color: transparent;\n      scroll-behavior: smooth;\n    }\n    #carousel-modal-container .div-thumbnails button {\n      padding: {{thumbnailBtnPadding}};\n      margin: {{thumbnailBtnMargin}};\n      background-color: transparent;\n      border: none;\n    }\n    #carousel-modal-container .div-thumbnails button:focus {\n      outline: 2px solid #aaa;\n      outline-offset: 2px;\n    }\n    #carousel-modal-container .div-thumbnails img {\n      height: {{thumbnailImgHeight}};\n      width: auto;\n      margin: 0;\n      border: {{thumbnailBorder}};\n    }\n    #carousel-modal-container .div-thumbnails img:hover {\n      filter: {{thumbnailImgHoverFilter}};\n    }\n    #carousel-modal-container .div-thumbnails img.selected {\n      cursor: default;\n      opacity: {{thumbnailSelectedOpacity}};\n      filter: {{thumbnailSelectedFilter}};\n    }\n    \n    /* close button */\n    #carousel-modal-container button.close {\n      float: right;\n      font-size: 1.5rem;\n      font-weight: 700;\n      line-height: 1;\n      color: #000;\n      text-shadow: 0 1px 0 #fff;\n      padding: 1rem;\n      margin: -1rem -1rem -1rem auto;;\n      background-color: transparent;\n      border: 0;\n      opacity: .5;\n    }\n    #carousel-modal-container button.close:hover {\n      opacity: .8;\n    }\n    \n    /* cmodal-backdrop */\n    .cmodal-backdrop {\n      position: fixed;\n      top: 0;\n      left: 0;\n      z-index: 1040;\n      width: 100vw;\n      height: 100vh;\n      background-color: #000;\n      transition: opacity .3s ease;\n      opacity: 0;\n    }\n    .cmodal-backdrop.show {\n      opacity: 0.5;\n    }\n    \n    /* .cmodal-open */ \n    .cmodal-open {\n      overflow: hidden;\n    }\n    \n    cmodal-open cmodal {\n      overflow-x: hidden;\n      overflow-y: auto;\n    }\n";
 /* harmony default export */ __webpack_exports__["default"] = (CSSTemplate);
 
 /***/ }),
@@ -210,6 +210,7 @@ function OverlayCarousel(userEditsToCSSProps) {
   var editableCSSProps = _objectSpread({}, _CSSEditableProps_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
   var cssContent = _CSSTemplate_js__WEBPACK_IMPORTED_MODULE_0__["default"].slice(0); // handy reference to our created HTML elements
+  // set with _htmlElementReferences()
 
   var htmlRefs = {};
   var _modalIsShowing = false; // state of the div + image that overlays the hero image
@@ -233,6 +234,9 @@ function OverlayCarousel(userEditsToCSSProps) {
     return {
       imgs: [],
       firstThumbnailImg: null,
+      firstThumbnailBtn: null,
+      lastThumbnailImg: null,
+      lastTumbnailBtn: null,
       selectedThumbnailImg: null
     };
   }
@@ -293,7 +297,8 @@ function OverlayCarousel(userEditsToCSSProps) {
 
 
   function _htmlElementReferences(galleryOverlay) {
-    var cModalContainer = galleryOverlay.shadowRoot.getElementById('carousel-modal-container'),
+    var shadowRoot = galleryOverlay.shadowRoot,
+        cModalContainer = shadowRoot.getElementById('carousel-modal-container'),
         cModal = cModalContainer.querySelector('.cmodal'),
         cmBackdrop = cModalContainer.querySelector('.cmodal-backdrop'),
         cmDialog = cModal.querySelector('.cmodal-dialog'),
@@ -309,6 +314,7 @@ function OverlayCarousel(userEditsToCSSProps) {
         cmFooter = cmDialog.querySelector('.cmodal-footer'),
         thumbnailsDiv = cmFooter.querySelector('.div-thumbnails');
     return {
+      shadowRoot: shadowRoot,
       cModalContainer: cModalContainer,
       cModal: cModal,
       cmBackdrop: cmBackdrop,
@@ -500,6 +506,46 @@ function OverlayCarousel(userEditsToCSSProps) {
 
   function _listenForImageOverlayFade() {
     htmlRefs.overlayDiv.addEventListener('transitionend', _completeImageFade);
+  } // listen for tab key to keep focus on gallery overlay elements
+
+
+  function _handleTab(evt) {
+    if (evt.key !== 'Tab') {
+      return;
+    }
+
+    var isShiftTab = evt.shiftKey === true;
+    var elWithFocus = htmlRefs.shadowRoot.activeElement;
+    var lastThumbnailHasFocus = elWithFocus === _thumbnailsState.lastThumbnailBtn;
+    var tabbingFromLastThumbnail = lastThumbnailHasFocus && !isShiftTab;
+    var closeBtnHasFocus = elWithFocus === htmlRefs.closeBtn;
+    var shiftTabbingFromCloseBtn = closeBtnHasFocus && isShiftTab; // handle tab and shift-tab from any non-gallery element
+
+    if (elWithFocus === null) {
+      evt.preventDefault();
+
+      if (isShiftTab) {
+        _thumbnailsState.lastThumbnailBtn.focus();
+      } else {
+        htmlRefs.closeBtn.focus();
+      }
+
+      return;
+    } // blur when tabbing off the ends of tabbable element list
+
+
+    if (tabbingFromLastThumbnail || shiftTabbingFromCloseBtn) {
+      evt.preventDefault();
+      elWithFocus.blur();
+    }
+  }
+
+  function _listenForTabKey() {
+    document.addEventListener('keydown', _handleTab);
+  }
+
+  function _removeTabKeyListener() {
+    document.removeEventListener('keydown', _handleTab);
   } // hide everything
 
 
@@ -510,6 +556,9 @@ function OverlayCarousel(userEditsToCSSProps) {
     }
 
     _modalIsShowing = false;
+
+    _removeTabKeyListener();
+
     htmlRefs.cmBackdrop.addEventListener('transitionend', function () {
       htmlRefs.cmBackdrop.style.display = 'none';
     }, {
@@ -633,7 +682,10 @@ function OverlayCarousel(userEditsToCSSProps) {
       btnThumb.appendChild(imgThumb);
       return imgThumb;
     });
-    _thumbnailsState.firstThumbnailImg = _thumbnailsState.imgs[0]; // display thumbnails only when there are multiple images
+    _thumbnailsState.firstThumbnailImg = _thumbnailsState.imgs[0];
+    _thumbnailsState.firstThumbnailBtn = _thumbnailsState.firstThumbnailImg.parentElement;
+    _thumbnailsState.lastThumbnailImg = _thumbnailsState.imgs[_thumbnailsState.imgs.length - 1];
+    _thumbnailsState.lastThumbnailBtn = _thumbnailsState.lastThumbnailImg.parentElement; // display thumbnails only when there are multiple images
 
     var hasMultipleImages = hrefs.length > 1;
     htmlRefs.cmFooter.style.display = hasMultipleImages ? '' : 'none';
@@ -727,7 +779,10 @@ function OverlayCarousel(userEditsToCSSProps) {
     _selectAndDisplayImage(_thumbnailsState.firstThumbnailImg, false);
 
     htmlRefs.cmBackdrop.style.display = 'block';
-    htmlRefs.cModal.style.display = 'block'; // delay showing slightly to avoid any UI flash
+    htmlRefs.cModal.style.display = 'block'; // listen for tab keys
+
+    _listenForTabKey(); // delay showing slightly to avoid any UI flash
+
 
     setTimeout(function () {
       htmlRefs.cModal.classList.add('show');

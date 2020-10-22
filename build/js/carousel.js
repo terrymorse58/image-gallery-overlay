@@ -11,6 +11,7 @@ function OverlayCarousel (userEditsToCSSProps) {
   let cssContent = CSSTemplate.slice(0);
 
   // handy reference to our created HTML elements
+  // set with _htmlElementReferences()
   const htmlRefs = {};
 
   let _modalIsShowing = false;
@@ -34,6 +35,9 @@ function OverlayCarousel (userEditsToCSSProps) {
     return {
       imgs: [],
       firstThumbnailImg: null,
+      firstThumbnailBtn: null,
+      lastThumbnailImg: null,
+      lastTumbnailBtn: null,
       selectedThumbnailImg: null
     };
   }
@@ -80,7 +84,8 @@ function OverlayCarousel (userEditsToCSSProps) {
   // references to our significant HTML elements
   function _htmlElementReferences (galleryOverlay) {
     const
-      cModalContainer =  galleryOverlay.shadowRoot.getElementById(
+      shadowRoot = galleryOverlay.shadowRoot,
+      cModalContainer =  shadowRoot.getElementById(
       'carousel-modal-container'),
       cModal = cModalContainer.querySelector('.cmodal'),
       cmBackdrop = cModalContainer.querySelector('.cmodal-backdrop'),
@@ -98,9 +103,9 @@ function OverlayCarousel (userEditsToCSSProps) {
       thumbnailsDiv = cmFooter.querySelector('.div-thumbnails');
 
     return{
-      cModalContainer, cModal, cmBackdrop, cmDialog, cmContent, cmHeader,
-      cmHeaderP, closeBtn, cmBody, carouselContainer, heroImg, overlayDiv,
-      overlayImg, cmFooter, thumbnailsDiv
+      shadowRoot, cModalContainer, cModal, cmBackdrop, cmDialog, cmContent,
+      cmHeader, cmHeaderP, closeBtn, cmBody, carouselContainer, heroImg,
+      overlayDiv, overlayImg, cmFooter, thumbnailsDiv
     };
   }
 
@@ -245,12 +250,49 @@ function OverlayCarousel (userEditsToCSSProps) {
       _completeImageFade);
   }
 
+  // listen for tab key to keep focus on gallery overlay elements
+  function _handleTab (evt) {
+    if (evt.key !== 'Tab') { return; }
+    const isShiftTab = evt.shiftKey === true;
+    const elWithFocus = htmlRefs.shadowRoot.activeElement;
+    const lastThumbnailHasFocus =
+      elWithFocus === _thumbnailsState.lastThumbnailBtn;
+    const tabbingFromLastThumbnail = lastThumbnailHasFocus && !isShiftTab;
+    const closeBtnHasFocus = elWithFocus === htmlRefs.closeBtn;
+    const shiftTabbingFromCloseBtn = closeBtnHasFocus && isShiftTab;
+
+    // handle tab and shift-tab from any non-gallery element
+    if (elWithFocus === null) {
+      evt.preventDefault();
+      if (isShiftTab) {
+        _thumbnailsState.lastThumbnailBtn.focus();
+      } else {
+        htmlRefs.closeBtn.focus();
+      }
+      return;
+    }
+
+    // blur when tabbing off the ends of tabbable element list
+    if (tabbingFromLastThumbnail || shiftTabbingFromCloseBtn) {
+      evt.preventDefault();
+      elWithFocus.blur();
+    }
+  }
+  function _listenForTabKey () {
+    document.addEventListener('keydown', _handleTab);
+  }
+  function _removeTabKeyListener () {
+    document.removeEventListener('keydown', _handleTab);
+  }
+
   // hide everything
   function _hideModal () {
     // console.log('_hideModal()');
 
     if (_modalIsShowing === false) { return; }
     _modalIsShowing = false;
+
+    _removeTabKeyListener();
 
     htmlRefs.cmBackdrop.addEventListener('transitionend', () => {
         htmlRefs.cmBackdrop.style.display = 'none';
@@ -370,6 +412,12 @@ function OverlayCarousel (userEditsToCSSProps) {
       return imgThumb;
     });
     _thumbnailsState.firstThumbnailImg = _thumbnailsState.imgs[0];
+    _thumbnailsState.firstThumbnailBtn =
+      _thumbnailsState.firstThumbnailImg.parentElement;
+    _thumbnailsState.lastThumbnailImg =
+      _thumbnailsState.imgs[_thumbnailsState.imgs.length - 1];
+    _thumbnailsState.lastThumbnailBtn =
+      _thumbnailsState.lastThumbnailImg.parentElement;
 
     // display thumbnails only when there are multiple images
     const hasMultipleImages = hrefs.length > 1;
@@ -469,6 +517,9 @@ function OverlayCarousel (userEditsToCSSProps) {
 
     htmlRefs.cmBackdrop.style.display = 'block';
     htmlRefs.cModal.style.display = 'block';
+
+    // listen for tab keys
+    _listenForTabKey();
 
     // delay showing slightly to avoid any UI flash
     setTimeout(() => {

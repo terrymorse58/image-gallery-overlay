@@ -559,16 +559,6 @@ function OverlayCarousel(userEditsToCSSProps) {
 
     _removeTabKeyListener();
 
-    htmlRefs.cmBackdrop.addEventListener('transitionend', function () {
-      htmlRefs.cmBackdrop.style.display = 'none';
-    }, {
-      once: true
-    });
-    htmlRefs.cModal.addEventListener('transitionend', function () {
-      htmlRefs.cModal.style.display = 'none';
-    }, {
-      once: true
-    });
     htmlRefs.cmBackdrop.classList.remove('show');
     htmlRefs.cModal.classList.remove('show');
     document.body.classList.remove('cmodal-open');
@@ -586,7 +576,20 @@ function OverlayCarousel(userEditsToCSSProps) {
         // console.log('ESC key pressed');
         _hideModal();
       }
-    });
+    }); // hide elements after removal of 'show' class, followed
+    // by 'transitionend' event
+
+    var hideAfterTransitionEnd = function hideAfterTransitionEnd() {
+      // don't hide when elements have 'show' class
+      if (htmlRefs.cModal.classList.contains('show')) {
+        return;
+      }
+
+      htmlRefs.cModal.style.display = 'none';
+      htmlRefs.cmBackdrop.style.display = 'none';
+    };
+
+    htmlRefs.cModal.addEventListener('transitionend', hideAfterTransitionEnd);
   } // scroll viewport using vanilla JavaScript
   // (for browsers like Safari that don't natively support smooth scrolling)
 

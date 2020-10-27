@@ -294,15 +294,6 @@ function OverlayCarousel (userEditsToCSSProps) {
 
     _removeTabKeyListener();
 
-    htmlRefs.cmBackdrop.addEventListener('transitionend', () => {
-        htmlRefs.cmBackdrop.style.display = 'none';
-      }, { once: true }
-    );
-    htmlRefs.cModal.addEventListener('transitionend', () => {
-        htmlRefs.cModal.style.display = 'none';
-      }, { once: true }
-    );
-
     htmlRefs.cmBackdrop.classList.remove('show');
     htmlRefs.cModal.classList.remove('show');
     document.body.classList.remove('cmodal-open');
@@ -324,6 +315,20 @@ function OverlayCarousel (userEditsToCSSProps) {
         _hideModal();
       }
     });
+
+    // hide elements after removal of 'show' class, followed
+    // by 'transitionend' event
+    const hideAfterTransitionEnd = () => {
+
+      // don't hide when elements have 'show' class
+      if (htmlRefs.cModal.classList.contains('show')) { return; }
+
+      htmlRefs.cModal.style.display = 'none';
+      htmlRefs.cmBackdrop.style.display = 'none';
+    }
+
+    htmlRefs.cModal.addEventListener('transitionend',
+      hideAfterTransitionEnd);
   }
 
   // scroll viewport using vanilla JavaScript

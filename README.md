@@ -3,11 +3,12 @@
 A responsive overlay Web Component with a single gallery image and
 scrolling list of clickable thumbnail images.
  
-![image-gallery-overlay](https://terrymorse.com/public/bootstrap-carousel-modal.gif "Sample image gallery")
+![image-gallery-overlay](docs/bootstrap-carousel-modal.gif 
+"image-gallery-overlay")
  
 ### Features ###
  
- + self contained Web Component
+ + self-contained Web Component
  + displays largest images possible without scrolling
  + responsive to window width and height changes
  + dimensions match aspect ratio of supplied images
@@ -62,7 +63,7 @@ carousel.populate(name, imageURLs, imageTitles)
   .then(() => {
     // show the overlay after all images have loaded
     carousel.show();
-  });
+  })
   .catch(err => { 
     // handle errors (typically image(s) did not load)
   });

@@ -1,6 +1,6 @@
 {
   "name": "image-gallery-overlay",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "A responsive overlay web component with a hero image and scrolling list of clickable thumbnail images",
 
   "main": "build/js/carousel.js",

@@ -1,4 +1,4 @@
-// test suite for carousel.js
+// test suite for image-gallery.js
 
 import * as fs from 'fs';
 const path = require('path');
@@ -32,7 +32,7 @@ document.body.innerHTML = Mock.mockBody;
 // require('bootstrap');
 
 // import carousel
-import Carousel from '../carousel.js';
+import Carousel from '../src/js/image-gallery.js';
 let carousel = new Carousel({
   headerPadding: '0.5rem 1rem'
 });
@@ -52,7 +52,7 @@ carousel.populate(Mock.productName, Mock.imageHrefs)
 
 // start testing
 
-test('carousel.js loaded', () => {
+test('image-gallery.js loaded', () => {
   expect(typeof Carousel).toEqual('function');
 });
 

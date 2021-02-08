@@ -1,10 +1,10 @@
-// image gallery carousel overlay with thumbnails
+// image gallery overlay with thumbnails
 
 import CSSTemplate from './CSSTemplate.js';
 import CSSEditableProps from './CSSEditableProps.js';
 import HTMLTemplate from './HTMLTemplate.js';
 
-function OverlayCarousel (userEditsToCSSProps) {
+function IGOverlay (userEditsToCSSProps) {
 
   // work on duplicates of the templates
   const editableCSSProps = { ...CSSEditableProps };
@@ -559,4 +559,4 @@ function OverlayCarousel (userEditsToCSSProps) {
 
 }
 
-export default OverlayCarousel;
+export default IGOverlay;

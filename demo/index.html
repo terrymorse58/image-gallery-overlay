@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <meta name="description"
+        content="a responsive web component containing an image gallery
+          with scrollable thumbnails">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootsdark@latest/dist/bootsdark.min.css">
+
+  <title>Web Component — Responsive Image Gallery</title>
+
+</head>
+<body class="h-100">
+<header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="https://terrymorse.com">Terry Morse
+      Software</a>
+  </nav>
+</header>
+
+<main>
+  <div class="m-4">
+    <h1>Responsive Image Gallery Overlay</h1>
+    <p>
+      GitHub:
+      <a href="https://github.com/terrymorse58/image-gallery-overlay"
+      >terrymorse58/image-gallery-overlay</a>
+    </p>
+    <button id="show-button" class="btn btn-lg btn-primary" disabled
+    >Show Overlay</button>
+  </div>
+
+  <div id="spinner"
+       class="spinner-border"
+       style="color: dodgerblue;
+          position:absolute;
+          top: 40%;
+          left: calc(50% - 2rem);
+          width: 4rem;
+          height: 4rem;
+          display: none">
+    <span class="sr-only">Loading...</span>
+  </div>
+
+</main>
+
+<script src="../dist/js/image-gallery.bundle.js"></script>
+<script>
+  // sample data
+  const productName = 'Sample Images';
+  const imageHrefs = [
+    '../imgs/613-200x300.jpg',
+    '../imgs/953-200x200.jpg',
+    '../imgs/810-300x400.jpg',
+    '../imgs/688-400x300.jpg',
+    '../imgs/661-400x200.jpg',
+    '../imgs/222-400x300.jpg',
+    '../imgs/623-400x400.jpg',
+    '../imgs/177-300x400.jpg',
+    '../imgs/1019-300x400.jpg',
+    '../imgs/498-300x400.jpg',
+    '../imgs/631-300x300.jpg',
+    '../imgs/987-400x200.jpg'
+  ];
+  const imgTitles = [
+    'Golden Gate Bridge',
+    'curving building',
+    'misty pond',
+    'road, green hills, cloudy sky',
+    'man silouetted before water and sky',
+    'sunlit clouds over hills',
+    'Golden Gate Bridge',
+    'backpacker in mountains',
+    'dark clouds over ocean beach',
+    'tall forest',
+    'water droplet on leaf',
+    'rolling fog at sunset'
+  ];
+
+  function initPage () {
+    // console.log('index.html initPage()');
+    const btnShow = document.getElementById('show-button');
+    const spinner = document.getElementById('spinner');
+    const gallery = IGOverlay.default({
+      headerPadding: '0.5rem 1rem'
+    });
+
+    // show the spinner if the loading is taking a while
+    let populateComplete = false;
+    setTimeout(() => {
+      if (!populateComplete) {
+        spinner.style.display = 'block';
+      }
+    }, 1000);
+
+    // respond to clicks on 'show modal' button
+    btnShow.addEventListener('click', () => {
+      gallery.show();
+    });
+
+    // populate the gallery with images
+    gallery.populate(productName, imageHrefs, imgTitles)
+      .then(() => {
+        populateComplete = true;
+        // hide the spinner
+        spinner.style.display = 'none';
+        // enable the "Show Overlay" button
+        btnShow.removeAttribute('disabled');
+      })
+      .catch(err => {
+        // display populate() errors
+        console.error(err);
+        alert(err);
+      });
+
+  }
+
+  window.addEventListener('load', initPage);
+</script>
+
+</body>
+</html>

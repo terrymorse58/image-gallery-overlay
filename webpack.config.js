@@ -1,14 +1,14 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 module.exports = {
   mode: "development",
   entry: {
-    products: './carousel.js'
+    products: './src/js/image-gallery.js'
   },
   output: {
-    library: 'OLCarousel',
-    path: path.resolve(__dirname, 'build/js'),
-    filename: 'carousel.bundle.js'
+    library: 'IGOverlay',
+    path: path.resolve(__dirname, 'dist/js'),
+    filename: 'image-gallery.bundle.js'
   },
   module: {
     rules: [

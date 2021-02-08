@@ -1,4 +1,4 @@
-var OLCarousel =
+var IGOverlay =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -82,15 +82,15 @@ var OLCarousel =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./carousel.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/image-gallery.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./CSSEditableProps.js":
-/*!*****************************!*\
-  !*** ./CSSEditableProps.js ***!
-  \*****************************/
+/***/ "./src/js/CSSEditableProps.js":
+/*!************************************!*\
+  !*** ./src/js/CSSEditableProps.js ***!
+  \************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -116,10 +116,10 @@ var CSSEditableProps = {
 
 /***/ }),
 
-/***/ "./CSSTemplate.js":
-/*!************************!*\
-  !*** ./CSSTemplate.js ***!
-  \************************/
+/***/ "./src/js/CSSTemplate.js":
+/*!*******************************!*\
+  !*** ./src/js/CSSTemplate.js ***!
+  \*******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -131,10 +131,10 @@ var CSSTemplate = "\n    /* general */\n    #carousel-modal-container {\n      f
 
 /***/ }),
 
-/***/ "./HTMLTemplate.js":
-/*!*************************!*\
-  !*** ./HTMLTemplate.js ***!
-  \*************************/
+/***/ "./src/js/HTMLTemplate.js":
+/*!********************************!*\
+  !*** ./src/js/HTMLTemplate.js ***!
+  \********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -146,18 +146,18 @@ var HTMLTemplate = "\n  <div\n    tabindex=\"-1\"\n    class=\"cmodal\"\n    dat
 
 /***/ }),
 
-/***/ "./carousel.js":
-/*!*********************!*\
-  !*** ./carousel.js ***!
-  \*********************/
+/***/ "./src/js/image-gallery.js":
+/*!*********************************!*\
+  !*** ./src/js/image-gallery.js ***!
+  \*********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CSSTemplate_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CSSTemplate.js */ "./CSSTemplate.js");
-/* harmony import */ var _CSSEditableProps_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CSSEditableProps.js */ "./CSSEditableProps.js");
-/* harmony import */ var _HTMLTemplate_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HTMLTemplate.js */ "./HTMLTemplate.js");
+/* harmony import */ var _CSSTemplate_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CSSTemplate.js */ "./src/js/CSSTemplate.js");
+/* harmony import */ var _CSSEditableProps_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CSSEditableProps.js */ "./src/js/CSSEditableProps.js");
+/* harmony import */ var _HTMLTemplate_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HTMLTemplate.js */ "./src/js/HTMLTemplate.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -200,12 +200,12 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-// image gallery carousel overlay with thumbnails
+// image gallery overlay with thumbnails
 
 
 
 
-function OverlayCarousel(userEditsToCSSProps) {
+function IGOverlay(userEditsToCSSProps) {
   // work on duplicates of the templates
   var editableCSSProps = _objectSpread({}, _CSSEditableProps_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
@@ -824,9 +824,9 @@ function OverlayCarousel(userEditsToCSSProps) {
   };
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (OverlayCarousel);
+/* harmony default export */ __webpack_exports__["default"] = (IGOverlay);
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=carousel.bundle.js.map
+//# sourceMappingURL=image-gallery.bundle.js.map

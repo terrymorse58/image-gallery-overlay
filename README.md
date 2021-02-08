@@ -38,7 +38,7 @@ git clone https://github.com/terrymorse58/image-gallery-overlay
 As an ES6 module:
  ```html
 <script type="module">
-  import OverlayCarousel from '<path_to>/carousel.js';
+  import OverlayCarousel from '<path_to>/image-gallery.js';
 </script>
 ```
 

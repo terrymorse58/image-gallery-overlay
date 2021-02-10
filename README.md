@@ -3,7 +3,7 @@
 A responsive overlay Web Component with a single gallery image and
 scrolling list of clickable thumbnail images.
  
-![image-gallery-overlay](docs/bootstrap-carousel-modal.gif 
+![image-gallery-overlay](docs/image-gallery-animated-400x300.gif 
 "image-gallery-overlay")
  
 ### Features ###
@@ -35,31 +35,28 @@ git clone https://github.com/terrymorse58/image-gallery-overlay
 
 ### Loading ###
  
-As an ES6 module:
- ```html
-<script type="module">
-  import OverlayCarousel from '<path_to>/image-gallery.js';
-</script>
-```
-
 As a bundled JavaScript classic script:
 ```html
-<script src="<path_to>/carousel.bundle.js"></script>
+<script src="<path_to>/image-gallery.bundle.js"></script>
+<!-- or to CDN -->
+<script
+  src="https://cdn.jsdelivr.net/npm/image-gallery-overlay@1.4.0/dist/js/image-gallery.bundle.js"></script>
+
 <script>
-  const OverlayCarousel = OLCarousel.default;
+  const Gallery = IGOverlay.default;
 </script>
 ```
 
 ### Usage ###
 ```javascript
-// create a carousel instance
-const carousel = new OverlayCarousel(styleOptions);
+// create a new gallery instance
+const gallery = new Gallery(styleOptions);
 
-// populate the carousel overlay with a name and images
+// populate the gallery  with a name and images
 //   name - text shown at the top of the modal
 //   imageURLs - array of url strings 
 //   imageTitles - array of strings that describe each image (optional)
-carousel.populate(name, imageURLs, imageTitles)
+gallery.populate(name, imageURLs, imageTitles)
   .then(() => {
     // show the overlay after all images have loaded
     carousel.show();
@@ -71,7 +68,7 @@ carousel.populate(name, imageURLs, imageTitles)
 ### Style Options ###
 
 The default styling of the overlay may be modified with `styleOptions`, passed
- into `OverlayCarousel()`. Here are the default options:
+ into `Gallery()`. Here are the default options:
 
 ```javascript
 // default style options
